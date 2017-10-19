@@ -57,14 +57,43 @@ public class ComPHP {
 
 PARSER_END(ComPHP)
 
-void Input() :
-{}
+
+//Caracteres que debe omitir el analizador
+SKIP:
 {
-  MatchedBraces() ("\n"|"\r")* <EOF>
+    " "
+|   "\n"
+|   "\t"
+|   "\r"
+
 }
 
-void MatchedBraces() :
-{}
+//Tokens para las estructuras de control del lenguaje
+TOKEN:
 {
-  "{" [ MatchedBraces() ] "}"
+    //Sentencias condicionales
+    <IF: "if">
+|   <ELSE: "else">    
+|   <ELSEIF: "elseif">
+|   <SWITCH: "switch">
+
+    //Sentencias de repetición
+|   <FOR: "for">
+|   <FOREACH: "foreach">
+|   <WHILE: "while">
+|   <DO: "do">
+|   <BREAK: "break">
+|   <CONTINUE: "continue">
+|   <ENDFOR: "endfor">
+
+}
+
+//Tokens para la inclusión de ficheros
+TOKEN: 
+{
+    <INCLUDE: "include">
+|   <INCLUDEONCE: "include_once">    
+|   <REQUIRE: "require">    
+|   <REQUIREONCE: "require_once"> 
+
 }
