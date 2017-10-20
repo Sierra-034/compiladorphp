@@ -40,6 +40,8 @@ public class Application extends javax.swing.JFrame {
         copyM = new javax.swing.JMenuItem();
         cutM = new javax.swing.JMenuItem();
         pasteM = new javax.swing.JMenuItem();
+        compileM = new javax.swing.JMenu();
+        analize = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().add(tabPane, java.awt.BorderLayout.CENTER);
@@ -76,6 +78,14 @@ public class Application extends javax.swing.JFrame {
         editM.add(pasteM);
 
         menuBar.add(editM);
+
+        compileM.setText("Compile");
+
+        analize.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F5, 0));
+        analize.setText("Analize Gramar");
+        compileM.add(analize);
+
+        menuBar.add(compileM);
 
         setJMenuBar(menuBar);
 
@@ -132,6 +142,8 @@ public class Application extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem analize;
+    private javax.swing.JMenu compileM;
     private javax.swing.JMenuItem copyM;
     private javax.swing.JMenuItem cutM;
     private javax.swing.JMenu editM;
