@@ -5,6 +5,7 @@
  */
 package interfaz;
 
+import javax.swing.JFileChooser;
 import javax.swing.JTextPane;
 
 /**
@@ -14,6 +15,7 @@ import javax.swing.JTextPane;
 public class Application extends javax.swing.JFrame {
 
     private int tabCounter = 0;
+    private final JFileChooser fc = new JFileChooser();
     
     /**
      * Creates new form Application
@@ -59,6 +61,11 @@ public class Application extends javax.swing.JFrame {
 
         openFile.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
         openFile.setText("Open File");
+        openFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fileMenuActionPerformed(evt);
+            }
+        });
         fileM.add(openFile);
 
         menuBar.add(fileM);
@@ -103,6 +110,17 @@ public class Application extends javax.swing.JFrame {
             tabPane.addTab(tabLabel, null, textPane, null);
             
             tabCounter++;                        
+        }
+        
+        //Se hizo clic en Open File
+        if(evt.getSource() == this.openFile)
+        {
+            int returnVal = fc.showOpenDialog(this);
+            
+            if(returnVal == JFileChooser.APPROVE_OPTION)
+            {
+                //Si se oprimió aceptar se ejecutará este fragmento de código
+            }
         }
     }//GEN-LAST:event_fileMenuActionPerformed
 
