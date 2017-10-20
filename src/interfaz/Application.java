@@ -5,6 +5,10 @@
  */
 package interfaz;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import javax.swing.JFileChooser;
 import javax.swing.JTextPane;
 
@@ -119,7 +123,31 @@ public class Application extends javax.swing.JFrame {
             
             if(returnVal == JFileChooser.APPROVE_OPTION)
             {
-                //Si se oprimió aceptar se ejecutará este fragmento de código
+                File file = fc.getSelectedFile();
+                FileReader input = null;
+                
+                try
+                {
+                    input = new FileReader(file);
+                    JTextPane textPane = new JTextPane();
+                    tabPane.addTab(file.getName(), null, textPane, null);
+                    tabCounter++;  
+                    
+                    int c;
+                    String cadena = "";
+                    while((c = input.read()) != -1)
+                        cadena += String.format("%c", (char)c );
+                    
+                    textPane.setText(cadena);
+                } 
+                catch (FileNotFoundException ex)
+                {
+                    
+                }
+                catch (IOException ex)
+                {
+                    
+                }
             }
         }
     }//GEN-LAST:event_fileMenuActionPerformed
