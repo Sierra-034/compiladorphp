@@ -31,7 +31,7 @@ public class Application extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        tabPane = new javax.swing.JTabbedPane();
         menuBar = new javax.swing.JMenuBar();
         fileM = new javax.swing.JMenu();
         newFile = new javax.swing.JMenuItem();
@@ -42,12 +42,17 @@ public class Application extends javax.swing.JFrame {
         pasteM = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().add(jTabbedPane1, java.awt.BorderLayout.CENTER);
+        getContentPane().add(tabPane, java.awt.BorderLayout.CENTER);
 
         fileM.setText("File");
 
         newFile.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
         newFile.setText("New File");
+        newFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fileMenuActionPerformed(evt);
+            }
+        });
         fileM.add(newFile);
 
         openFile.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
@@ -76,6 +81,20 @@ public class Application extends javax.swing.JFrame {
 
         setBounds(0, 0, 616, 439);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void fileMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileMenuActionPerformed
+        // TODO add your handling code here:
+        
+        //Se hizo clic en New File
+        if(evt.getSource() == this.newFile)
+        {
+            JTextPane textPane = new JTextPane();
+            String tabLabel = String.format("new file %d", tabCounter);
+            tabPane.addTab(tabLabel, null, textPane, null);
+            
+            tabCounter++;                        
+        }
+    }//GEN-LAST:event_fileMenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -117,10 +136,10 @@ public class Application extends javax.swing.JFrame {
     private javax.swing.JMenuItem cutM;
     private javax.swing.JMenu editM;
     private javax.swing.JMenu fileM;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem newFile;
     private javax.swing.JMenuItem openFile;
     private javax.swing.JMenuItem pasteM;
+    private javax.swing.JTabbedPane tabPane;
     // End of variables declaration//GEN-END:variables
 }
