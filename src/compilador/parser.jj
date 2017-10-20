@@ -137,6 +137,23 @@ TOKEN:
 |   <MENORIGUAL: (<MENOR>)(<IGUAL>)>    
 |   <MAYORIGUAL: (<MAYOR>)(<IGUAL>)>    
 
-/* Agregar algunos operadores faltantes */
+}
+
+//Tokens para símbolos y caracteres especiales
+TOKEN: 
+{
+    <DOLLAR: "$">   //Token para identificar las variables
+
+|   <KOP: "{">
+|   <KCL: "}">
+
+|   <BOP: "[">
+|   <BCL: "]">
+
+|   <POP: "(">
+|   <PCL: ")">
+
+|   <PC: ";">
+|   <PP: ":">
 
 }
