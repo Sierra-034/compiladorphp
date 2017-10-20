@@ -31,13 +31,18 @@ public class Application extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTabbedPane1 = new javax.swing.JTabbedPane();
         menuBar = new javax.swing.JMenuBar();
         fileM = new javax.swing.JMenu();
         newFile = new javax.swing.JMenuItem();
         openFile = new javax.swing.JMenuItem();
         editM = new javax.swing.JMenu();
+        copyM = new javax.swing.JMenuItem();
+        cutM = new javax.swing.JMenuItem();
+        pasteM = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().add(jTabbedPane1, java.awt.BorderLayout.CENTER);
 
         fileM.setText("File");
 
@@ -52,6 +57,19 @@ public class Application extends javax.swing.JFrame {
         menuBar.add(fileM);
 
         editM.setText("Edit");
+
+        copyM.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
+        copyM.setText("Copy");
+        editM.add(copyM);
+
+        cutM.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_MASK));
+        cutM.setText("Cut");
+        editM.add(cutM);
+
+        pasteM.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
+        pasteM.setText("Paste");
+        editM.add(pasteM);
+
         menuBar.add(editM);
 
         setJMenuBar(menuBar);
@@ -95,10 +113,14 @@ public class Application extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem copyM;
+    private javax.swing.JMenuItem cutM;
     private javax.swing.JMenu editM;
     private javax.swing.JMenu fileM;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem newFile;
     private javax.swing.JMenuItem openFile;
+    private javax.swing.JMenuItem pasteM;
     // End of variables declaration//GEN-END:variables
 }
