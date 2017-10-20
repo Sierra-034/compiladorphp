@@ -97,3 +97,46 @@ TOKEN:
 |   <REQUIREONCE: "require_once"> 
 
 }
+
+//Tokens para definir los operadores 
+TOKEN:
+{
+    //Operadores aritméticos
+    <MAS: "+">
+|   <MENOS: "-">
+|   <MULTI: "*">
+|   <DIV: "/">
+|   <MOD: "%">
+
+    //Operadores de asignación
+|   <IGUAL: "="> 
+|   <MASIGUAL: (<MAS>)(<IGUAL>)>    
+|   <MENOSIGUAL: (<MENOS>)(<IGUAL>)>    
+|   <MULTIIGUAL: (<MULTI>)(<IGUAL>)>    
+|   <DIVIGUAL: (<DIV>)(<IGUAL>)>    
+|   <MODIGUAL: (<MOD>)(<IGUAL>)>    
+|   <PUNTOIGUAL: "."(<IGUAL>)>    //Concatenación de cadenas
+
+    //Operadores de incremento y decremento
+|   <INCREMENTO: (<MAS>)(<MAS>)>
+|   <DECREMENTO: (<MENOS>)(<MENOS>)>
+
+    //Operadores lógicos
+|   <AND: ("&&" | "and")>
+|   <OR: ("||" | "or")>
+|   <NEGACION: "!">
+|   <XOR: "xor">
+
+    //Operadores de comparación
+|   <IGUALDAD: (<IGUAL>)(<IGUAL>)>    
+|   <NOIGUALDAD: (<NEGACION>)(<IGUAL>)>    
+|   <IDENTICO: (<IGUAL>)(<IGUAL>)(<IGUAL>)>    
+|   <NOIDENTICO: (<NEGACION>)(<IGUAL>)(<IGUAL>)>    
+|   <MENOR: "<">    
+|   <MAYOR: ">">    
+|   <MENORIGUAL: (<MENOR>)(<IGUAL>)>    
+|   <MAYORIGUAL: (<MAYOR>)(<IGUAL>)>    
+
+/* Agregar algunos operadores faltantes */
+
+}
