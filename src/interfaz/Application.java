@@ -5,12 +5,16 @@
  */
 package interfaz;
 
+import javax.swing.JTextPane;
+
 /**
  *
  * @author Samuel Gomez
  */
 public class Application extends javax.swing.JFrame {
 
+    private int tabCounter = 0;
+    
     /**
      * Creates new form Application
      */
@@ -27,7 +31,30 @@ public class Application extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        menuBar = new javax.swing.JMenuBar();
+        fileM = new javax.swing.JMenu();
+        newFile = new javax.swing.JMenuItem();
+        openFile = new javax.swing.JMenuItem();
+        editM = new javax.swing.JMenu();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        fileM.setText("File");
+
+        newFile.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
+        newFile.setText("New File");
+        fileM.add(newFile);
+
+        openFile.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
+        openFile.setText("Open File");
+        fileM.add(openFile);
+
+        menuBar.add(fileM);
+
+        editM.setText("Edit");
+        menuBar.add(editM);
+
+        setJMenuBar(menuBar);
 
         setBounds(0, 0, 616, 439);
     }// </editor-fold>//GEN-END:initComponents
@@ -68,5 +95,10 @@ public class Application extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu editM;
+    private javax.swing.JMenu fileM;
+    private javax.swing.JMenuBar menuBar;
+    private javax.swing.JMenuItem newFile;
+    private javax.swing.JMenuItem openFile;
     // End of variables declaration//GEN-END:variables
 }
