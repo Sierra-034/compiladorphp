@@ -157,3 +157,31 @@ TOKEN:
 |   <PP: ":">
 
 }
+
+//Tokens dinámicos
+TOKEN:
+{
+    <#digito: ["0"-"9"]>    //Esto es un token privado
+|   <#letra: ["a"-"z", "A"-"Z"]>
+
+    /*
+      VALOR_INT coincide con
+      uno o más de los digitos simples definidos 
+      en el token privado 'digito'
+    */
+|   <VALOR_INT: (<digito>)+>
+
+    /*
+        VALOR_DOULE coincide con 
+        uno o más dígitos simples seguidos de un punto
+        y uno o más digitos simples
+    */
+|   <VALOR_DOULE: (<digito>)+ "." (<digito>)+>
+
+    /*
+        IDENTIFICADOR coincide con 
+        signo de dollar, seguido de una letra o guión bajo,
+        seguido de una secuencia de letras o dígitos
+    */         
+|   <IDENTIFICADOR: (<DOLLAR>) ((<letra>) | "_") ((<letra>) | (<digito>))*>        
+}
