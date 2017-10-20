@@ -4,55 +4,17 @@ package compilador;
 
 public class ComPHP implements ComPHPConstants {
 
-  public ComPHP() throws ParseException {
-    ComPHP parser = new ComPHP(System.in);
-    parser.Input();
-  }
-
-  static final public void Input() throws ParseException {
-    MatchedBraces();
-    label_1:
-    while (true) {
-      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-      case 1:
-      case 2:{
-        ;
-        break;
-        }
-      default:
-        jj_la1[0] = jj_gen;
-        break label_1;
-      }
-      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-      case 1:{
-        jj_consume_token(1);
-        break;
-        }
-      case 2:{
-        jj_consume_token(2);
-        break;
-        }
-      default:
-        jj_la1[1] = jj_gen;
-        jj_consume_token(-1);
-        throw new ParseException();
-      }
+    public ComPHP() throws ParseException {
+        ComPHP parser = new ComPHP(System.in);
+        parser.gramaticaPrincipal();
     }
-    jj_consume_token(0);
-  }
 
-  static final public void MatchedBraces() throws ParseException {
-    jj_consume_token(3);
-    switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case 3:{
-      MatchedBraces();
-      break;
-      }
-    default:
-      jj_la1[2] = jj_gen;
-      ;
-    }
-    jj_consume_token(4);
+  static final public void gramaticaPrincipal() throws ParseException {
+    jj_consume_token(MENOR);
+    jj_consume_token(QUERY);
+    jj_consume_token(PHP);
+    jj_consume_token(QUERY);
+    jj_consume_token(MAYOR);
   }
 
   static private boolean jj_initialized_once = false;
@@ -65,13 +27,18 @@ public class ComPHP implements ComPHPConstants {
   static public Token jj_nt;
   static private int jj_ntk;
   static private int jj_gen;
-  static final private int[] jj_la1 = new int[3];
+  static final private int[] jj_la1 = new int[0];
   static private int[] jj_la1_0;
+  static private int[] jj_la1_1;
   static {
       jj_la1_init_0();
+      jj_la1_init_1();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x6,0x6,0x8,};
+      jj_la1_0 = new int[] {};
+   }
+   private static void jj_la1_init_1() {
+      jj_la1_1 = new int[] {};
    }
 
   /** Constructor with InputStream. */
@@ -92,7 +59,6 @@ public class ComPHP implements ComPHPConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 3; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -106,7 +72,7 @@ public class ComPHP implements ComPHPConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 3; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 0; i++) jj_la1[i] = -1;
   }
 
   /** Constructor. */
@@ -123,7 +89,6 @@ public class ComPHP implements ComPHPConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 3; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -133,7 +98,6 @@ public class ComPHP implements ComPHPConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 3; i++) jj_la1[i] = -1;
   }
 
   /** Constructor with generated Token Manager. */
@@ -149,7 +113,6 @@ public class ComPHP implements ComPHPConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 3; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -158,7 +121,6 @@ public class ComPHP implements ComPHPConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 3; i++) jj_la1[i] = -1;
   }
 
   static private Token jj_consume_token(int kind) throws ParseException {
@@ -209,21 +171,24 @@ public class ComPHP implements ComPHPConstants {
   /** Generate ParseException. */
   static public ParseException generateParseException() {
     jj_expentries.clear();
-    boolean[] la1tokens = new boolean[5];
+    boolean[] la1tokens = new boolean[62];
     if (jj_kind >= 0) {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
     }
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 0; i++) {
       if (jj_la1[i] == jj_gen) {
         for (int j = 0; j < 32; j++) {
           if ((jj_la1_0[i] & (1<<j)) != 0) {
             la1tokens[j] = true;
           }
+          if ((jj_la1_1[i] & (1<<j)) != 0) {
+            la1tokens[32+j] = true;
+          }
         }
       }
     }
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 62; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;

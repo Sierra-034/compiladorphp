@@ -23,23 +23,23 @@
 
 
 options {
-  LOOKAHEAD = 1;
-  CHOICE_AMBIGUITY_CHECK = 2;
-  OTHER_AMBIGUITY_CHECK = 1;
-  STATIC = true;
-  DEBUG_PARSER = false;
-  DEBUG_LOOKAHEAD = false;
-  DEBUG_TOKEN_MANAGER = false;
-  ERROR_REPORTING = true;
-  JAVA_UNICODE_ESCAPE = false;
-  UNICODE_INPUT = false;
-  IGNORE_CASE = false;
-  USER_TOKEN_MANAGER = false;
-  USER_CHAR_STREAM = false;
-  BUILD_PARSER = true;
-  BUILD_TOKEN_MANAGER = true;
-  SANITY_CHECK = true;
-  FORCE_LA_CHECK = false;
+    LOOKAHEAD = 1;
+    CHOICE_AMBIGUITY_CHECK = 2;
+    OTHER_AMBIGUITY_CHECK = 1;
+    STATIC = true;
+    DEBUG_PARSER = false;
+    DEBUG_LOOKAHEAD = false;
+    DEBUG_TOKEN_MANAGER = false;
+    ERROR_REPORTING = true;
+    JAVA_UNICODE_ESCAPE = false;
+    UNICODE_INPUT = false;
+    IGNORE_CASE = false;
+    USER_TOKEN_MANAGER = false;
+    USER_CHAR_STREAM = false;
+    BUILD_PARSER = true;
+    BUILD_TOKEN_MANAGER = true;
+    SANITY_CHECK = true;
+    FORCE_LA_CHECK = false;
 }
 
 PARSER_BEGIN(ComPHP)
@@ -48,10 +48,10 @@ package compilador;
 
 public class ComPHP {
 
-  public ComPHP() throws ParseException {
-    ComPHP parser = new ComPHP(System.in);
-    parser.Input();
-  }
+    public ComPHP() throws ParseException {
+        ComPHP parser = new ComPHP(System.in);
+        parser.gramaticaPrincipal();
+    }
 
 }
 
@@ -71,8 +71,10 @@ SKIP:
 //Tokens para las estructuras de control del lenguaje
 TOKEN:
 {
+    <PHP: "php">
+
     //Sentencias condicionales
-    <IF: "if">
+|   <IF: "if">
 |   <ELSE: "else">    
 |   <ELSEIF: "elseif">
 |   <SWITCH: "switch">
@@ -135,7 +137,10 @@ TOKEN:
 |   <MENOR: "<">    
 |   <MAYOR: ">">    
 |   <MENORIGUAL: (<MENOR>)(<IGUAL>)>    
-|   <MAYORIGUAL: (<MAYOR>)(<IGUAL>)>    
+|   <MAYORIGUAL: (<MAYOR>)(<IGUAL>)>  
+
+    //Operador ternario de comparación
+|   <QUERY: "?">
 
 }
 
@@ -184,4 +189,12 @@ TOKEN:
         seguido de una secuencia de letras o dígitos
     */         
 |   <IDENTIFICADOR: (<DOLLAR>) ((<letra>) | "_") ((<letra>) | (<digito>))*>        
+
+}
+
+void gramaticaPrincipal() :
+{}
+{
+    <MENOR><QUERY><PHP>
+    <QUERY><MAYOR>
 }
