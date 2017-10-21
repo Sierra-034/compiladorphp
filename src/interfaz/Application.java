@@ -5,6 +5,7 @@
  */
 package interfaz;
 
+import java.awt.Font;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -130,6 +131,11 @@ public class Application extends javax.swing.JFrame {
                 {
                     input = new FileReader(file);
                     JTextPane textPane = new JTextPane();
+                    
+                    //Creamos la fuente para el documento
+                    Font font = new Font("Consolas", Font.PLAIN, 12);
+                    textPane.setFont(font);
+                    
                     tabPane.addTab(file.getName(), null, textPane, null);
                     tabCounter++;  
                     
