@@ -87,6 +87,8 @@ TOKEN:
 |   <BREAK: "break">
 |   <CONTINUE: "continue">
 |   <ENDFOR: "endfor">
+|   <ENDWHILE: "endwhile">
+|   <GOTO: "goto">
 
 }
 
@@ -197,4 +199,48 @@ void gramaticaPrincipal() :
 {
     <MENOR><QUERY><PHP>
     <QUERY><MAYOR>
+}
+
+void repeticion() :
+{}
+{
+    (
+        /* 
+            --WHILE--
+            Instrucción de repetición while 
+            considerar la forma de dos puntos
+            'while(): Instrucciones endwhile;'
+        */
+        <WHILE><POP>/* Expresión booleana aquí */<PCL>
+        <KOP>
+            /* Instrucciones aquí */
+        <KCL>
+    )
+|
+    (
+        /*
+            --DO..WHILE--
+            Instrucción de repetición 'do...while'
+            solo hay una sintaxis para esta estructura de repetición
+            gracias al universo XD 
+        */
+        <DO>
+        <KOP>
+            /* Instrucciones aquí */
+        <KCL><WHILE><POP>/* Expresión booleana aquí */<PCL><PC>
+    )
+|
+    (
+        /*
+            --FOR--
+            Instrucción de repeticón 'for' 
+            existe la sintaxis tradicional
+            y la sintaxis de dos puntos
+            'for(): Instrucciones endfor;'
+        */
+        <FOR><POP>/* Expresión */<PC>/* Expresión */<PC>/* Expresión */<PCL>
+        <KOP>
+            /* Instrucciones */
+        <KCL>
+    )
 }

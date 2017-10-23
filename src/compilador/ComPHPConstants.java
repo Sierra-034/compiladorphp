@@ -35,95 +35,99 @@ public interface ComPHPConstants {
   /** RegularExpression Id. */
   int ENDFOR = 16;
   /** RegularExpression Id. */
-  int INCLUDE = 17;
+  int ENDWHILE = 17;
   /** RegularExpression Id. */
-  int INCLUDEONCE = 18;
+  int GOTO = 18;
   /** RegularExpression Id. */
-  int REQUIRE = 19;
+  int INCLUDE = 19;
   /** RegularExpression Id. */
-  int REQUIREONCE = 20;
+  int INCLUDEONCE = 20;
   /** RegularExpression Id. */
-  int MAS = 21;
+  int REQUIRE = 21;
   /** RegularExpression Id. */
-  int MENOS = 22;
+  int REQUIREONCE = 22;
   /** RegularExpression Id. */
-  int MULTI = 23;
+  int MAS = 23;
   /** RegularExpression Id. */
-  int DIV = 24;
+  int MENOS = 24;
   /** RegularExpression Id. */
-  int MOD = 25;
+  int MULTI = 25;
   /** RegularExpression Id. */
-  int IGUAL = 26;
+  int DIV = 26;
   /** RegularExpression Id. */
-  int MASIGUAL = 27;
+  int MOD = 27;
   /** RegularExpression Id. */
-  int MENOSIGUAL = 28;
+  int IGUAL = 28;
   /** RegularExpression Id. */
-  int MULTIIGUAL = 29;
+  int MASIGUAL = 29;
   /** RegularExpression Id. */
-  int DIVIGUAL = 30;
+  int MENOSIGUAL = 30;
   /** RegularExpression Id. */
-  int MODIGUAL = 31;
+  int MULTIIGUAL = 31;
   /** RegularExpression Id. */
-  int PUNTOIGUAL = 32;
+  int DIVIGUAL = 32;
   /** RegularExpression Id. */
-  int INCREMENTO = 33;
+  int MODIGUAL = 33;
   /** RegularExpression Id. */
-  int DECREMENTO = 34;
+  int PUNTOIGUAL = 34;
   /** RegularExpression Id. */
-  int AND = 35;
+  int INCREMENTO = 35;
   /** RegularExpression Id. */
-  int OR = 36;
+  int DECREMENTO = 36;
   /** RegularExpression Id. */
-  int NEGACION = 37;
+  int AND = 37;
   /** RegularExpression Id. */
-  int XOR = 38;
+  int OR = 38;
   /** RegularExpression Id. */
-  int IGUALDAD = 39;
+  int NEGACION = 39;
   /** RegularExpression Id. */
-  int NOIGUALDAD = 40;
+  int XOR = 40;
   /** RegularExpression Id. */
-  int IDENTICO = 41;
+  int IGUALDAD = 41;
   /** RegularExpression Id. */
-  int NOIDENTICO = 42;
+  int NOIGUALDAD = 42;
   /** RegularExpression Id. */
-  int MENOR = 43;
+  int IDENTICO = 43;
   /** RegularExpression Id. */
-  int MAYOR = 44;
+  int NOIDENTICO = 44;
   /** RegularExpression Id. */
-  int MENORIGUAL = 45;
+  int MENOR = 45;
   /** RegularExpression Id. */
-  int MAYORIGUAL = 46;
+  int MAYOR = 46;
   /** RegularExpression Id. */
-  int QUERY = 47;
+  int MENORIGUAL = 47;
   /** RegularExpression Id. */
-  int DOLLAR = 48;
+  int MAYORIGUAL = 48;
   /** RegularExpression Id. */
-  int KOP = 49;
+  int QUERY = 49;
   /** RegularExpression Id. */
-  int KCL = 50;
+  int DOLLAR = 50;
   /** RegularExpression Id. */
-  int BOP = 51;
+  int KOP = 51;
   /** RegularExpression Id. */
-  int BCL = 52;
+  int KCL = 52;
   /** RegularExpression Id. */
-  int POP = 53;
+  int BOP = 53;
   /** RegularExpression Id. */
-  int PCL = 54;
+  int BCL = 54;
   /** RegularExpression Id. */
-  int PC = 55;
+  int POP = 55;
   /** RegularExpression Id. */
-  int PP = 56;
+  int PCL = 56;
   /** RegularExpression Id. */
-  int digito = 57;
+  int PC = 57;
   /** RegularExpression Id. */
-  int letra = 58;
+  int PP = 58;
   /** RegularExpression Id. */
-  int VALOR_INT = 59;
+  int digito = 59;
   /** RegularExpression Id. */
-  int VALOR_DOULE = 60;
+  int letra = 60;
   /** RegularExpression Id. */
-  int IDENTIFICADOR = 61;
+  int VALOR_INT = 61;
+  /** RegularExpression Id. */
+  int VALOR_DOULE = 62;
+  /** RegularExpression Id. */
+  int IDENTIFICADOR = 63;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -147,6 +151,8 @@ public interface ComPHPConstants {
     "\"break\"",
     "\"continue\"",
     "\"endfor\"",
+    "\"endwhile\"",
+    "\"goto\"",
     "\"include\"",
     "\"include_once\"",
     "\"require\"",
