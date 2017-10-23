@@ -78,6 +78,8 @@ TOKEN:
 |   <ELSE: "else">    
 |   <ELSEIF: "elseif">
 |   <SWITCH: "switch">
+|   <CASE: "case">
+|   <DEF: "default">
 
     //Sentencias de repetición
 |   <FOR: "for">
@@ -197,4 +199,57 @@ void gramaticaPrincipal() :
 {
     <MENOR><QUERY><PHP>
     <QUERY><MAYOR>
+}
+
+void control() :
+{}
+{
+    (
+        /*
+            Estructuras de control IF y sus variantes
+            coincide con un if simple, if con else,
+            if con elseif, if con elseif con else.
+
+            Se garantiza la existencia de un if antes
+            de cualquier else o elseif
+        */
+        <IF><POP>/* Esxpresion booleana aquí */<PCL>
+        <KOP>
+        <KCL>
+        (
+            <ELSEIF><POP>/* Esxpresion booleana aquí */<PCL>
+            <KOP>
+            <KCL>
+        )*
+        (
+            <ELSE> 
+            <KOP>
+            <KCL>
+        )?
+    )
+|
+    (
+        /*
+            Estructura de control Switch
+        */
+        <SWITCH><POP>/* Expresión aritmética aquí */<PCL>
+        <KOP>
+            /*
+                La instrucción case puede ir cero o más veces
+            */
+            (
+                <CASE>/* Expresión aritmética aquí */<PP>
+                    /* Instrucciones aquí */
+            )*
+
+            /*
+                La instrucción default puede no aparecer
+                o puede aparecer solo una vez
+            */
+            (
+                <DEF><PP>
+                    /* Instruccines aquí */
+            )?
+        <KCL>
+    )
 }
