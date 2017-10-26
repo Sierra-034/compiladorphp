@@ -11,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import javax.swing.JFileChooser;
+import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 
 /**
@@ -133,10 +134,12 @@ public class Application extends javax.swing.JFrame {
                     JTextPane textPane = new JTextPane();
                     
                     //Creamos la fuente para el documento
-                    Font font = new Font("Consolas", Font.PLAIN, 12);
+                    Font font = new Font("Consolas", Font.BOLD, 12);
                     textPane.setFont(font);
                     
-                    tabPane.addTab(file.getName(), null, textPane, null);
+                    JScrollPane scroll = new JScrollPane(textPane);
+                    
+                    tabPane.addTab(file.getName(), null, scroll, null);
                     tabCounter++;  
                     
                     int c;
