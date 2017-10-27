@@ -48,10 +48,6 @@ package compilador;
 
 public class ComPHP {
 
-    public ComPHP() throws ParseException {
-        ComPHP parser = new ComPHP(System.in);
-        parser.gramaticaPrincipal();
-    }
 
 }
 
@@ -181,7 +177,7 @@ TOKEN:
         uno o más dígitos simples seguidos de un punto
         y uno o más digitos simples
     */
-|   <VALOR_DOULE: (<digito>)+ "." (<digito>)+>
+|   <VALOR_DOUBLE: (<digito>)+ "." (<digito>)+>
 
 |   <VALOR_BOOLEAN: ("true" | "false")>
 
@@ -254,4 +250,45 @@ void operadorLogico() :
 {}
 {
     ( <AND> | <OR> | <XOR> )
+}
+
+
+
+
+
+
+
+void declaracionAsignacion() :
+{}
+{
+    <IDENTIFICADOR> 
+    (
+        operadorAsignacion() expresion()
+    |   <INCREMENTO>        
+    ) <PC>
+}
+
+void expresion() :
+{}
+{
+    ( valor() | <POP> expresion() <PCL> )
+    ( operador() ( valor() | <POP> expresion() <PCL> ) )*
+}
+
+void operador() :
+{}
+{
+    ( operadorAritmetico() | operadorRelacional() | operadorLogico() )
+}
+
+void valor() :
+{}
+{
+    ( <IDENTIFICADOR> | <VALOR_BOOLEAN> | valorNumerico() )
+}
+
+void valorNumerico() :
+{}
+{
+    ( <VALOR_INT> | <VALOR_DOUBLE> )
 }

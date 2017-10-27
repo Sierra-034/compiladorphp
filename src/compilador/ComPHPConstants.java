@@ -121,7 +121,7 @@ public interface ComPHPConstants {
   /** RegularExpression Id. */
   int VALOR_INT = 59;
   /** RegularExpression Id. */
-  int VALOR_DOULE = 60;
+  int VALOR_DOUBLE = 60;
   /** RegularExpression Id. */
   int VALOR_BOOLEAN = 61;
   /** RegularExpression Id. */
@@ -192,7 +192,7 @@ public interface ComPHPConstants {
     "<digito>",
     "<letra>",
     "<VALOR_INT>",
-    "<VALOR_DOULE>",
+    "<VALOR_DOUBLE>",
     "<VALOR_BOOLEAN>",
     "<IDENTIFICADOR>",
   };
