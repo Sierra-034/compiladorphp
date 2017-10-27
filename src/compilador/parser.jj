@@ -183,6 +183,8 @@ TOKEN:
     */
 |   <VALOR_DOULE: (<digito>)+ "." (<digito>)+>
 
+|   <VALOR_BOOLEAN: ("true" | "false")>
+
     /*
         IDENTIFICADOR coincide con 
         signo de dollar, seguido de una letra o guión bajo,
