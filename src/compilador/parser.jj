@@ -200,11 +200,16 @@ void gramaticaPrincipal() :
 void declaracionAsignacion() :
 {}
 {
-    <IDENTIFICADOR> 
     (
-        operadorAsignacion() expresion()
-    |   <INCREMENTO> 
-    ) <PC>
+        <IDENTIFICADOR> 
+        (
+            operadorAsignacion() expresion()
+        |   <INCREMENTO> 
+        ) 
+
+    |   (<INCREMENTO> | <DECREMENTO> ) <IDENTIFICADOR>
+    )
+    <PC>
 }
 
 void expresion() :
@@ -214,8 +219,11 @@ void expresion() :
     ( operador() ( valor() | <POP> expresion() <PCL> ) )*   
 
 |   <IDENTIFICADOR>
+    ( <INCREMENTO> | <DECREMENTO> )?
     ( operador() ( valor() | <POP> expresion() <PCL> ) )*      
     ( <QUERY> expresion() <PP> expresion() )?
+
+|   ( <INCREMENTO> | <DECREMENTO> ) <IDENTIFICADOR>
 
 }
 
