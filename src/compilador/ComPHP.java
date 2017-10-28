@@ -12,165 +12,6 @@ public class ComPHP implements ComPHPConstants {
     jj_consume_token(MAYOR);
   }
 
-/*
-    Operadores de asignación
-    Para usar estos operadores 
-    debe existir un 'IDENTIFICADOR' que lo preceda
-    seguido de cualquier expresión.
-
-    Se omiten preincremento, predecremento, posincremento y posdecremento
-    por no definir su clase 
-*/
-  static final public void operadorAsignacion() throws ParseException {
-    switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case IGUAL:{
-      jj_consume_token(IGUAL);
-      break;
-      }
-    case MASIGUAL:{
-      jj_consume_token(MASIGUAL);
-      break;
-      }
-    case MENOSIGUAL:{
-      jj_consume_token(MENOSIGUAL);
-      break;
-      }
-    case MULTIIGUAL:{
-      jj_consume_token(MULTIIGUAL);
-      break;
-      }
-    case DIVIGUAL:{
-      jj_consume_token(DIVIGUAL);
-      break;
-      }
-    case MODIGUAL:{
-      jj_consume_token(MODIGUAL);
-      break;
-      }
-    case PUNTOIGUAL:{
-      jj_consume_token(PUNTOIGUAL);
-      break;
-      }
-    default:
-      jj_la1[0] = jj_gen;
-      jj_consume_token(-1);
-      throw new ParseException();
-    }
-  }
-
-/*
-    Operadores Aritméticos
-    Estos operadores deben usarse solo en 
-    expresiones aritméticas y con operadores numéricos
-
-    Se omiten preincremento, predecremento, posincremento y posdecremento
-    por no definir su clase     
-*/
-  static final public void operadorAritmetico() throws ParseException {
-    switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case MAS:{
-      jj_consume_token(MAS);
-      break;
-      }
-    case MENOS:{
-      jj_consume_token(MENOS);
-      break;
-      }
-    case MULTI:{
-      jj_consume_token(MULTI);
-      break;
-      }
-    case DIV:{
-      jj_consume_token(DIV);
-      break;
-      }
-    case MOD:{
-      jj_consume_token(MOD);
-      break;
-      }
-    default:
-      jj_la1[1] = jj_gen;
-      jj_consume_token(-1);
-      throw new ParseException();
-    }
-  }
-
-/*
-    Operadores Relacionales
-    Estos operadores deben usarse solo en 
-    expresiones booleanas y con operandos aritméticos
-*/
-  static final public void operadorRelacional() throws ParseException {
-    switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case IGUALDAD:{
-      jj_consume_token(IGUALDAD);
-      break;
-      }
-    case NOIGUALDAD:{
-      jj_consume_token(NOIGUALDAD);
-      break;
-      }
-    case IDENTICO:{
-      jj_consume_token(IDENTICO);
-      break;
-      }
-    case NOIDENTICO:{
-      jj_consume_token(NOIDENTICO);
-      break;
-      }
-    case MENOR:{
-      jj_consume_token(MENOR);
-      break;
-      }
-    case MAYOR:{
-      jj_consume_token(MAYOR);
-      break;
-      }
-    case MENORIGUAL:{
-      jj_consume_token(MENORIGUAL);
-      break;
-      }
-    case MAYORIGUAL:{
-      jj_consume_token(MAYORIGUAL);
-      break;
-      }
-    default:
-      jj_la1[2] = jj_gen;
-      jj_consume_token(-1);
-      throw new ParseException();
-    }
-  }
-
-/*
-    Operadores Lógicos
-    Estos operadores deben usarse solo en 
-    expresiones booleanas y con operandos lógicos
-    que generen valores 'true' o 'flase'
-
-    Se omite la negación por cuestión de número de operandos
-    en posteriores utilizaciones
-*/
-  static final public void operadorLogico() throws ParseException {
-    switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case AND:{
-      jj_consume_token(AND);
-      break;
-      }
-    case OR:{
-      jj_consume_token(OR);
-      break;
-      }
-    case XOR:{
-      jj_consume_token(XOR);
-      break;
-      }
-    default:
-      jj_la1[3] = jj_gen;
-      jj_consume_token(-1);
-      throw new ParseException();
-    }
-  }
-
   static final public void declaracionAsignacion() throws ParseException {
     jj_consume_token(IDENTIFICADOR);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
@@ -190,7 +31,7 @@ public class ComPHP implements ComPHPConstants {
       break;
       }
     default:
-      jj_la1[4] = jj_gen;
+      jj_la1[0] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -199,57 +40,18 @@ public class ComPHP implements ComPHPConstants {
 
   static final public void expresion() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+    case POP:
     case VALOR_INT:
     case VALOR_DOUBLE:
-    case VALOR_BOOLEAN:
-    case IDENTIFICADOR:{
-      valor();
-      break;
-      }
-    case POP:{
-      jj_consume_token(POP);
-      expresion();
-      jj_consume_token(PCL);
-      break;
-      }
-    default:
-      jj_la1[5] = jj_gen;
-      jj_consume_token(-1);
-      throw new ParseException();
-    }
-    label_1:
-    while (true) {
+    case VALOR_BOOLEAN:{
       switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-      case MAS:
-      case MENOS:
-      case MULTI:
-      case DIV:
-      case MOD:
-      case AND:
-      case OR:
-      case XOR:
-      case IGUALDAD:
-      case NOIGUALDAD:
-      case IDENTICO:
-      case NOIDENTICO:
-      case MENOR:
-      case MAYOR:
-      case MENORIGUAL:
-      case MAYORIGUAL:{
-        ;
+      case VALOR_BOOLEAN:{
+        jj_consume_token(VALOR_BOOLEAN);
         break;
         }
-      default:
-        jj_la1[6] = jj_gen;
-        break label_1;
-      }
-      operador();
-      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
       case VALOR_INT:
-      case VALOR_DOUBLE:
-      case VALOR_BOOLEAN:
-      case IDENTIFICADOR:{
-        valor();
+      case VALOR_DOUBLE:{
+        valorNumerico();
         break;
         }
       case POP:{
@@ -259,10 +61,126 @@ public class ComPHP implements ComPHPConstants {
         break;
         }
       default:
-        jj_la1[7] = jj_gen;
+        jj_la1[1] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
+      label_1:
+      while (true) {
+        switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+        case MAS:
+        case MENOS:
+        case MULTI:
+        case DIV:
+        case MOD:
+        case AND:
+        case OR:
+        case XOR:
+        case IGUALDAD:
+        case NOIGUALDAD:
+        case IDENTICO:
+        case NOIDENTICO:
+        case MENOR:
+        case MAYOR:
+        case MENORIGUAL:
+        case MAYORIGUAL:{
+          ;
+          break;
+          }
+        default:
+          jj_la1[2] = jj_gen;
+          break label_1;
+        }
+        operador();
+        switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+        case VALOR_INT:
+        case VALOR_DOUBLE:
+        case VALOR_BOOLEAN:
+        case IDENTIFICADOR:{
+          valor();
+          break;
+          }
+        case POP:{
+          jj_consume_token(POP);
+          expresion();
+          jj_consume_token(PCL);
+          break;
+          }
+        default:
+          jj_la1[3] = jj_gen;
+          jj_consume_token(-1);
+          throw new ParseException();
+        }
+      }
+      break;
+      }
+    case IDENTIFICADOR:{
+      jj_consume_token(IDENTIFICADOR);
+      label_2:
+      while (true) {
+        switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+        case MAS:
+        case MENOS:
+        case MULTI:
+        case DIV:
+        case MOD:
+        case AND:
+        case OR:
+        case XOR:
+        case IGUALDAD:
+        case NOIGUALDAD:
+        case IDENTICO:
+        case NOIDENTICO:
+        case MENOR:
+        case MAYOR:
+        case MENORIGUAL:
+        case MAYORIGUAL:{
+          ;
+          break;
+          }
+        default:
+          jj_la1[4] = jj_gen;
+          break label_2;
+        }
+        operador();
+        switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+        case VALOR_INT:
+        case VALOR_DOUBLE:
+        case VALOR_BOOLEAN:
+        case IDENTIFICADOR:{
+          valor();
+          break;
+          }
+        case POP:{
+          jj_consume_token(POP);
+          expresion();
+          jj_consume_token(PCL);
+          break;
+          }
+        default:
+          jj_la1[5] = jj_gen;
+          jj_consume_token(-1);
+          throw new ParseException();
+        }
+      }
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case QUERY:{
+        jj_consume_token(QUERY);
+        expresion();
+        jj_consume_token(PP);
+        expresion();
+        break;
+        }
+      default:
+        jj_la1[6] = jj_gen;
+        ;
+      }
+      break;
+      }
+    default:
+      jj_la1[7] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
     }
   }
 
@@ -339,6 +257,165 @@ public class ComPHP implements ComPHPConstants {
     }
   }
 
+/*
+    Operadores de asignación
+    Para usar estos operadores 
+    debe existir un 'IDENTIFICADOR' que lo preceda
+    seguido de cualquier expresión.
+
+    Se omiten preincremento, predecremento, posincremento y posdecremento
+    por no definir su clase 
+*/
+  static final public void operadorAsignacion() throws ParseException {
+    switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+    case IGUAL:{
+      jj_consume_token(IGUAL);
+      break;
+      }
+    case MASIGUAL:{
+      jj_consume_token(MASIGUAL);
+      break;
+      }
+    case MENOSIGUAL:{
+      jj_consume_token(MENOSIGUAL);
+      break;
+      }
+    case MULTIIGUAL:{
+      jj_consume_token(MULTIIGUAL);
+      break;
+      }
+    case DIVIGUAL:{
+      jj_consume_token(DIVIGUAL);
+      break;
+      }
+    case MODIGUAL:{
+      jj_consume_token(MODIGUAL);
+      break;
+      }
+    case PUNTOIGUAL:{
+      jj_consume_token(PUNTOIGUAL);
+      break;
+      }
+    default:
+      jj_la1[11] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+  }
+
+/*
+    Operadores Aritméticos
+    Estos operadores deben usarse solo en 
+    expresiones aritméticas y con operadores numéricos
+
+    Se omiten preincremento, predecremento, posincremento y posdecremento
+    por no definir su clase     
+*/
+  static final public void operadorAritmetico() throws ParseException {
+    switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+    case MAS:{
+      jj_consume_token(MAS);
+      break;
+      }
+    case MENOS:{
+      jj_consume_token(MENOS);
+      break;
+      }
+    case MULTI:{
+      jj_consume_token(MULTI);
+      break;
+      }
+    case DIV:{
+      jj_consume_token(DIV);
+      break;
+      }
+    case MOD:{
+      jj_consume_token(MOD);
+      break;
+      }
+    default:
+      jj_la1[12] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+  }
+
+/*
+    Operadores Relacionales
+    Estos operadores deben usarse solo en 
+    expresiones booleanas y con operandos aritméticos
+*/
+  static final public void operadorRelacional() throws ParseException {
+    switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+    case IGUALDAD:{
+      jj_consume_token(IGUALDAD);
+      break;
+      }
+    case NOIGUALDAD:{
+      jj_consume_token(NOIGUALDAD);
+      break;
+      }
+    case IDENTICO:{
+      jj_consume_token(IDENTICO);
+      break;
+      }
+    case NOIDENTICO:{
+      jj_consume_token(NOIDENTICO);
+      break;
+      }
+    case MENOR:{
+      jj_consume_token(MENOR);
+      break;
+      }
+    case MAYOR:{
+      jj_consume_token(MAYOR);
+      break;
+      }
+    case MENORIGUAL:{
+      jj_consume_token(MENORIGUAL);
+      break;
+      }
+    case MAYORIGUAL:{
+      jj_consume_token(MAYORIGUAL);
+      break;
+      }
+    default:
+      jj_la1[13] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+  }
+
+/*
+    Operadores Lógicos
+    Estos operadores deben usarse solo en 
+    expresiones booleanas y con operandos lógicos
+    que generen valores 'true' o 'flase'
+
+    Se omite la negación por cuestión de número de operandos
+    en posteriores utilizaciones
+*/
+  static final public void operadorLogico() throws ParseException {
+    switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+    case AND:{
+      jj_consume_token(AND);
+      break;
+      }
+    case OR:{
+      jj_consume_token(OR);
+      break;
+      }
+    case XOR:{
+      jj_consume_token(XOR);
+      break;
+      }
+    default:
+      jj_la1[14] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+  }
+
   static private boolean jj_initialized_once = false;
   /** Generated Token Manager. */
   static public ComPHPTokenManager token_source;
@@ -349,7 +426,7 @@ public class ComPHP implements ComPHPConstants {
   static public Token jj_nt;
   static private int jj_ntk;
   static private int jj_gen;
-  static final private int[] jj_la1 = new int[11];
+  static final private int[] jj_la1 = new int[15];
   static private int[] jj_la1_0;
   static private int[] jj_la1_1;
   static {
@@ -357,10 +434,10 @@ public class ComPHP implements ComPHPConstants {
       jj_la1_init_1();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0xfc000000,0x3e00000,0x0,0x0,0xfc000000,0x0,0x3e00000,0x0,0x3e00000,0x0,0x0,};
+      jj_la1_0 = new int[] {0xfc000000,0x0,0x3e00000,0x0,0x3e00000,0x0,0x0,0x0,0x3e00000,0x0,0x0,0xfc000000,0x3e00000,0x0,0x0,};
    }
    private static void jj_la1_init_1() {
-      jj_la1_1 = new int[] {0x1,0x0,0x7f80,0x58,0x3,0x78200000,0x7fd8,0x78200000,0x7fd8,0x78000000,0x18000000,};
+      jj_la1_1 = new int[] {0x3,0x38200000,0x7fd8,0x78200000,0x7fd8,0x78200000,0x8000,0x78200000,0x7fd8,0x78000000,0x18000000,0x1,0x0,0x7f80,0x58,};
    }
 
   /** Constructor with InputStream. */
@@ -381,7 +458,7 @@ public class ComPHP implements ComPHPConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 11; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 15; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -395,7 +472,7 @@ public class ComPHP implements ComPHPConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 11; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 15; i++) jj_la1[i] = -1;
   }
 
   /** Constructor. */
@@ -412,7 +489,7 @@ public class ComPHP implements ComPHPConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 11; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 15; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -422,7 +499,7 @@ public class ComPHP implements ComPHPConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 11; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 15; i++) jj_la1[i] = -1;
   }
 
   /** Constructor with generated Token Manager. */
@@ -438,7 +515,7 @@ public class ComPHP implements ComPHPConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 11; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 15; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -447,7 +524,7 @@ public class ComPHP implements ComPHPConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 11; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 15; i++) jj_la1[i] = -1;
   }
 
   static private Token jj_consume_token(int kind) throws ParseException {
@@ -503,7 +580,7 @@ public class ComPHP implements ComPHPConstants {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
     }
-    for (int i = 0; i < 11; i++) {
+    for (int i = 0; i < 15; i++) {
       if (jj_la1[i] == jj_gen) {
         for (int j = 0; j < 32; j++) {
           if ((jj_la1_0[i] & (1<<j)) != 0) {

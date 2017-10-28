@@ -197,6 +197,46 @@ void gramaticaPrincipal() :
     <QUERY><MAYOR>
 }
 
+void declaracionAsignacion() :
+{}
+{
+    <IDENTIFICADOR> 
+    (
+        operadorAsignacion() expresion()
+    |   <INCREMENTO> 
+    ) <PC>
+}
+
+void expresion() :
+{}
+{
+    ( <VALOR_BOOLEAN> | valorNumerico() | <POP> expresion() <PCL> )
+    ( operador() ( valor() | <POP> expresion() <PCL> ) )*   
+
+|   <IDENTIFICADOR>
+    ( operador() ( valor() | <POP> expresion() <PCL> ) )*      
+    ( <QUERY> expresion() <PP> expresion() )?
+
+}
+
+void operador() :
+{}
+{
+    ( operadorAritmetico() | operadorRelacional() | operadorLogico() )
+}
+
+void valor() :
+{}
+{
+    ( <IDENTIFICADOR> | <VALOR_BOOLEAN> | valorNumerico() )
+}
+
+void valorNumerico() :
+{}
+{
+    ( <VALOR_INT> | <VALOR_DOUBLE> )
+}
+
 /*
     Operadores de asignación
     Para usar estos operadores 
@@ -250,45 +290,4 @@ void operadorLogico() :
 {}
 {
     ( <AND> | <OR> | <XOR> )
-}
-
-
-
-
-
-
-
-void declaracionAsignacion() :
-{}
-{
-    <IDENTIFICADOR> 
-    (
-        operadorAsignacion() expresion()
-    |   <INCREMENTO>        
-    ) <PC>
-}
-
-void expresion() :
-{}
-{
-    ( valor() | <POP> expresion() <PCL> )
-    ( operador() ( valor() | <POP> expresion() <PCL> ) )*
-}
-
-void operador() :
-{}
-{
-    ( operadorAritmetico() | operadorRelacional() | operadorLogico() )
-}
-
-void valor() :
-{}
-{
-    ( <IDENTIFICADOR> | <VALOR_BOOLEAN> | valorNumerico() )
-}
-
-void valorNumerico() :
-{}
-{
-    ( <VALOR_INT> | <VALOR_DOUBLE> )
 }
