@@ -101,6 +101,13 @@ public class ComPHP implements ComPHPConstants {
         case MULTI:
         case DIV:
         case MOD:
+        case IGUAL:
+        case MASIGUAL:
+        case MENOSIGUAL:
+        case MULTIIGUAL:
+        case DIVIGUAL:
+        case MODIGUAL:
+        case PUNTOIGUAL:
         case AND:
         case OR:
         case XOR:
@@ -175,6 +182,13 @@ public class ComPHP implements ComPHPConstants {
         case MULTI:
         case DIV:
         case MOD:
+        case IGUAL:
+        case MASIGUAL:
+        case MENOSIGUAL:
+        case MULTIIGUAL:
+        case DIVIGUAL:
+        case MODIGUAL:
+        case PUNTOIGUAL:
         case AND:
         case OR:
         case XOR:
@@ -256,6 +270,16 @@ public class ComPHP implements ComPHPConstants {
 
   static final public void operador() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+    case IGUAL:
+    case MASIGUAL:
+    case MENOSIGUAL:
+    case MULTIIGUAL:
+    case DIVIGUAL:
+    case MODIGUAL:
+    case PUNTOIGUAL:{
+      operadorAsignacion();
+      break;
+      }
     case MAS:
     case MENOS:
     case MULTI:
@@ -504,10 +528,10 @@ public class ComPHP implements ComPHPConstants {
       jj_la1_init_1();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0xfc000000,0x0,0x0,0x0,0x3e00000,0x0,0x0,0x0,0x3e00000,0x0,0x0,0x0,0x0,0x3e00000,0x0,0x0,0xfc000000,0x3e00000,0x0,0x0,};
+      jj_la1_0 = new int[] {0xfc000000,0x0,0x0,0x0,0xffe00000,0x0,0x0,0x0,0xffe00000,0x0,0x0,0x0,0x0,0xffe00000,0x0,0x0,0xfc000000,0x3e00000,0x0,0x0,};
    }
    private static void jj_la1_init_1() {
-      jj_la1_1 = new int[] {0x3,0x6,0x40000006,0x38200000,0x7fd8,0x78200000,0x6,0x6,0x7fd8,0x78200000,0x8000,0x6,0x78200006,0x7fd8,0x78000000,0x18000000,0x1,0x0,0x7f80,0x58,};
+      jj_la1_1 = new int[] {0x3,0x6,0x40000006,0x38200000,0x7fd9,0x78200000,0x6,0x6,0x7fd9,0x78200000,0x8000,0x6,0x78200006,0x7fd9,0x78000000,0x18000000,0x1,0x0,0x7f80,0x58,};
    }
 
   /** Constructor with InputStream. */

@@ -230,7 +230,7 @@ void expresion() :
 void operador() :
 {}
 {
-    ( operadorAritmetico() | operadorRelacional() | operadorLogico() )
+    ( operadorAsignacion() | operadorAritmetico() | operadorRelacional() | operadorLogico() )
 }
 
 void valor() :
