@@ -14,8 +14,9 @@ public class ComPHP implements ComPHPConstants {
 
   static final public void declaracionAsignacion() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case IDENTIFICADOR:{
-      jj_consume_token(IDENTIFICADOR);
+    case IDENTIFICADOR:
+    case ARRAY:{
+      valorIdentificador();
       switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
       case IGUAL:
       case MASIGUAL:
@@ -55,7 +56,7 @@ public class ComPHP implements ComPHPConstants {
         jj_consume_token(-1);
         throw new ParseException();
       }
-      jj_consume_token(IDENTIFICADOR);
+      valorIdentificador();
       break;
       }
     default:
@@ -131,7 +132,8 @@ public class ComPHP implements ComPHPConstants {
         case VALOR_INT:
         case VALOR_DOUBLE:
         case VALOR_BOOLEAN:
-        case IDENTIFICADOR:{
+        case IDENTIFICADOR:
+        case ARRAY:{
           valor();
           break;
           }
@@ -147,10 +149,23 @@ public class ComPHP implements ComPHPConstants {
           throw new ParseException();
         }
       }
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case QUERY:{
+        jj_consume_token(QUERY);
+        expresion();
+        jj_consume_token(PP);
+        expresion();
+        break;
+        }
+      default:
+        jj_la1[6] = jj_gen;
+        ;
+      }
       break;
       }
-    case IDENTIFICADOR:{
-      jj_consume_token(IDENTIFICADOR);
+    case IDENTIFICADOR:
+    case ARRAY:{
+      valorIdentificador();
       switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
       case INCREMENTO:
       case DECREMENTO:{
@@ -164,14 +179,14 @@ public class ComPHP implements ComPHPConstants {
           break;
           }
         default:
-          jj_la1[6] = jj_gen;
+          jj_la1[7] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
         break;
         }
       default:
-        jj_la1[7] = jj_gen;
+        jj_la1[8] = jj_gen;
         ;
       }
       label_2:
@@ -204,7 +219,7 @@ public class ComPHP implements ComPHPConstants {
           break;
           }
         default:
-          jj_la1[8] = jj_gen;
+          jj_la1[9] = jj_gen;
           break label_2;
         }
         operador();
@@ -212,7 +227,8 @@ public class ComPHP implements ComPHPConstants {
         case VALOR_INT:
         case VALOR_DOUBLE:
         case VALOR_BOOLEAN:
-        case IDENTIFICADOR:{
+        case IDENTIFICADOR:
+        case ARRAY:{
           valor();
           break;
           }
@@ -223,7 +239,7 @@ public class ComPHP implements ComPHPConstants {
           break;
           }
         default:
-          jj_la1[9] = jj_gen;
+          jj_la1[10] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -237,7 +253,7 @@ public class ComPHP implements ComPHPConstants {
         break;
         }
       default:
-        jj_la1[10] = jj_gen;
+        jj_la1[11] = jj_gen;
         ;
       }
       break;
@@ -254,15 +270,15 @@ public class ComPHP implements ComPHPConstants {
         break;
         }
       default:
-        jj_la1[11] = jj_gen;
+        jj_la1[12] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
-      jj_consume_token(IDENTIFICADOR);
+      valorIdentificador();
       break;
       }
     default:
-      jj_la1[12] = jj_gen;
+      jj_la1[13] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -306,7 +322,7 @@ public class ComPHP implements ComPHPConstants {
       break;
       }
     default:
-      jj_la1[13] = jj_gen;
+      jj_la1[14] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -314,8 +330,9 @@ public class ComPHP implements ComPHPConstants {
 
   static final public void valor() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case IDENTIFICADOR:{
-      jj_consume_token(IDENTIFICADOR);
+    case IDENTIFICADOR:
+    case ARRAY:{
+      valorIdentificador();
       break;
       }
     case VALOR_BOOLEAN:{
@@ -328,7 +345,24 @@ public class ComPHP implements ComPHPConstants {
       break;
       }
     default:
-      jj_la1[14] = jj_gen;
+      jj_la1[15] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+  }
+
+  static final public void valorIdentificador() throws ParseException {
+    switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+    case IDENTIFICADOR:{
+      jj_consume_token(IDENTIFICADOR);
+      break;
+      }
+    case ARRAY:{
+      jj_consume_token(ARRAY);
+      break;
+      }
+    default:
+      jj_la1[16] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -345,7 +379,7 @@ public class ComPHP implements ComPHPConstants {
       break;
       }
     default:
-      jj_la1[15] = jj_gen;
+      jj_la1[17] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -354,7 +388,7 @@ public class ComPHP implements ComPHPConstants {
 /*
     Operadores de asignación
     Para usar estos operadores 
-    debe existir un 'IDENTIFICADOR' que lo preceda
+    debe existir un 'valorIdentificador' que lo preceda
     seguido de cualquier expresión.
 
     Se omiten preincremento, predecremento, posincremento y posdecremento
@@ -391,7 +425,7 @@ public class ComPHP implements ComPHPConstants {
       break;
       }
     default:
-      jj_la1[16] = jj_gen;
+      jj_la1[18] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -428,7 +462,7 @@ public class ComPHP implements ComPHPConstants {
       break;
       }
     default:
-      jj_la1[17] = jj_gen;
+      jj_la1[19] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -474,7 +508,7 @@ public class ComPHP implements ComPHPConstants {
       break;
       }
     default:
-      jj_la1[18] = jj_gen;
+      jj_la1[20] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -504,7 +538,7 @@ public class ComPHP implements ComPHPConstants {
       break;
       }
     default:
-      jj_la1[19] = jj_gen;
+      jj_la1[21] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -520,7 +554,7 @@ public class ComPHP implements ComPHPConstants {
   static public Token jj_nt;
   static private int jj_ntk;
   static private int jj_gen;
-  static final private int[] jj_la1 = new int[20];
+  static final private int[] jj_la1 = new int[22];
   static private int[] jj_la1_0;
   static private int[] jj_la1_1;
   static {
@@ -528,10 +562,10 @@ public class ComPHP implements ComPHPConstants {
       jj_la1_init_1();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0xfc000000,0x0,0x0,0x0,0xffe00000,0x0,0x0,0x0,0xffe00000,0x0,0x0,0x0,0x0,0xffe00000,0x0,0x0,0xfc000000,0x3e00000,0x0,0x0,};
+      jj_la1_0 = new int[] {0xfc000000,0x0,0x0,0x0,0xffe00000,0x0,0x0,0x0,0x0,0xffe00000,0x0,0x0,0x0,0x0,0xffe00000,0x0,0x0,0x0,0xfc000000,0x3e00000,0x0,0x0,};
    }
    private static void jj_la1_init_1() {
-      jj_la1_1 = new int[] {0x3,0x6,0x40000006,0x38200000,0x7fd9,0x78200000,0x6,0x6,0x7fd9,0x78200000,0x8000,0x6,0x78200006,0x7fd9,0x78000000,0x18000000,0x1,0x0,0x7f80,0x58,};
+      jj_la1_1 = new int[] {0x3,0x6,0xc0000006,0x38200000,0x7fd9,0xf8200000,0x8000,0x6,0x6,0x7fd9,0xf8200000,0x8000,0x6,0xf8200006,0x7fd9,0xf8000000,0xc0000000,0x18000000,0x1,0x0,0x7f80,0x58,};
    }
 
   /** Constructor with InputStream. */
@@ -552,7 +586,7 @@ public class ComPHP implements ComPHPConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 20; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 22; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -566,7 +600,7 @@ public class ComPHP implements ComPHPConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 20; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 22; i++) jj_la1[i] = -1;
   }
 
   /** Constructor. */
@@ -583,7 +617,7 @@ public class ComPHP implements ComPHPConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 20; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 22; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -593,7 +627,7 @@ public class ComPHP implements ComPHPConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 20; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 22; i++) jj_la1[i] = -1;
   }
 
   /** Constructor with generated Token Manager. */
@@ -609,7 +643,7 @@ public class ComPHP implements ComPHPConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 20; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 22; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -618,7 +652,7 @@ public class ComPHP implements ComPHPConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 20; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 22; i++) jj_la1[i] = -1;
   }
 
   static private Token jj_consume_token(int kind) throws ParseException {
@@ -669,12 +703,12 @@ public class ComPHP implements ComPHPConstants {
   /** Generate ParseException. */
   static public ParseException generateParseException() {
     jj_expentries.clear();
-    boolean[] la1tokens = new boolean[63];
+    boolean[] la1tokens = new boolean[64];
     if (jj_kind >= 0) {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
     }
-    for (int i = 0; i < 20; i++) {
+    for (int i = 0; i < 22; i++) {
       if (jj_la1[i] == jj_gen) {
         for (int j = 0; j < 32; j++) {
           if ((jj_la1_0[i] & (1<<j)) != 0) {
@@ -686,7 +720,7 @@ public class ComPHP implements ComPHPConstants {
         }
       }
     }
-    for (int i = 0; i < 63; i++) {
+    for (int i = 0; i < 64; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;

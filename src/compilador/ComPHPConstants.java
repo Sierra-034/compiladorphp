@@ -126,6 +126,8 @@ public interface ComPHPConstants {
   int VALOR_BOOLEAN = 61;
   /** RegularExpression Id. */
   int IDENTIFICADOR = 62;
+  /** RegularExpression Id. */
+  int ARRAY = 63;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -195,6 +197,7 @@ public interface ComPHPConstants {
     "<VALOR_DOUBLE>",
     "<VALOR_BOOLEAN>",
     "<IDENTIFICADOR>",
+    "<ARRAY>",
   };
 
 }

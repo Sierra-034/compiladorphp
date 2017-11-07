@@ -186,7 +186,9 @@ TOKEN:
         signo de dollar, seguido de una letra o guión bajo,
         seguido de una secuencia de letras o dígitos
     */         
-|   <IDENTIFICADOR: (<DOLLAR>) ((<letra>) | "_") ((<letra>) | (<digito>))*>        
+|   <IDENTIFICADOR: (<DOLLAR>) ((<letra>) | "_") ((<letra>) | (<digito>))*>
+
+|   <ARRAY: <IDENTIFICADOR><BOP> ( <IDENTIFICADOR> | <VALOR_INT> )? <BCL>>
 
 }
 
@@ -201,13 +203,13 @@ void declaracionAsignacion() :
 {}
 {
     (
-        <IDENTIFICADOR> 
+        valorIdentificador()
         (
             operadorAsignacion() expresion()
         |   <INCREMENTO> 
         ) 
 
-    |   (<INCREMENTO> | <DECREMENTO> ) <IDENTIFICADOR>
+    |   (<INCREMENTO> | <DECREMENTO> ) valorIdentificador()
     )
     <PC>
 }
@@ -217,13 +219,14 @@ void expresion() :
 {
     ( <VALOR_BOOLEAN> | valorNumerico() | <POP> expresion() <PCL> )
     ( operador() ( valor() | <POP> expresion() <PCL> ) )*   
+    ( <QUERY> expresion() <PP> expresion() )?
 
-|   <IDENTIFICADOR>
+|   valorIdentificador()
     ( <INCREMENTO> | <DECREMENTO> )?
     ( operador() ( valor() | <POP> expresion() <PCL> ) )*      
     ( <QUERY> expresion() <PP> expresion() )?
 
-|   ( <INCREMENTO> | <DECREMENTO> ) <IDENTIFICADOR>
+|   ( <INCREMENTO> | <DECREMENTO> ) valorIdentificador()
 
 }
 
@@ -236,7 +239,13 @@ void operador() :
 void valor() :
 {}
 {
-    ( <IDENTIFICADOR> | <VALOR_BOOLEAN> | valorNumerico() )
+    ( valorIdentificador() | <VALOR_BOOLEAN> | valorNumerico() )
+}
+
+void valorIdentificador() :
+{}
+{
+    ( <IDENTIFICADOR> | <ARRAY> )
 }
 
 void valorNumerico() :
@@ -248,7 +257,7 @@ void valorNumerico() :
 /*
     Operadores de asignación
     Para usar estos operadores 
-    debe existir un 'IDENTIFICADOR' que lo preceda
+    debe existir un 'valorIdentificador' que lo preceda
     seguido de cualquier expresión.
 
     Se omiten preincremento, predecremento, posincremento y posdecremento
