@@ -124,39 +124,21 @@ public class Application extends javax.swing.JFrame {
             int returnVal = fc.showOpenDialog(this);
             
             if(returnVal == JFileChooser.APPROVE_OPTION)
-            {
-                File file = fc.getSelectedFile();
-                FileReader input = null;
+            {               
+                JTextPane textPane = new JTextPane();
+
+                //Creamos la fuente para el documento
+                Font font = new Font("Consolas", Font.BOLD, 12);
+                textPane.setFont(font);
+
+                JScrollPane scroll = new JScrollPane(textPane);
+
+                File file = fc.getSelectedFile(); 
+                tabPane.addTab(file.getName(), null, scroll, null);
+                tabCounter++;  
                 
-                try
-                {
-                    input = new FileReader(file);
-                    JTextPane textPane = new JTextPane();
-                    
-                    //Creamos la fuente para el documento
-                    Font font = new Font("Consolas", Font.BOLD, 12);
-                    textPane.setFont(font);
-                    
-                    JScrollPane scroll = new JScrollPane(textPane);
-                    
-                    tabPane.addTab(file.getName(), null, scroll, null);
-                    tabCounter++;  
-                    
-                    int c;
-                    String cadena = "";
-                    while((c = input.read()) != -1)
-                        cadena += String.format("%c", (char)c );
-                    
-                    textPane.setText(cadena);
-                } 
-                catch (FileNotFoundException ex)
-                {
-                    
-                }
-                catch (IOException ex)
-                {
-                    
-                }
+                String cadena = FileManager.read(file);
+                textPane.setText(cadena);
             }
         }
     }//GEN-LAST:event_fileMenuActionPerformed
