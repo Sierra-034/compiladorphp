@@ -7,9 +7,6 @@ package interfaz;
 
 import java.awt.Font;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import javax.swing.JFileChooser;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
@@ -22,6 +19,7 @@ public class Application extends javax.swing.JFrame {
 
     private int tabCounter = 0;
     private final JFileChooser fc = new JFileChooser();
+    private final Font font = new Font("Consolas", Font.BOLD, 12);
     
     /**
      * Creates new form Application
@@ -44,6 +42,9 @@ public class Application extends javax.swing.JFrame {
         fileM = new javax.swing.JMenu();
         newFile = new javax.swing.JMenuItem();
         openFile = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        closeFile = new javax.swing.JMenuItem();
+        closeAllFiles = new javax.swing.JMenuItem();
         editM = new javax.swing.JMenu();
         copyM = new javax.swing.JMenuItem();
         cutM = new javax.swing.JMenuItem();
@@ -73,6 +74,19 @@ public class Application extends javax.swing.JFrame {
             }
         });
         fileM.add(openFile);
+        fileM.add(jSeparator1);
+
+        closeFile.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_W, java.awt.event.InputEvent.CTRL_MASK));
+        closeFile.setText("Close File");
+        closeFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fileMenuActionPerformed(evt);
+            }
+        });
+        fileM.add(closeFile);
+
+        closeAllFiles.setText("Close All Files");
+        fileM.add(closeAllFiles);
 
         menuBar.add(fileM);
 
@@ -112,8 +126,12 @@ public class Application extends javax.swing.JFrame {
         if(evt.getSource() == this.newFile)
         {
             JTextPane textPane = new JTextPane();
+            textPane.setFont(font);
+            JScrollPane scroll = new JScrollPane(textPane);            
             String tabLabel = String.format("new file %d", tabCounter);
-            tabPane.addTab(tabLabel, null, textPane, null);
+            
+            tabPane.addTab(tabLabel, null, scroll, null);
+            tabPane.setSelectedIndex(tabCounter);
             
             tabCounter++;                        
         }
@@ -125,21 +143,32 @@ public class Application extends javax.swing.JFrame {
             
             if(returnVal == JFileChooser.APPROVE_OPTION)
             {               
-                JTextPane textPane = new JTextPane();
-
-                //Creamos la fuente para el documento
-                Font font = new Font("Consolas", Font.BOLD, 12);
+                JTextPane textPane = new JTextPane();                
                 textPane.setFont(font);
-
                 JScrollPane scroll = new JScrollPane(textPane);
 
                 File file = fc.getSelectedFile(); 
                 tabPane.addTab(file.getName(), null, scroll, null);
+                tabPane.setSelectedIndex(tabCounter);
                 tabCounter++;  
                 
                 String cadena = FileManager.read(file);
                 textPane.setText(cadena);
             }
+        }
+        
+        //Se hizo clic en Close File
+        if(evt.getSource() == this.closeFile)
+        {
+            this.tabPane.removeTabAt(tabPane.getSelectedIndex());
+            this.tabCounter--;
+        }
+        
+        //Se hizo clic en Close
+        if(evt.getSource() == this.closeAllFiles)
+        {
+            this.tabPane.removeAll();
+            this.tabCounter = 0;
         }
     }//GEN-LAST:event_fileMenuActionPerformed
 
@@ -180,11 +209,14 @@ public class Application extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem analize;
+    private javax.swing.JMenuItem closeAllFiles;
+    private javax.swing.JMenuItem closeFile;
     private javax.swing.JMenu compileM;
     private javax.swing.JMenuItem copyM;
     private javax.swing.JMenuItem cutM;
     private javax.swing.JMenu editM;
     private javax.swing.JMenu fileM;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem newFile;
     private javax.swing.JMenuItem openFile;
