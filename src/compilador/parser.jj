@@ -183,6 +183,11 @@ TOKEN:
     */
 |   <VALOR_DOUBLE: (<digito>)+ "." (<digito>)+>
 
+    /*
+        VALOR_BOOLEAN coincide con
+        los valores estándares booleanos
+        resultados de las operaciones booleanas
+    */
 |   <VALOR_BOOLEAN: ("true" | "false")>
 
     /*
@@ -192,10 +197,25 @@ TOKEN:
     */         
 |   <IDENTIFICADOR: (<DOLLAR>) ((<letra>) | "_") ((<letra>) | (<digito>))*>
 
+    /*
+        ARRAY coincide con 
+        un identificador seguido inmediatamente 
+        por los corchetes y opcionalmente un 
+        valor entero o identificador dentro 
+        de los corchetes
+    */
 |   <ARRAY: <IDENTIFICADOR><BOP> ( <IDENTIFICADOR> | <VALOR_INT> )? <BCL>>
 
 }
 
+/*
+    Esta gramática se utiliza para 
+    iniciar cualquier programa en PHP 
+    es el punto inicial. La parte más 
+    ímportante son los delimitadores. 
+    El uso de la gramática instrucción 
+    valida cualquier tipo de instrucción PHP.
+*/
 void gramaticaPrincipal() :
 {}
 {
@@ -204,10 +224,16 @@ void gramaticaPrincipal() :
     <QUERY><MAYOR>
 }
 
+/*
+    Una instrucción engloba todo aquello que 
+    sirve para escribir un programa
+    se dividieron en tres tipos principales
+    las estructuras secuenciales, estructuras de
+    control y las estructuras de repetición 
+*/
 void instruccion() :
 {}
 {
-    // Añadir break, continue y demás
     ( 
         declaracionAsignacion() 
     |   <BREAK><PC>
@@ -217,6 +243,14 @@ void instruccion() :
     )
 }
 
+/*
+    La estructuras de control sirven 
+    para ejecutar o no cierta porción 
+    de código dependiendo de alguna condición.
+
+    Existen dos variantes de estas estructuras,
+    La estructura IF y la SWITCH.
+*/
 void control() :
 {}
 {
@@ -250,6 +284,8 @@ void control() :
     (
         /*
             Estructura de control Switch
+            coincide con una estructura switch
+            convencional
         */
         <SWITCH><POP> expresion() <PCL>
         <KOP>
@@ -273,6 +309,12 @@ void control() :
     )
 }            
 
+/*
+    Las estructuras de repetición permiten
+    ejecutar o no un fragmento de código
+    cero o varias veces dependiendo de una
+    condición dada. Similar a las estructuras de control
+*/
 void repeticion() :
 {}
 {
@@ -317,6 +359,12 @@ void repeticion() :
     )
 }
 
+/*
+    Esta gramática valida la declaración
+    y validación de una variable. En PHP 
+    no se pueden declarar las variables sin
+    ser inicializadas al mismo tiempo.
+*/
 void declaracionAsignacion() :
 {}
 {
@@ -332,6 +380,16 @@ void declaracionAsignacion() :
     <PC>
 }
 
+/*
+    Valida cualquier operación primitiva 
+    que se pueda realizar en PHP, es decir, 
+    operaciones aritméticas, relacionales y booleanas.
+
+    La gramática expresión considera a todas 
+    estas expresiones como del mismo tipo. Todas
+    las expresiones podrán devolver dos tipos 
+    de valores a sean booleanos o aritméticos
+*/
 void expresion() :
 {}
 {
@@ -348,24 +406,42 @@ void expresion() :
 
 }
 
+/*
+    Elgoba todos los tipos de operadores
+    relacionales, asignación, aritméticos y lógicos
+*/
 void operador() :
 {}
 {
     ( operadorAsignacion() | operadorAritmetico() | operadorRelacional() | operadorLogico() )
 }
 
+/*
+    Engloba todos los tipos de valores
+    que se pueden manejar en PHP, desde
+    los arreglos, hasta los valores numéricos
+*/
 void valor() :
 {}
 {
     ( valorIdentificador() | <VALOR_BOOLEAN> | valorNumerico() )
 }
 
+/*
+    Cualquier valor que sea referenciado
+    a través de un identificador. Estos podrían
+    ser numéricos, booleanos o cadenas.
+*/
 void valorIdentificador() :
 {}
 {
     ( <IDENTIFICADOR> | <ARRAY> )
 }
 
+/*
+    Cualquier tipo de valor numérico
+    de tipo entero o decimal (de coma flotante)
+*/
 void valorNumerico() :
 {}
 {
