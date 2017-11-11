@@ -91,9 +91,17 @@ static private int jjMoveStringLiteralDfa0_0(){
       case 100:
          return jjMoveStringLiteralDfa1_0(0x8800L);
       case 101:
+<<<<<<< HEAD
          return jjMoveStringLiteralDfa1_0(0x40180L);
       case 102:
          return jjMoveStringLiteralDfa1_0(0x3000L);
+=======
+         return jjMoveStringLiteralDfa1_0(0x30180L);
+      case 102:
+         return jjMoveStringLiteralDfa1_0(0xc00L);
+      case 103:
+         return jjMoveStringLiteralDfa1_0(0x40000L);
+>>>>>>> estructuras-repeticion
       case 105:
          return jjMoveStringLiteralDfa1_0(0x180040L);
       case 112:
@@ -125,7 +133,11 @@ static private int jjMoveStringLiteralDfa1_0(long active0){
       case 97:
          return jjMoveStringLiteralDfa2_0(active0, 0x400L);
       case 101:
+<<<<<<< HEAD
          return jjMoveStringLiteralDfa2_0(active0, 0x600800L);
+=======
+         return jjMoveStringLiteralDfa2_0(active0, 0x600000L);
+>>>>>>> estructuras-repeticion
       case 102:
          if ((active0 & 0x40L) != 0L)
             return jjStopAtPos(1, 6);
@@ -135,11 +147,19 @@ static private int jjMoveStringLiteralDfa1_0(long active0){
       case 108:
          return jjMoveStringLiteralDfa2_0(active0, 0x180L);
       case 110:
+<<<<<<< HEAD
          return jjMoveStringLiteralDfa2_0(active0, 0x1c0000L);
       case 111:
          if ((active0 & 0x8000L) != 0L)
             return jjStopAtPos(1, 15);
          return jjMoveStringLiteralDfa2_0(active0, 0x10000023000L);
+=======
+         return jjMoveStringLiteralDfa2_0(active0, 0x1b0000L);
+      case 111:
+         if ((active0 & 0x2000L) != 0L)
+            return jjStopAtPos(1, 13);
+         return jjMoveStringLiteralDfa2_0(active0, 0x10000048c00L);
+>>>>>>> estructuras-repeticion
       case 114:
          return jjMoveStringLiteralDfa2_0(active0, 0x10000L);
       case 119:
@@ -162,7 +182,11 @@ static private int jjMoveStringLiteralDfa2_0(long old0, long active0){
       case 99:
          return jjMoveStringLiteralDfa3_0(active0, 0x180000L);
       case 100:
+<<<<<<< HEAD
          return jjMoveStringLiteralDfa3_0(active0, 0x40000L);
+=======
+         return jjMoveStringLiteralDfa3_0(active0, 0x30000L);
+>>>>>>> estructuras-repeticion
       case 101:
          return jjMoveStringLiteralDfa3_0(active0, 0x10000L);
       case 102:
@@ -185,9 +209,17 @@ static private int jjMoveStringLiteralDfa2_0(long old0, long active0){
          }
          else if ((active0 & 0x10000000000L) != 0L)
             return jjStopAtPos(2, 40);
+<<<<<<< HEAD
          return jjMoveStringLiteralDfa3_0(active0, 0x2000L);
       case 115:
          return jjMoveStringLiteralDfa3_0(active0, 0x580L);
+=======
+         return jjMoveStringLiteralDfa3_0(active0, 0x800L);
+      case 115:
+         return jjMoveStringLiteralDfa3_0(active0, 0x180L);
+      case 116:
+         return jjMoveStringLiteralDfa3_0(active0, 0x40000L);
+>>>>>>> estructuras-repeticion
       default :
          break;
    }
@@ -217,11 +249,24 @@ static private int jjMoveStringLiteralDfa3_0(long old0, long active0){
       case 102:
          return jjMoveStringLiteralDfa4_0(active0, 0x40000L);
       case 108:
+<<<<<<< HEAD
          return jjMoveStringLiteralDfa4_0(active0, 0x184000L);
+=======
+         return jjMoveStringLiteralDfa4_0(active0, 0x181000L);
+      case 111:
+         if ((active0 & 0x40000L) != 0L)
+            return jjStopAtPos(3, 18);
+         break;
+>>>>>>> estructuras-repeticion
       case 116:
          return jjMoveStringLiteralDfa4_0(active0, 0x20200L);
       case 117:
          return jjMoveStringLiteralDfa4_0(active0, 0x600000L);
+<<<<<<< HEAD
+=======
+      case 119:
+         return jjMoveStringLiteralDfa4_0(active0, 0x20000L);
+>>>>>>> estructuras-repeticion
       default :
          break;
    }
@@ -245,8 +290,14 @@ static private int jjMoveStringLiteralDfa4_0(long old0, long active0){
          if ((active0 & 0x4000L) != 0L)
             return jjStopAtPos(4, 14);
          break;
+      case 104:
+         return jjMoveStringLiteralDfa5_0(active0, 0x20000L);
       case 105:
+<<<<<<< HEAD
          return jjMoveStringLiteralDfa5_0(active0, 0x620100L);
+=======
+         return jjMoveStringLiteralDfa5_0(active0, 0x608100L);
+>>>>>>> estructuras-repeticion
       case 107:
          if ((active0 & 0x10000L) != 0L)
             return jjStopAtPos(4, 16);
@@ -254,7 +305,11 @@ static private int jjMoveStringLiteralDfa4_0(long old0, long active0){
       case 111:
          return jjMoveStringLiteralDfa5_0(active0, 0x40000L);
       case 117:
+<<<<<<< HEAD
          return jjMoveStringLiteralDfa5_0(active0, 0x180800L);
+=======
+         return jjMoveStringLiteralDfa5_0(active0, 0x180000L);
+>>>>>>> estructuras-repeticion
       default :
          break;
    }
@@ -282,13 +337,23 @@ static private int jjMoveStringLiteralDfa5_0(long old0, long active0){
          if ((active0 & 0x200L) != 0L)
             return jjStopAtPos(5, 9);
          break;
+<<<<<<< HEAD
       case 108:
          return jjMoveStringLiteralDfa6_0(active0, 0x800L);
+=======
+      case 105:
+         return jjMoveStringLiteralDfa6_0(active0, 0x20000L);
+>>>>>>> estructuras-repeticion
       case 110:
          return jjMoveStringLiteralDfa6_0(active0, 0x20000L);
       case 114:
+<<<<<<< HEAD
          if ((active0 & 0x40000L) != 0L)
             return jjStopAtPos(5, 18);
+=======
+         if ((active0 & 0x10000L) != 0L)
+            return jjStopAtPos(5, 16);
+>>>>>>> estructuras-repeticion
          return jjMoveStringLiteralDfa6_0(active0, 0x600000L);
       default :
          break;
@@ -325,6 +390,8 @@ static private int jjMoveStringLiteralDfa6_0(long old0, long active0){
          if ((active0 & 0x800L) != 0L)
             return jjStopAtPos(6, 11);
          break;
+      case 108:
+         return jjMoveStringLiteralDfa7_0(active0, 0x20000L);
       case 117:
          return jjMoveStringLiteralDfa7_0(active0, 0x20000L);
       default :
@@ -345,7 +412,13 @@ static private int jjMoveStringLiteralDfa7_0(long old0, long active0){
       case 95:
          return jjMoveStringLiteralDfa8_0(active0, 0x500000L);
       case 101:
+<<<<<<< HEAD
          if ((active0 & 0x20000L) != 0L)
+=======
+         if ((active0 & 0x8000L) != 0L)
+            return jjStopAtPos(7, 15);
+         else if ((active0 & 0x20000L) != 0L)
+>>>>>>> estructuras-repeticion
             return jjStopAtPos(7, 17);
          break;
       default :
@@ -754,6 +827,7 @@ static final int[] jjnextStates = {
 /** Token literal values. */
 public static final String[] jjstrLiteralImages = {
 "", null, null, null, null, "\160\150\160", "\151\146", "\145\154\163\145", 
+<<<<<<< HEAD
 "\145\154\163\145\151\146", "\163\167\151\164\143\150", "\143\141\163\145", 
 "\144\145\146\141\165\154\164", "\146\157\162", "\146\157\162\145\141\143\150", "\167\150\151\154\145", 
 "\144\157", "\142\162\145\141\153", "\143\157\156\164\151\156\165\145", 
@@ -763,6 +837,17 @@ public static final String[] jjstrLiteralImages = {
 null, null, null, null, "\41", "\170\157\162", null, null, null, null, "\74", "\76", 
 null, null, "\77", "\44", "\173", "\175", "\133", "\135", "\50", "\51", "\73", 
 "\72", null, null, null, null, null, };
+=======
+"\145\154\163\145\151\146", "\163\167\151\164\143\150", "\146\157\162", "\146\157\162\145\141\143\150", 
+"\167\150\151\154\145", "\144\157", "\142\162\145\141\153", "\143\157\156\164\151\156\165\145", 
+"\145\156\144\146\157\162", "\145\156\144\167\150\151\154\145", "\147\157\164\157", 
+"\151\156\143\154\165\144\145", "\151\156\143\154\165\144\145\137\157\156\143\145", 
+"\162\145\161\165\151\162\145", "\162\145\161\165\151\162\145\137\157\156\143\145", "\53", "\55", "\52", 
+"\57", "\45", "\75", null, null, null, null, null, null, null, null, null, null, 
+"\41", "\170\157\162", null, null, null, null, "\74", "\76", null, null, "\77", 
+"\44", "\173", "\175", "\133", "\135", "\50", "\51", "\73", "\72", null, null, null, 
+null, null, };
+>>>>>>> estructuras-repeticion
 static protected Token jjFillToken()
 {
    final Token t;

@@ -24,7 +24,11 @@ public class TestCompilador {
         try {
             // TODO code application logic here
             ComPHP c = new ComPHP(System.in);
+<<<<<<< HEAD
             ComPHP.control();
+=======
+            ComPHP.repeticion();
+>>>>>>> estructuras-repeticion
         } catch (ParseException ex) {
             Logger.getLogger(TestCompilador.class.getName()).log(Level.SEVERE, null, ex);
         }

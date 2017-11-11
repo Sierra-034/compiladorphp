@@ -35,9 +35,15 @@ public interface ComPHPConstants {
   /** RegularExpression Id. */
   int BREAK = 16;
   /** RegularExpression Id. */
+<<<<<<< HEAD
   int CONTINUE = 17;
   /** RegularExpression Id. */
   int ENDFOR = 18;
+=======
+  int ENDWHILE = 17;
+  /** RegularExpression Id. */
+  int GOTO = 18;
+>>>>>>> estructuras-repeticion
   /** RegularExpression Id. */
   int INCLUDE = 19;
   /** RegularExpression Id. */
@@ -153,6 +159,8 @@ public interface ComPHPConstants {
     "\"break\"",
     "\"continue\"",
     "\"endfor\"",
+    "\"endwhile\"",
+    "\"goto\"",
     "\"include\"",
     "\"include_once\"",
     "\"require\"",

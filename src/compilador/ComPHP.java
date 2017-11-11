@@ -17,14 +17,22 @@ public class ComPHP implements ComPHPConstants {
     jj_consume_token(MAYOR);
   }
 
+<<<<<<< HEAD
   static final public void control() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case IF:{
       jj_consume_token(IF);
+=======
+  static final public void repeticion() throws ParseException {
+    switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+    case WHILE:{
+      jj_consume_token(WHILE);
+>>>>>>> estructuras-repeticion
       jj_consume_token(POP);
       jj_consume_token(PCL);
       jj_consume_token(KOP);
       jj_consume_token(KCL);
+<<<<<<< HEAD
       label_1:
       while (true) {
         switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
@@ -84,11 +92,36 @@ public class ComPHP implements ComPHPConstants {
         jj_la1[3] = jj_gen;
         ;
       }
+=======
+      break;
+      }
+    case DO:{
+      jj_consume_token(DO);
+      jj_consume_token(KOP);
+      jj_consume_token(KCL);
+      jj_consume_token(WHILE);
+      jj_consume_token(POP);
+      jj_consume_token(PCL);
+      jj_consume_token(PC);
+      break;
+      }
+    case FOR:{
+      jj_consume_token(FOR);
+      jj_consume_token(POP);
+      jj_consume_token(PC);
+      jj_consume_token(PC);
+      jj_consume_token(PCL);
+      jj_consume_token(KOP);
+>>>>>>> estructuras-repeticion
       jj_consume_token(KCL);
       break;
       }
     default:
+<<<<<<< HEAD
       jj_la1[4] = jj_gen;
+=======
+      jj_la1[0] = jj_gen;
+>>>>>>> estructuras-repeticion
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -104,7 +137,11 @@ public class ComPHP implements ComPHPConstants {
   static public Token jj_nt;
   static private int jj_ntk;
   static private int jj_gen;
+<<<<<<< HEAD
   static final private int[] jj_la1 = new int[5];
+=======
+  static final private int[] jj_la1 = new int[1];
+>>>>>>> estructuras-repeticion
   static private int[] jj_la1_0;
   static private int[] jj_la1_1;
   static {
@@ -112,10 +149,17 @@ public class ComPHP implements ComPHPConstants {
       jj_la1_init_1();
    }
    private static void jj_la1_init_0() {
+<<<<<<< HEAD
       jj_la1_0 = new int[] {0x100,0x80,0x400,0x800,0x240,};
    }
    private static void jj_la1_init_1() {
       jj_la1_1 = new int[] {0x0,0x0,0x0,0x0,0x0,};
+=======
+      jj_la1_0 = new int[] {0x3400,};
+   }
+   private static void jj_la1_init_1() {
+      jj_la1_1 = new int[] {0x0,};
+>>>>>>> estructuras-repeticion
    }
 
   /** Constructor with InputStream. */
@@ -136,7 +180,11 @@ public class ComPHP implements ComPHPConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
+<<<<<<< HEAD
     for (int i = 0; i < 5; i++) jj_la1[i] = -1;
+=======
+    for (int i = 0; i < 1; i++) jj_la1[i] = -1;
+>>>>>>> estructuras-repeticion
   }
 
   /** Reinitialise. */
@@ -150,7 +198,11 @@ public class ComPHP implements ComPHPConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
+<<<<<<< HEAD
     for (int i = 0; i < 5; i++) jj_la1[i] = -1;
+=======
+    for (int i = 0; i < 1; i++) jj_la1[i] = -1;
+>>>>>>> estructuras-repeticion
   }
 
   /** Constructor. */
@@ -167,7 +219,11 @@ public class ComPHP implements ComPHPConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
+<<<<<<< HEAD
     for (int i = 0; i < 5; i++) jj_la1[i] = -1;
+=======
+    for (int i = 0; i < 1; i++) jj_la1[i] = -1;
+>>>>>>> estructuras-repeticion
   }
 
   /** Reinitialise. */
@@ -177,7 +233,11 @@ public class ComPHP implements ComPHPConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
+<<<<<<< HEAD
     for (int i = 0; i < 5; i++) jj_la1[i] = -1;
+=======
+    for (int i = 0; i < 1; i++) jj_la1[i] = -1;
+>>>>>>> estructuras-repeticion
   }
 
   /** Constructor with generated Token Manager. */
@@ -193,7 +253,11 @@ public class ComPHP implements ComPHPConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
+<<<<<<< HEAD
     for (int i = 0; i < 5; i++) jj_la1[i] = -1;
+=======
+    for (int i = 0; i < 1; i++) jj_la1[i] = -1;
+>>>>>>> estructuras-repeticion
   }
 
   /** Reinitialise. */
@@ -202,7 +266,11 @@ public class ComPHP implements ComPHPConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
+<<<<<<< HEAD
     for (int i = 0; i < 5; i++) jj_la1[i] = -1;
+=======
+    for (int i = 0; i < 1; i++) jj_la1[i] = -1;
+>>>>>>> estructuras-repeticion
   }
 
   static private Token jj_consume_token(int kind) throws ParseException {
@@ -258,7 +326,11 @@ public class ComPHP implements ComPHPConstants {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
     }
+<<<<<<< HEAD
     for (int i = 0; i < 5; i++) {
+=======
+    for (int i = 0; i < 1; i++) {
+>>>>>>> estructuras-repeticion
       if (jj_la1[i] == jj_gen) {
         for (int j = 0; j < 32; j++) {
           if ((jj_la1_0[i] & (1<<j)) != 0) {
