@@ -125,6 +125,7 @@ public interface ComPHPConstants {
   /** RegularExpression Id. */
   int PP = 58;
   /** RegularExpression Id. */
+<<<<<<< HEAD
   int digito = 59;
   /** RegularExpression Id. */
   int letra = 60;
@@ -134,6 +135,15 @@ public interface ComPHPConstants {
   int VALOR_DOULE = 62;
   /** RegularExpression Id. */
   int IDENTIFICADOR = 63;
+=======
+  int VALOR_DOUBLE = 60;
+  /** RegularExpression Id. */
+  int VALOR_BOOLEAN = 61;
+  /** RegularExpression Id. */
+  int IDENTIFICADOR = 62;
+  /** RegularExpression Id. */
+  int ARRAY = 63;
+>>>>>>> expresiones-javier
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -204,8 +214,10 @@ public interface ComPHPConstants {
     "<digito>",
     "<letra>",
     "<VALOR_INT>",
-    "<VALOR_DOULE>",
+    "<VALOR_DOUBLE>",
+    "<VALOR_BOOLEAN>",
     "<IDENTIFICADOR>",
+    "<ARRAY>",
   };
 
 }

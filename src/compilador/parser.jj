@@ -48,10 +48,6 @@ package compilador;
 
 public class ComPHP {
 
-    public ComPHP() throws ParseException {
-        ComPHP parser = new ComPHP(System.in);
-        parser.gramaticaPrincipal();
-    }
 
 }
 
@@ -185,14 +181,18 @@ TOKEN:
         uno o más dígitos simples seguidos de un punto
         y uno o más digitos simples
     */
-|   <VALOR_DOULE: (<digito>)+ "." (<digito>)+>
+|   <VALOR_DOUBLE: (<digito>)+ "." (<digito>)+>
+
+|   <VALOR_BOOLEAN: ("true" | "false")>
 
     /*
         IDENTIFICADOR coincide con 
         signo de dollar, seguido de una letra o guión bajo,
         seguido de una secuencia de letras o dígitos
     */         
-|   <IDENTIFICADOR: (<DOLLAR>) ((<letra>) | "_") ((<letra>) | (<digito>))*>        
+|   <IDENTIFICADOR: (<DOLLAR>) ((<letra>) | "_") ((<letra>) | (<digito>))*>
+
+|   <ARRAY: <IDENTIFICADOR><BOP> ( <IDENTIFICADOR> | <VALOR_INT> )? <BCL>>
 
 }
 
@@ -298,4 +298,114 @@ void repeticion() :
             /* Instrucciones */
         <KCL>
     )
+}
+
+void declaracionAsignacion() :
+{}
+{
+    (
+        valorIdentificador()
+        (
+            operadorAsignacion() expresion()
+        |   <INCREMENTO> 
+        ) 
+
+    |   (<INCREMENTO> | <DECREMENTO> ) valorIdentificador()
+    )
+    <PC>
+}
+
+void expresion() :
+{}
+{
+    ( <VALOR_BOOLEAN> | valorNumerico() | <POP> expresion() <PCL> )
+    ( operador() ( valor() | <POP> expresion() <PCL> ) )*   
+    ( <QUERY> expresion() <PP> expresion() )?
+
+|   valorIdentificador()
+    ( <INCREMENTO> | <DECREMENTO> )?
+    ( operador() ( valor() | <POP> expresion() <PCL> ) )*      
+    ( <QUERY> expresion() <PP> expresion() )?
+
+|   ( <INCREMENTO> | <DECREMENTO> ) valorIdentificador()
+
+}
+
+void operador() :
+{}
+{
+    ( operadorAsignacion() | operadorAritmetico() | operadorRelacional() | operadorLogico() )
+}
+
+void valor() :
+{}
+{
+    ( valorIdentificador() | <VALOR_BOOLEAN> | valorNumerico() )
+}
+
+void valorIdentificador() :
+{}
+{
+    ( <IDENTIFICADOR> | <ARRAY> )
+}
+
+void valorNumerico() :
+{}
+{
+    ( <VALOR_INT> | <VALOR_DOUBLE> )
+}
+
+/*
+    Operadores de asignación
+    Para usar estos operadores 
+    debe existir un 'valorIdentificador' que lo preceda
+    seguido de cualquier expresión.
+
+    Se omiten preincremento, predecremento, posincremento y posdecremento
+    por no definir su clase 
+*/
+void operadorAsignacion() :
+{}
+{
+    ( <IGUAL> | <MASIGUAL> | <MENOSIGUAL> | <MULTIIGUAL> | <DIVIGUAL> | <MODIGUAL> | <PUNTOIGUAL> )
+}
+
+/*
+    Operadores Aritméticos
+    Estos operadores deben usarse solo en 
+    expresiones aritméticas y con operadores numéricos
+
+    Se omiten preincremento, predecremento, posincremento y posdecremento
+    por no definir su clase     
+*/
+void operadorAritmetico() :
+{}
+{
+    ( <MAS> | <MENOS> | <MULTI> | <DIV> | <MOD> )
+}
+
+/*
+    Operadores Relacionales
+    Estos operadores deben usarse solo en 
+    expresiones booleanas y con operandos aritméticos
+*/
+void operadorRelacional() :
+{}
+{
+    ( <IGUALDAD> | <NOIGUALDAD> | <IDENTICO> | <NOIDENTICO> | <MENOR> | <MAYOR> | <MENORIGUAL> | <MAYORIGUAL> )
+}
+
+/*
+    Operadores Lógicos
+    Estos operadores deben usarse solo en 
+    expresiones booleanas y con operandos lógicos
+    que generen valores 'true' o 'flase'
+
+    Se omite la negación por cuestión de número de operandos
+    en posteriores utilizaciones
+*/
+void operadorLogico() : 
+{}
+{
+    ( <AND> | <OR> | <XOR> )
 }
