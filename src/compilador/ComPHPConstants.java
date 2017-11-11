@@ -35,115 +35,107 @@ public interface ComPHPConstants {
   /** RegularExpression Id. */
   int BREAK = 16;
   /** RegularExpression Id. */
-<<<<<<< HEAD
   int CONTINUE = 17;
   /** RegularExpression Id. */
   int ENDFOR = 18;
-=======
-  int ENDWHILE = 17;
   /** RegularExpression Id. */
-  int GOTO = 18;
->>>>>>> estructuras-repeticion
+  int ENDWHILE = 19;
   /** RegularExpression Id. */
-  int INCLUDE = 19;
+  int GOTO = 20;
   /** RegularExpression Id. */
-  int INCLUDEONCE = 20;
+  int INCLUDE = 21;
   /** RegularExpression Id. */
-  int REQUIRE = 21;
+  int INCLUDEONCE = 22;
   /** RegularExpression Id. */
-  int REQUIREONCE = 22;
+  int REQUIRE = 23;
   /** RegularExpression Id. */
-  int MAS = 23;
+  int REQUIREONCE = 24;
   /** RegularExpression Id. */
-  int MENOS = 24;
+  int MAS = 25;
   /** RegularExpression Id. */
-  int MULTI = 25;
+  int MENOS = 26;
   /** RegularExpression Id. */
-  int DIV = 26;
+  int MULTI = 27;
   /** RegularExpression Id. */
-  int MOD = 27;
+  int DIV = 28;
   /** RegularExpression Id. */
-  int IGUAL = 28;
+  int MOD = 29;
   /** RegularExpression Id. */
-  int MASIGUAL = 29;
+  int IGUAL = 30;
   /** RegularExpression Id. */
-  int MENOSIGUAL = 30;
+  int MASIGUAL = 31;
   /** RegularExpression Id. */
-  int MULTIIGUAL = 31;
+  int MENOSIGUAL = 32;
   /** RegularExpression Id. */
-  int DIVIGUAL = 32;
+  int MULTIIGUAL = 33;
   /** RegularExpression Id. */
-  int MODIGUAL = 33;
+  int DIVIGUAL = 34;
   /** RegularExpression Id. */
-  int PUNTOIGUAL = 34;
+  int MODIGUAL = 35;
   /** RegularExpression Id. */
-  int INCREMENTO = 35;
+  int PUNTOIGUAL = 36;
   /** RegularExpression Id. */
-  int DECREMENTO = 36;
+  int INCREMENTO = 37;
   /** RegularExpression Id. */
-  int AND = 37;
+  int DECREMENTO = 38;
   /** RegularExpression Id. */
-  int OR = 38;
+  int AND = 39;
   /** RegularExpression Id. */
-  int NEGACION = 39;
+  int OR = 40;
   /** RegularExpression Id. */
-  int XOR = 40;
+  int NEGACION = 41;
   /** RegularExpression Id. */
-  int IGUALDAD = 41;
+  int XOR = 42;
   /** RegularExpression Id. */
-  int NOIGUALDAD = 42;
+  int IGUALDAD = 43;
   /** RegularExpression Id. */
-  int IDENTICO = 43;
+  int NOIGUALDAD = 44;
   /** RegularExpression Id. */
-  int NOIDENTICO = 44;
+  int IDENTICO = 45;
   /** RegularExpression Id. */
-  int MENOR = 45;
+  int NOIDENTICO = 46;
   /** RegularExpression Id. */
-  int MAYOR = 46;
+  int MENOR = 47;
   /** RegularExpression Id. */
-  int MENORIGUAL = 47;
+  int MAYOR = 48;
   /** RegularExpression Id. */
-  int MAYORIGUAL = 48;
+  int MENORIGUAL = 49;
   /** RegularExpression Id. */
-  int QUERY = 49;
+  int MAYORIGUAL = 50;
   /** RegularExpression Id. */
-  int DOLLAR = 50;
+  int QUERY = 51;
   /** RegularExpression Id. */
-  int KOP = 51;
+  int DOLLAR = 52;
   /** RegularExpression Id. */
-  int KCL = 52;
+  int KOP = 53;
   /** RegularExpression Id. */
-  int BOP = 53;
+  int KCL = 54;
   /** RegularExpression Id. */
-  int BCL = 54;
+  int BOP = 55;
   /** RegularExpression Id. */
-  int POP = 55;
+  int BCL = 56;
   /** RegularExpression Id. */
-  int PCL = 56;
+  int POP = 57;
   /** RegularExpression Id. */
-  int PC = 57;
+  int PCL = 58;
   /** RegularExpression Id. */
-  int PP = 58;
+  int PC = 59;
   /** RegularExpression Id. */
-<<<<<<< HEAD
-  int digito = 59;
+  int PP = 60;
   /** RegularExpression Id. */
-  int letra = 60;
+  int digito = 61;
   /** RegularExpression Id. */
-  int VALOR_INT = 61;
+  int letra = 62;
   /** RegularExpression Id. */
-  int VALOR_DOULE = 62;
+  int VALOR_INT = 63;
   /** RegularExpression Id. */
-  int IDENTIFICADOR = 63;
-=======
-  int VALOR_DOUBLE = 60;
+  int VALOR_DOUBLE = 64;
   /** RegularExpression Id. */
-  int VALOR_BOOLEAN = 61;
+  int VALOR_BOOLEAN = 65;
   /** RegularExpression Id. */
-  int IDENTIFICADOR = 62;
+  int IDENTIFICADOR = 66;
   /** RegularExpression Id. */
-  int ARRAY = 63;
->>>>>>> expresiones-javier
+  int ARRAY = 67;
 
   /** Lexical state. */
   int DEFAULT = 0;

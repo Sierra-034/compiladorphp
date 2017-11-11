@@ -8,32 +8,377 @@ public class ComPHP implements ComPHPConstants {
     jj_consume_token(MENOR);
     jj_consume_token(QUERY);
     jj_consume_token(PHP);
+    label_1:
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case IF:
+      case SWITCH:
+      case FOR:
+      case WHILE:
+      case DO:
+      case BREAK:
+      case CONTINUE:
+      case INCREMENTO:
+      case DECREMENTO:
+      case IDENTIFICADOR:
+      case ARRAY:{
+        ;
+        break;
+        }
+      default:
+        jj_la1[0] = jj_gen;
+        break label_1;
+      }
+      instruccion();
+    }
     jj_consume_token(QUERY);
     jj_consume_token(MAYOR);
   }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+  static final public void instruccion() throws ParseException {
+    switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+    case INCREMENTO:
+    case DECREMENTO:
+    case IDENTIFICADOR:
+    case ARRAY:{
+      declaracionAsignacion();
+      break;
+      }
+    case BREAK:{
+      jj_consume_token(BREAK);
+      jj_consume_token(PC);
+      break;
+      }
+    case CONTINUE:{
+      jj_consume_token(CONTINUE);
+      jj_consume_token(PC);
+      break;
+      }
+    case IF:
+    case SWITCH:{
+      control();
+      break;
+      }
+    case FOR:
+    case WHILE:
+    case DO:{
+      repeticion();
+      break;
+      }
+    default:
+      jj_la1[1] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+  }
+
   static final public void control() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case IF:{
       jj_consume_token(IF);
-=======
+      jj_consume_token(POP);
+      expresion();
+      jj_consume_token(PCL);
+      jj_consume_token(KOP);
+      label_2:
+      while (true) {
+        switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+        case IF:
+        case SWITCH:
+        case FOR:
+        case WHILE:
+        case DO:
+        case BREAK:
+        case CONTINUE:
+        case INCREMENTO:
+        case DECREMENTO:
+        case IDENTIFICADOR:
+        case ARRAY:{
+          ;
+          break;
+          }
+        default:
+          jj_la1[2] = jj_gen;
+          break label_2;
+        }
+        instruccion();
+      }
+      jj_consume_token(KCL);
+      label_3:
+      while (true) {
+        switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+        case ELSEIF:{
+          ;
+          break;
+          }
+        default:
+          jj_la1[3] = jj_gen;
+          break label_3;
+        }
+        jj_consume_token(ELSEIF);
+        jj_consume_token(POP);
+        expresion();
+        jj_consume_token(PCL);
+        jj_consume_token(KOP);
+        label_4:
+        while (true) {
+          switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+          case IF:
+          case SWITCH:
+          case FOR:
+          case WHILE:
+          case DO:
+          case BREAK:
+          case CONTINUE:
+          case INCREMENTO:
+          case DECREMENTO:
+          case IDENTIFICADOR:
+          case ARRAY:{
+            ;
+            break;
+            }
+          default:
+            jj_la1[4] = jj_gen;
+            break label_4;
+          }
+          instruccion();
+        }
+        jj_consume_token(KCL);
+      }
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case ELSE:{
+        jj_consume_token(ELSE);
+        jj_consume_token(KOP);
+        label_5:
+        while (true) {
+          switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+          case IF:
+          case SWITCH:
+          case FOR:
+          case WHILE:
+          case DO:
+          case BREAK:
+          case CONTINUE:
+          case INCREMENTO:
+          case DECREMENTO:
+          case IDENTIFICADOR:
+          case ARRAY:{
+            ;
+            break;
+            }
+          default:
+            jj_la1[5] = jj_gen;
+            break label_5;
+          }
+          instruccion();
+        }
+        jj_consume_token(KCL);
+        break;
+        }
+      default:
+        jj_la1[6] = jj_gen;
+        ;
+      }
+      break;
+      }
+    case SWITCH:{
+      jj_consume_token(SWITCH);
+      jj_consume_token(POP);
+      expresion();
+      jj_consume_token(PCL);
+      jj_consume_token(KOP);
+      label_6:
+      while (true) {
+        switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+        case CASE:{
+          ;
+          break;
+          }
+        default:
+          jj_la1[7] = jj_gen;
+          break label_6;
+        }
+        jj_consume_token(CASE);
+        jj_consume_token(VALOR_INT);
+        jj_consume_token(PP);
+        label_7:
+        while (true) {
+          switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+          case IF:
+          case SWITCH:
+          case FOR:
+          case WHILE:
+          case DO:
+          case BREAK:
+          case CONTINUE:
+          case INCREMENTO:
+          case DECREMENTO:
+          case IDENTIFICADOR:
+          case ARRAY:{
+            ;
+            break;
+            }
+          default:
+            jj_la1[8] = jj_gen;
+            break label_7;
+          }
+          instruccion();
+        }
+      }
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case DEF:{
+        jj_consume_token(DEF);
+        jj_consume_token(PP);
+        label_8:
+        while (true) {
+          switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+          case IF:
+          case SWITCH:
+          case FOR:
+          case WHILE:
+          case DO:
+          case BREAK:
+          case CONTINUE:
+          case INCREMENTO:
+          case DECREMENTO:
+          case IDENTIFICADOR:
+          case ARRAY:{
+            ;
+            break;
+            }
+          default:
+            jj_la1[9] = jj_gen;
+            break label_8;
+          }
+          instruccion();
+        }
+        break;
+        }
+      default:
+        jj_la1[10] = jj_gen;
+        ;
+      }
+      jj_consume_token(KCL);
+      break;
+      }
+    default:
+      jj_la1[11] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+  }
+
   static final public void repeticion() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case WHILE:{
       jj_consume_token(WHILE);
->>>>>>> estructuras-repeticion
       jj_consume_token(POP);
+      expresion();
       jj_consume_token(PCL);
       jj_consume_token(KOP);
-      jj_consume_token(KCL);
-<<<<<<< HEAD
-      label_1:
+      label_9:
       while (true) {
         switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-        case ELSEIF:{
-=======
+        case IF:
+        case SWITCH:
+        case FOR:
+        case WHILE:
+        case DO:
+        case BREAK:
+        case CONTINUE:
+        case INCREMENTO:
+        case DECREMENTO:
+        case IDENTIFICADOR:
+        case ARRAY:{
+          ;
+          break;
+          }
+        default:
+          jj_la1[12] = jj_gen;
+          break label_9;
+        }
+        instruccion();
+      }
+      jj_consume_token(KCL);
+      break;
+      }
+    case DO:{
+      jj_consume_token(DO);
+      jj_consume_token(KOP);
+      label_10:
+      while (true) {
+        switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+        case IF:
+        case SWITCH:
+        case FOR:
+        case WHILE:
+        case DO:
+        case BREAK:
+        case CONTINUE:
+        case INCREMENTO:
+        case DECREMENTO:
+        case IDENTIFICADOR:
+        case ARRAY:{
+          ;
+          break;
+          }
+        default:
+          jj_la1[13] = jj_gen;
+          break label_10;
+        }
+        instruccion();
+      }
+      jj_consume_token(KCL);
+      jj_consume_token(WHILE);
+      jj_consume_token(POP);
+      expresion();
+      jj_consume_token(PCL);
+      jj_consume_token(PC);
+      break;
+      }
+    case FOR:{
+      jj_consume_token(FOR);
+      jj_consume_token(POP);
+      expresion();
+      jj_consume_token(PC);
+      expresion();
+      jj_consume_token(PC);
+      expresion();
+      jj_consume_token(PCL);
+      jj_consume_token(KOP);
+      label_11:
+      while (true) {
+        switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+        case IF:
+        case SWITCH:
+        case FOR:
+        case WHILE:
+        case DO:
+        case BREAK:
+        case CONTINUE:
+        case INCREMENTO:
+        case DECREMENTO:
+        case IDENTIFICADOR:
+        case ARRAY:{
+          ;
+          break;
+          }
+        default:
+          jj_la1[14] = jj_gen;
+          break label_11;
+        }
+        instruccion();
+      }
+      jj_consume_token(KCL);
+      break;
+      }
+    default:
+      jj_la1[15] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+  }
+
   static final public void declaracionAsignacion() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case IDENTIFICADOR:
@@ -56,7 +401,7 @@ public class ComPHP implements ComPHPConstants {
         break;
         }
       default:
-        jj_la1[0] = jj_gen;
+        jj_la1[16] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -74,7 +419,7 @@ public class ComPHP implements ComPHPConstants {
         break;
         }
       default:
-        jj_la1[1] = jj_gen;
+        jj_la1[17] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -82,7 +427,7 @@ public class ComPHP implements ComPHPConstants {
       break;
       }
     default:
-      jj_la1[2] = jj_gen;
+      jj_la1[18] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -112,11 +457,11 @@ public class ComPHP implements ComPHPConstants {
         break;
         }
       default:
-        jj_la1[3] = jj_gen;
+        jj_la1[19] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
-      label_1:
+      label_12:
       while (true) {
         switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
         case MAS:
@@ -142,33 +487,12 @@ public class ComPHP implements ComPHPConstants {
         case MAYOR:
         case MENORIGUAL:
         case MAYORIGUAL:{
->>>>>>> expresiones-javier
           ;
           break;
           }
         default:
-<<<<<<< HEAD
-          jj_la1[0] = jj_gen;
-          break label_1;
-        }
-        jj_consume_token(ELSEIF);
-        jj_consume_token(POP);
-        jj_consume_token(PCL);
-        jj_consume_token(KOP);
-        jj_consume_token(KCL);
-      }
-      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-      case ELSE:{
-        jj_consume_token(ELSE);
-        jj_consume_token(KOP);
-        jj_consume_token(KCL);
-        break;
-        }
-      default:
-        jj_la1[1] = jj_gen;
-=======
-          jj_la1[4] = jj_gen;
-          break label_1;
+          jj_la1[20] = jj_gen;
+          break label_12;
         }
         operador();
         switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
@@ -187,7 +511,7 @@ public class ComPHP implements ComPHPConstants {
           break;
           }
         default:
-          jj_la1[5] = jj_gen;
+          jj_la1[21] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -201,23 +525,11 @@ public class ComPHP implements ComPHPConstants {
         break;
         }
       default:
-        jj_la1[6] = jj_gen;
->>>>>>> expresiones-javier
+        jj_la1[22] = jj_gen;
         ;
       }
       break;
       }
-<<<<<<< HEAD
-    case SWITCH:{
-      jj_consume_token(SWITCH);
-      jj_consume_token(POP);
-      jj_consume_token(PCL);
-      jj_consume_token(KOP);
-      label_2:
-      while (true) {
-        switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-        case CASE:{
-=======
     case IDENTIFICADOR:
     case ARRAY:{
       valorIdentificador();
@@ -234,17 +546,17 @@ public class ComPHP implements ComPHPConstants {
           break;
           }
         default:
-          jj_la1[7] = jj_gen;
+          jj_la1[23] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
         break;
         }
       default:
-        jj_la1[8] = jj_gen;
+        jj_la1[24] = jj_gen;
         ;
       }
-      label_2:
+      label_13:
       while (true) {
         switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
         case MAS:
@@ -270,61 +582,12 @@ public class ComPHP implements ComPHPConstants {
         case MAYOR:
         case MENORIGUAL:
         case MAYORIGUAL:{
->>>>>>> expresiones-javier
           ;
           break;
           }
         default:
-<<<<<<< HEAD
-          jj_la1[2] = jj_gen;
-          break label_2;
-        }
-        jj_consume_token(CASE);
-        jj_consume_token(PP);
-      }
-      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-      case DEF:{
-        jj_consume_token(DEF);
-        jj_consume_token(PP);
-        break;
-        }
-      default:
-        jj_la1[3] = jj_gen;
-        ;
-      }
-=======
-      break;
-      }
-    case DO:{
-      jj_consume_token(DO);
-      jj_consume_token(KOP);
-      jj_consume_token(KCL);
-      jj_consume_token(WHILE);
-      jj_consume_token(POP);
-      jj_consume_token(PCL);
-      jj_consume_token(PC);
-      break;
-      }
-    case FOR:{
-      jj_consume_token(FOR);
-      jj_consume_token(POP);
-      jj_consume_token(PC);
-      jj_consume_token(PC);
-      jj_consume_token(PCL);
-      jj_consume_token(KOP);
->>>>>>> estructuras-repeticion
-      jj_consume_token(KCL);
-      break;
-      }
-    default:
-<<<<<<< HEAD
-      jj_la1[4] = jj_gen;
-=======
-      jj_la1[0] = jj_gen;
->>>>>>> estructuras-repeticion
-=======
-          jj_la1[9] = jj_gen;
-          break label_2;
+          jj_la1[25] = jj_gen;
+          break label_13;
         }
         operador();
         switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
@@ -343,7 +606,7 @@ public class ComPHP implements ComPHPConstants {
           break;
           }
         default:
-          jj_la1[10] = jj_gen;
+          jj_la1[26] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -357,7 +620,7 @@ public class ComPHP implements ComPHPConstants {
         break;
         }
       default:
-        jj_la1[11] = jj_gen;
+        jj_la1[27] = jj_gen;
         ;
       }
       break;
@@ -374,7 +637,7 @@ public class ComPHP implements ComPHPConstants {
         break;
         }
       default:
-        jj_la1[12] = jj_gen;
+        jj_la1[28] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -382,7 +645,7 @@ public class ComPHP implements ComPHPConstants {
       break;
       }
     default:
-      jj_la1[13] = jj_gen;
+      jj_la1[29] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -426,7 +689,7 @@ public class ComPHP implements ComPHPConstants {
       break;
       }
     default:
-      jj_la1[14] = jj_gen;
+      jj_la1[30] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -449,7 +712,7 @@ public class ComPHP implements ComPHPConstants {
       break;
       }
     default:
-      jj_la1[15] = jj_gen;
+      jj_la1[31] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -466,7 +729,7 @@ public class ComPHP implements ComPHPConstants {
       break;
       }
     default:
-      jj_la1[16] = jj_gen;
+      jj_la1[32] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -483,7 +746,7 @@ public class ComPHP implements ComPHPConstants {
       break;
       }
     default:
-      jj_la1[17] = jj_gen;
+      jj_la1[33] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -529,7 +792,7 @@ public class ComPHP implements ComPHPConstants {
       break;
       }
     default:
-      jj_la1[18] = jj_gen;
+      jj_la1[34] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -566,7 +829,7 @@ public class ComPHP implements ComPHPConstants {
       break;
       }
     default:
-      jj_la1[19] = jj_gen;
+      jj_la1[35] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -612,7 +875,7 @@ public class ComPHP implements ComPHPConstants {
       break;
       }
     default:
-      jj_la1[20] = jj_gen;
+      jj_la1[36] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -642,8 +905,7 @@ public class ComPHP implements ComPHPConstants {
       break;
       }
     default:
-      jj_la1[21] = jj_gen;
->>>>>>> expresiones-javier
+      jj_la1[37] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -659,40 +921,23 @@ public class ComPHP implements ComPHPConstants {
   static public Token jj_nt;
   static private int jj_ntk;
   static private int jj_gen;
-<<<<<<< HEAD
-<<<<<<< HEAD
-  static final private int[] jj_la1 = new int[5];
-=======
-  static final private int[] jj_la1 = new int[1];
->>>>>>> estructuras-repeticion
-=======
-  static final private int[] jj_la1 = new int[22];
->>>>>>> expresiones-javier
+  static final private int[] jj_la1 = new int[38];
   static private int[] jj_la1_0;
   static private int[] jj_la1_1;
+  static private int[] jj_la1_2;
   static {
       jj_la1_init_0();
       jj_la1_init_1();
+      jj_la1_init_2();
    }
    private static void jj_la1_init_0() {
-<<<<<<< HEAD
-<<<<<<< HEAD
-      jj_la1_0 = new int[] {0x100,0x80,0x400,0x800,0x240,};
+      jj_la1_0 = new int[] {0x3d240,0x3d240,0x3d240,0x100,0x3d240,0x3d240,0x80,0x400,0x3d240,0x3d240,0x800,0x240,0x3d240,0x3d240,0x3d240,0xd000,0xc0000000,0x0,0x0,0x0,0xfe000000,0x0,0x0,0x0,0x0,0xfe000000,0x0,0x0,0x0,0x0,0xfe000000,0x0,0x0,0x0,0xc0000000,0x3e000000,0x0,0x0,};
    }
    private static void jj_la1_init_1() {
-      jj_la1_1 = new int[] {0x0,0x0,0x0,0x0,0x0,};
-=======
-      jj_la1_0 = new int[] {0x3400,};
+      jj_la1_1 = new int[] {0x60,0x60,0x60,0x0,0x60,0x60,0x0,0x0,0x60,0x60,0x0,0x0,0x60,0x60,0x60,0x0,0x3f,0x60,0x60,0x82000000,0x7fd9f,0x82000000,0x80000,0x60,0x60,0x7fd9f,0x82000000,0x80000,0x60,0x82000060,0x7fd9f,0x80000000,0x0,0x80000000,0x1f,0x0,0x7f800,0x580,};
    }
-   private static void jj_la1_init_1() {
-      jj_la1_1 = new int[] {0x0,};
->>>>>>> estructuras-repeticion
-=======
-      jj_la1_0 = new int[] {0xfc000000,0x0,0x0,0x0,0xffe00000,0x0,0x0,0x0,0x0,0xffe00000,0x0,0x0,0x0,0x0,0xffe00000,0x0,0x0,0x0,0xfc000000,0x3e00000,0x0,0x0,};
-   }
-   private static void jj_la1_init_1() {
-      jj_la1_1 = new int[] {0x3,0x6,0xc0000006,0x38200000,0x7fd9,0xf8200000,0x8000,0x6,0x6,0x7fd9,0xf8200000,0x8000,0x6,0xf8200006,0x7fd9,0xf8000000,0xc0000000,0x18000000,0x1,0x0,0x7f80,0x58,};
->>>>>>> expresiones-javier
+   private static void jj_la1_init_2() {
+      jj_la1_2 = new int[] {0xc,0xc,0xc,0x0,0xc,0xc,0x0,0x0,0xc,0xc,0x0,0x0,0xc,0xc,0xc,0x0,0x0,0x0,0xc,0x3,0x0,0xf,0x0,0x0,0x0,0x0,0xf,0x0,0x0,0xf,0x0,0xf,0xc,0x1,0x0,0x0,0x0,0x0,};
    }
 
   /** Constructor with InputStream. */
@@ -713,15 +958,7 @@ public class ComPHP implements ComPHPConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-<<<<<<< HEAD
-<<<<<<< HEAD
-    for (int i = 0; i < 5; i++) jj_la1[i] = -1;
-=======
-    for (int i = 0; i < 1; i++) jj_la1[i] = -1;
->>>>>>> estructuras-repeticion
-=======
-    for (int i = 0; i < 22; i++) jj_la1[i] = -1;
->>>>>>> expresiones-javier
+    for (int i = 0; i < 38; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -735,15 +972,7 @@ public class ComPHP implements ComPHPConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-<<<<<<< HEAD
-<<<<<<< HEAD
-    for (int i = 0; i < 5; i++) jj_la1[i] = -1;
-=======
-    for (int i = 0; i < 1; i++) jj_la1[i] = -1;
->>>>>>> estructuras-repeticion
-=======
-    for (int i = 0; i < 22; i++) jj_la1[i] = -1;
->>>>>>> expresiones-javier
+    for (int i = 0; i < 38; i++) jj_la1[i] = -1;
   }
 
   /** Constructor. */
@@ -760,15 +989,7 @@ public class ComPHP implements ComPHPConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-<<<<<<< HEAD
-<<<<<<< HEAD
-    for (int i = 0; i < 5; i++) jj_la1[i] = -1;
-=======
-    for (int i = 0; i < 1; i++) jj_la1[i] = -1;
->>>>>>> estructuras-repeticion
-=======
-    for (int i = 0; i < 22; i++) jj_la1[i] = -1;
->>>>>>> expresiones-javier
+    for (int i = 0; i < 38; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -778,15 +999,7 @@ public class ComPHP implements ComPHPConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-<<<<<<< HEAD
-<<<<<<< HEAD
-    for (int i = 0; i < 5; i++) jj_la1[i] = -1;
-=======
-    for (int i = 0; i < 1; i++) jj_la1[i] = -1;
->>>>>>> estructuras-repeticion
-=======
-    for (int i = 0; i < 22; i++) jj_la1[i] = -1;
->>>>>>> expresiones-javier
+    for (int i = 0; i < 38; i++) jj_la1[i] = -1;
   }
 
   /** Constructor with generated Token Manager. */
@@ -802,15 +1015,7 @@ public class ComPHP implements ComPHPConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-<<<<<<< HEAD
-<<<<<<< HEAD
-    for (int i = 0; i < 5; i++) jj_la1[i] = -1;
-=======
-    for (int i = 0; i < 1; i++) jj_la1[i] = -1;
->>>>>>> estructuras-repeticion
-=======
-    for (int i = 0; i < 22; i++) jj_la1[i] = -1;
->>>>>>> expresiones-javier
+    for (int i = 0; i < 38; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -819,15 +1024,7 @@ public class ComPHP implements ComPHPConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-<<<<<<< HEAD
-<<<<<<< HEAD
-    for (int i = 0; i < 5; i++) jj_la1[i] = -1;
-=======
-    for (int i = 0; i < 1; i++) jj_la1[i] = -1;
->>>>>>> estructuras-repeticion
-=======
-    for (int i = 0; i < 22; i++) jj_la1[i] = -1;
->>>>>>> expresiones-javier
+    for (int i = 0; i < 38; i++) jj_la1[i] = -1;
   }
 
   static private Token jj_consume_token(int kind) throws ParseException {
@@ -878,20 +1075,12 @@ public class ComPHP implements ComPHPConstants {
   /** Generate ParseException. */
   static public ParseException generateParseException() {
     jj_expentries.clear();
-    boolean[] la1tokens = new boolean[64];
+    boolean[] la1tokens = new boolean[68];
     if (jj_kind >= 0) {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
-    for (int i = 0; i < 5; i++) {
-=======
-    for (int i = 0; i < 1; i++) {
->>>>>>> estructuras-repeticion
-=======
-    for (int i = 0; i < 22; i++) {
->>>>>>> expresiones-javier
+    for (int i = 0; i < 38; i++) {
       if (jj_la1[i] == jj_gen) {
         for (int j = 0; j < 32; j++) {
           if ((jj_la1_0[i] & (1<<j)) != 0) {
@@ -900,10 +1089,13 @@ public class ComPHP implements ComPHPConstants {
           if ((jj_la1_1[i] & (1<<j)) != 0) {
             la1tokens[32+j] = true;
           }
+          if ((jj_la1_2[i] & (1<<j)) != 0) {
+            la1tokens[64+j] = true;
+          }
         }
       }
     }
-    for (int i = 0; i < 64; i++) {
+    for (int i = 0; i < 68; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;

@@ -177,7 +177,7 @@ TOKEN:
 |   <VALOR_INT: (<digito>)+>
 
     /*
-        VALOR_DOULE coincide con 
+        VALOR_DOUBLE coincide con 
         uno o más dígitos simples seguidos de un punto
         y uno o más digitos simples
     */
@@ -200,7 +200,21 @@ void gramaticaPrincipal() :
 {}
 {
     <MENOR><QUERY><PHP>
+        ( instruccion() )*
     <QUERY><MAYOR>
+}
+
+void instruccion() :
+{}
+{
+    // Añadir break, continue y demás
+    ( 
+        declaracionAsignacion() 
+    |   <BREAK><PC>
+    |   <CONTINUE><PC>
+    |   control() 
+    |   repeticion()
+    )
 }
 
 void control() :
@@ -215,17 +229,20 @@ void control() :
             Se garantiza la existencia de un if antes
             de cualquier else o elseif
         */
-        <IF><POP>/* Esxpresion booleana aquí */<PCL>
+        <IF><POP> expresion() <PCL>
         <KOP>
+            ( instruccion() )*
         <KCL>
         (
-            <ELSEIF><POP>/* Esxpresion booleana aquí */<PCL>
+            <ELSEIF><POP> expresion() <PCL>
             <KOP>
+                ( instruccion() )*
             <KCL>
         )*
         (
             <ELSE> 
             <KOP>
+                ( instruccion() )*
             <KCL>
         )?
     )
@@ -234,14 +251,14 @@ void control() :
         /*
             Estructura de control Switch
         */
-        <SWITCH><POP>/* Expresión aritmética aquí */<PCL>
+        <SWITCH><POP> expresion() <PCL>
         <KOP>
             /*
                 La instrucción case puede ir cero o más veces
             */
             (
-                <CASE>/* Expresión aritmética aquí */<PP>
-                    /* Instrucciones aquí */
+                <CASE><VALOR_INT><PP>
+                    ( instruccion() )*
             )*
 
             /*
@@ -250,7 +267,7 @@ void control() :
             */
             (
                 <DEF><PP>
-                    /* Instruccines aquí */
+                    ( instruccion() )*
             )?
         <KCL>
     )
@@ -266,9 +283,9 @@ void repeticion() :
             considerar la forma de dos puntos
             'while(): Instrucciones endwhile;'
         */
-        <WHILE><POP>/* Expresión booleana aquí */<PCL>
+        <WHILE><POP> expresion() <PCL>
         <KOP>
-            /* Instrucciones aquí */
+            ( instruccion() )*
         <KCL>
     )
 |
@@ -281,8 +298,8 @@ void repeticion() :
         */
         <DO>
         <KOP>
-            /* Instrucciones aquí */
-        <KCL><WHILE><POP>/* Expresión booleana aquí */<PCL><PC>
+            ( instruccion() )*
+        <KCL><WHILE><POP> expresion() <PCL><PC>
     )
 |
     (
@@ -293,9 +310,9 @@ void repeticion() :
             y la sintaxis de dos puntos
             'for(): Instrucciones endfor;'
         */
-        <FOR><POP>/* Expresión */<PC>/* Expresión */<PC>/* Expresión */<PCL>
+        <FOR><POP> expresion() <PC> expresion() <PC> expresion() <PCL>
         <KOP>
-            /* Instrucciones */
+            ( instruccion() )*
         <KCL>
     )
 }

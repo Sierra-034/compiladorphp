@@ -22,8 +22,9 @@ public class TestCompiler {
     public static void main(String[] args) {
         try {
             // TODO code application logic here
+            
             ComPHP c = new ComPHP(System.in);
-            ComPHP.declaracionAsignacion();
+            ComPHP.gramaticaPrincipal();
         } catch (ParseException ex) {
             Logger.getLogger(TestCompiler.class.getName()).log(Level.SEVERE, null, ex);
         }
