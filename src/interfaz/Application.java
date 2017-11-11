@@ -131,7 +131,7 @@ public class Application extends javax.swing.JFrame {
             String tabLabel = String.format("new file %d", tabCounter);
             
             tabPane.addTab(tabLabel, null, scroll, null);
-            tabPane.setSelectedIndex(tabCounter);
+            tabPane.setSelectedIndex(tabCounter); 
             
             tabCounter++;                        
         }

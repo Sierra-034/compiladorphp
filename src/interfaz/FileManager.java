@@ -6,13 +6,13 @@
 package interfaz;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import sun.awt.image.BufImgSurfaceData;
 
 /**
  *
@@ -22,13 +22,12 @@ public class FileManager {
     
     public static String read( File fileP )
     {
-        FileReader entrada = null;
+        BufferedReader br = null;
         String cadena = "";
         
         try 
         {
-            entrada = new FileReader(fileP);
-            BufferedReader br = new BufferedReader(entrada);
+            br = new BufferedReader(new FileReader(fileP));
             
             int character = br.read();
             while(character != -1)
@@ -44,7 +43,7 @@ public class FileManager {
         finally
         {
             try {
-                entrada.close();
+                br.close();
             } catch (IOException ex) {
                 Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -52,5 +51,29 @@ public class FileManager {
             return cadena;            
         }
         
+    }
+    
+    public static void write( File fileP, String str )
+    {
+        BufferedWriter bw = null;
+        
+        try
+        {
+            bw = new BufferedWriter(new FileWriter(fileP));            
+            bw.write(str);
+        }
+        catch ( IOException ex )
+        {
+            System.out.println("Error en el archivo");
+            ex.printStackTrace();
+        }
+        finally
+        {
+            try {
+                bw.close();
+            } catch (IOException ex) {
+                Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 }
