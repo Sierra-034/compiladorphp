@@ -43,99 +43,105 @@ public interface ComPHPConstants {
   /** RegularExpression Id. */
   int GOTO = 20;
   /** RegularExpression Id. */
-  int INCLUDE = 21;
+  int FUNCTION = 21;
   /** RegularExpression Id. */
-  int INCLUDEONCE = 22;
+  int INCLUDE = 22;
   /** RegularExpression Id. */
-  int REQUIRE = 23;
+  int INCLUDEONCE = 23;
   /** RegularExpression Id. */
-  int REQUIREONCE = 24;
+  int REQUIRE = 24;
   /** RegularExpression Id. */
-  int MAS = 25;
+  int REQUIREONCE = 25;
   /** RegularExpression Id. */
-  int MENOS = 26;
+  int MAS = 26;
   /** RegularExpression Id. */
-  int MULTI = 27;
+  int MENOS = 27;
   /** RegularExpression Id. */
-  int DIV = 28;
+  int MULTI = 28;
   /** RegularExpression Id. */
-  int MOD = 29;
+  int DIV = 29;
   /** RegularExpression Id. */
-  int IGUAL = 30;
+  int MOD = 30;
   /** RegularExpression Id. */
-  int MASIGUAL = 31;
+  int IGUAL = 31;
   /** RegularExpression Id. */
-  int MENOSIGUAL = 32;
+  int MASIGUAL = 32;
   /** RegularExpression Id. */
-  int MULTIIGUAL = 33;
+  int MENOSIGUAL = 33;
   /** RegularExpression Id. */
-  int DIVIGUAL = 34;
+  int MULTIIGUAL = 34;
   /** RegularExpression Id. */
-  int MODIGUAL = 35;
+  int DIVIGUAL = 35;
   /** RegularExpression Id. */
-  int PUNTOIGUAL = 36;
+  int MODIGUAL = 36;
   /** RegularExpression Id. */
-  int INCREMENTO = 37;
+  int PUNTOIGUAL = 37;
   /** RegularExpression Id. */
-  int DECREMENTO = 38;
+  int INCREMENTO = 38;
   /** RegularExpression Id. */
-  int AND = 39;
+  int DECREMENTO = 39;
   /** RegularExpression Id. */
-  int OR = 40;
+  int AND = 40;
   /** RegularExpression Id. */
-  int NEGACION = 41;
+  int OR = 41;
   /** RegularExpression Id. */
-  int XOR = 42;
+  int NEGACION = 42;
   /** RegularExpression Id. */
-  int IGUALDAD = 43;
+  int XOR = 43;
   /** RegularExpression Id. */
-  int NOIGUALDAD = 44;
+  int IGUALDAD = 44;
   /** RegularExpression Id. */
-  int IDENTICO = 45;
+  int NOIGUALDAD = 45;
   /** RegularExpression Id. */
-  int NOIDENTICO = 46;
+  int IDENTICO = 46;
   /** RegularExpression Id. */
-  int MENOR = 47;
+  int NOIDENTICO = 47;
   /** RegularExpression Id. */
-  int MAYOR = 48;
+  int MENOR = 48;
   /** RegularExpression Id. */
-  int MENORIGUAL = 49;
+  int MAYOR = 49;
   /** RegularExpression Id. */
-  int MAYORIGUAL = 50;
+  int MENORIGUAL = 50;
   /** RegularExpression Id. */
-  int QUERY = 51;
+  int MAYORIGUAL = 51;
   /** RegularExpression Id. */
-  int DOLLAR = 52;
+  int QUERY = 52;
   /** RegularExpression Id. */
-  int KOP = 53;
+  int DOLLAR = 53;
   /** RegularExpression Id. */
-  int KCL = 54;
+  int KOP = 54;
   /** RegularExpression Id. */
-  int BOP = 55;
+  int KCL = 55;
   /** RegularExpression Id. */
-  int BCL = 56;
+  int BOP = 56;
   /** RegularExpression Id. */
-  int POP = 57;
+  int BCL = 57;
   /** RegularExpression Id. */
-  int PCL = 58;
+  int POP = 58;
   /** RegularExpression Id. */
-  int PC = 59;
+  int PCL = 59;
   /** RegularExpression Id. */
-  int PP = 60;
+  int PC = 60;
   /** RegularExpression Id. */
-  int digito = 61;
+  int COM = 61;
   /** RegularExpression Id. */
-  int letra = 62;
+  int PP = 62;
   /** RegularExpression Id. */
-  int VALOR_INT = 63;
+  int digito = 63;
   /** RegularExpression Id. */
-  int VALOR_DOUBLE = 64;
+  int letra = 64;
   /** RegularExpression Id. */
-  int VALOR_BOOLEAN = 65;
+  int VALOR_INT = 65;
   /** RegularExpression Id. */
-  int IDENTIFICADOR = 66;
+  int VALOR_DOUBLE = 66;
   /** RegularExpression Id. */
-  int ARRAY = 67;
+  int VALOR_BOOLEAN = 67;
+  /** RegularExpression Id. */
+  int ID_FUNCION = 68;
+  /** RegularExpression Id. */
+  int IDENTIFICADOR = 69;
+  /** RegularExpression Id. */
+  int ARRAY = 70;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -163,6 +169,7 @@ public interface ComPHPConstants {
     "\"endfor\"",
     "\"endwhile\"",
     "\"goto\"",
+    "\"function\"",
     "\"include\"",
     "\"include_once\"",
     "\"require\"",
@@ -202,12 +209,14 @@ public interface ComPHPConstants {
     "\"(\"",
     "\")\"",
     "\";\"",
+    "\",\"",
     "\":\"",
     "<digito>",
     "<letra>",
     "<VALOR_INT>",
     "<VALOR_DOUBLE>",
     "<VALOR_BOOLEAN>",
+    "<ID_FUNCION>",
     "<IDENTIFICADOR>",
     "<ARRAY>",
   };

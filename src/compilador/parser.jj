@@ -88,6 +88,9 @@ TOKEN:
 |   <ENDWHILE: "endwhile">
 |   <GOTO: "goto">
 
+    //Funciones, clases, etc.
+|   <FUNCTION: "function">    
+
 }
 
 //Tokens para la inclusión de ficheros
@@ -159,6 +162,7 @@ TOKEN:
 |   <PCL: ")">
 
 |   <PC: ";">
+|   <COM: ",">
 |   <PP: ":">
 
 }
@@ -191,6 +195,13 @@ TOKEN:
 |   <VALOR_BOOLEAN: ("true" | "false")>
 
     /*
+        ID_FUNCION coincide con los nombres de
+        las funciones ya que éstos al ser declarados
+        o llamados no requieren del signo de dollar 
+    */
+|   <ID_FUNCION: ((<letra>) | "_") ((<letra>) | (<digito>))*>
+
+    /*
         IDENTIFICADOR coincide con 
         signo de dollar, seguido de una letra o guión bajo,
         seguido de una secuencia de letras o dígitos
@@ -220,9 +231,40 @@ void gramaticaPrincipal() :
 {}
 {
     <MENOR><QUERY><PHP>
-        ( instruccion() )*
+        ( 
+            instruccion()
+        |   funcion()
+        )*
     <QUERY><MAYOR>
 }
+
+/*
+    Gramática función especifica cómo se deben 
+    declarar las funciones
+*/
+void funcion() :
+{}
+{
+    <FUNCTION> <ID_FUNCION> 
+        <POP> (<IDENTIFICADOR> ( <COM> <IDENTIFICADOR> )* )? <PCL>
+    <KOP>
+        ( instruccion() )*
+    <KCL>
+}  
+
+/*
+    LLamada a una función
+    después de que se declaran las 
+    funciones, éstas pueden ser llamadas
+    como lo indica esta grammática
+*/
+void callFuncion() :
+{}
+{
+    <ID_FUNCION> <POP> 
+        ( <IDENTIFICADOR> ( <COM> <IDENTIFICADOR> )* )? 
+    <PCL>
+}  
 
 /*
     Una instrucción engloba todo aquello que 
@@ -235,12 +277,28 @@ void instruccion() :
 {}
 {
     ( 
+        /*
+            Instrucciones que requieren 
+            de punto y coma para indicar 
+            que la instrucción termina y 
+            comienza otra
+        */
         declaracionAsignacion() 
-    |   <BREAK><PC>
-    |   <CONTINUE><PC>
-    |   control() 
-    |   repeticion()
+    |   callFuncion()
+    |   <BREAK>
+    |   <CONTINUE>
     )
+    <PC>
+|
+    (
+        /*
+            Instrucciones que no requieren 
+            un punto y coma para indicar el 
+            término de dicha instrucción
+        */
+        control() 
+    |   repeticion()
+    )    
 }
 
 /*
@@ -265,18 +323,27 @@ void control() :
         */
         <IF><POP> expresion() <PCL>
         <KOP>
-            ( instruccion() )*
+            ( 
+                instruccion() 
+            |   funcion()
+            )*
         <KCL>
         (
             <ELSEIF><POP> expresion() <PCL>
             <KOP>
-                ( instruccion() )*
+                ( 
+                    instruccion() 
+                |   funcion()
+                )*
             <KCL>
         )*
         (
             <ELSE> 
             <KOP>
-                ( instruccion() )*
+                ( 
+                    instruccion()
+                |   funcion()
+                )*
             <KCL>
         )?
     )
@@ -377,7 +444,6 @@ void declaracionAsignacion() :
 
     |   (<INCREMENTO> | <DECREMENTO> ) valorIdentificador()
     )
-    <PC>
 }
 
 /*
@@ -393,7 +459,7 @@ void declaracionAsignacion() :
 void expresion() :
 {}
 {
-    ( <VALOR_BOOLEAN> | valorNumerico() | <POP> expresion() <PCL> )
+    ( <VALOR_BOOLEAN> | valorNumerico() | callFuncion() | <POP> expresion() <PCL> )
     ( operador() ( valor() | <POP> expresion() <PCL> ) )*   
     ( <QUERY> expresion() <PP> expresion() )?
 
@@ -424,7 +490,7 @@ void operador() :
 void valor() :
 {}
 {
-    ( valorIdentificador() | <VALOR_BOOLEAN> | valorNumerico() )
+    ( valorIdentificador() | callFuncion() | <VALOR_BOOLEAN> | valorNumerico() )
 }
 
 /*
