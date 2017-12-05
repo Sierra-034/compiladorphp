@@ -663,7 +663,28 @@ public class ComPHP implements ComPHPConstants {
       case MODIGUAL:
       case PUNTOIGUAL:{
         operadorAsignacion();
-        expresion();
+        switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+        case INCREMENTO:
+        case DECREMENTO:
+        case POP:
+        case VALOR_INT:
+        case VALOR_DOUBLE:
+        case VALOR_BOOLEAN:
+        case ID_FUNCION:
+        case IDENTIFICADOR:
+        case ARRAY:{
+          expresion();
+          break;
+          }
+        case ARREGLO:{
+          array();
+          break;
+          }
+        default:
+          jj_la1[27] = jj_gen;
+          jj_consume_token(-1);
+          throw new ParseException();
+        }
         break;
         }
       case INCREMENTO:{
@@ -671,7 +692,7 @@ public class ComPHP implements ComPHPConstants {
         break;
         }
       default:
-        jj_la1[27] = jj_gen;
+        jj_la1[28] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -689,7 +710,7 @@ public class ComPHP implements ComPHPConstants {
         break;
         }
       default:
-        jj_la1[28] = jj_gen;
+        jj_la1[29] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -697,11 +718,10 @@ public class ComPHP implements ComPHPConstants {
       break;
       }
     default:
-      jj_la1[29] = jj_gen;
+      jj_la1[30] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
-    jj_consume_token(PC);
   }
 
 /*
@@ -742,7 +762,7 @@ public class ComPHP implements ComPHPConstants {
         break;
         }
       default:
-        jj_la1[30] = jj_gen;
+        jj_la1[31] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -776,7 +796,7 @@ public class ComPHP implements ComPHPConstants {
           break;
           }
         default:
-          jj_la1[31] = jj_gen;
+          jj_la1[32] = jj_gen;
           break label_15;
         }
         operador();
@@ -797,7 +817,7 @@ public class ComPHP implements ComPHPConstants {
           break;
           }
         default:
-          jj_la1[32] = jj_gen;
+          jj_la1[33] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -811,7 +831,7 @@ public class ComPHP implements ComPHPConstants {
         break;
         }
       default:
-        jj_la1[33] = jj_gen;
+        jj_la1[34] = jj_gen;
         ;
       }
       break;
@@ -832,14 +852,14 @@ public class ComPHP implements ComPHPConstants {
           break;
           }
         default:
-          jj_la1[34] = jj_gen;
+          jj_la1[35] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
         break;
         }
       default:
-        jj_la1[35] = jj_gen;
+        jj_la1[36] = jj_gen;
         ;
       }
       label_16:
@@ -872,7 +892,7 @@ public class ComPHP implements ComPHPConstants {
           break;
           }
         default:
-          jj_la1[36] = jj_gen;
+          jj_la1[37] = jj_gen;
           break label_16;
         }
         operador();
@@ -893,7 +913,7 @@ public class ComPHP implements ComPHPConstants {
           break;
           }
         default:
-          jj_la1[37] = jj_gen;
+          jj_la1[38] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -907,7 +927,7 @@ public class ComPHP implements ComPHPConstants {
         break;
         }
       default:
-        jj_la1[38] = jj_gen;
+        jj_la1[39] = jj_gen;
         ;
       }
       break;
@@ -924,7 +944,7 @@ public class ComPHP implements ComPHPConstants {
         break;
         }
       default:
-        jj_la1[39] = jj_gen;
+        jj_la1[40] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -932,10 +952,60 @@ public class ComPHP implements ComPHPConstants {
       break;
       }
     default:
-      jj_la1[40] = jj_gen;
+      jj_la1[41] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
+  }
+
+/*
+    Creación de arreglos de formalmente.
+    Esta gramática ayuda a especificar 
+    claves relacionadas con cada valor 
+    del arreglo así como los índices 
+    convencionales pero en este caso permiten
+    especificar otro tipo de claves asociadas 
+    a los valores como strings o enteros.
+*/
+  static final public void array() throws ParseException {
+    jj_consume_token(ARREGLO);
+    jj_consume_token(POP);
+    label_17:
+    while (true) {
+      valor();
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case COM:{
+        jj_consume_token(COM);
+        break;
+        }
+      case IGUAL:{
+        jj_consume_token(IGUAL);
+        jj_consume_token(MAYOR);
+        valor();
+        jj_consume_token(COM);
+        break;
+        }
+      default:
+        jj_la1[42] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case VALOR_INT:
+      case VALOR_DOUBLE:
+      case VALOR_BOOLEAN:
+      case ID_FUNCION:
+      case IDENTIFICADOR:
+      case ARRAY:{
+        ;
+        break;
+        }
+      default:
+        jj_la1[43] = jj_gen;
+        break label_17;
+      }
+    }
+    jj_consume_token(PCL);
   }
 
 /*
@@ -980,7 +1050,7 @@ public class ComPHP implements ComPHPConstants {
       break;
       }
     default:
-      jj_la1[41] = jj_gen;
+      jj_la1[44] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -1012,7 +1082,7 @@ public class ComPHP implements ComPHPConstants {
       break;
       }
     default:
-      jj_la1[42] = jj_gen;
+      jj_la1[45] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -1034,7 +1104,7 @@ public class ComPHP implements ComPHPConstants {
       break;
       }
     default:
-      jj_la1[43] = jj_gen;
+      jj_la1[46] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -1055,7 +1125,7 @@ public class ComPHP implements ComPHPConstants {
       break;
       }
     default:
-      jj_la1[44] = jj_gen;
+      jj_la1[47] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -1101,7 +1171,7 @@ public class ComPHP implements ComPHPConstants {
       break;
       }
     default:
-      jj_la1[45] = jj_gen;
+      jj_la1[48] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -1138,7 +1208,7 @@ public class ComPHP implements ComPHPConstants {
       break;
       }
     default:
-      jj_la1[46] = jj_gen;
+      jj_la1[49] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -1184,7 +1254,7 @@ public class ComPHP implements ComPHPConstants {
       break;
       }
     default:
-      jj_la1[47] = jj_gen;
+      jj_la1[50] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -1214,7 +1284,7 @@ public class ComPHP implements ComPHPConstants {
       break;
       }
     default:
-      jj_la1[48] = jj_gen;
+      jj_la1[51] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -1230,7 +1300,7 @@ public class ComPHP implements ComPHPConstants {
   static public Token jj_nt;
   static private int jj_ntk;
   static private int jj_gen;
-  static final private int[] jj_la1 = new int[49];
+  static final private int[] jj_la1 = new int[52];
   static private int[] jj_la1_0;
   static private int[] jj_la1_1;
   static private int[] jj_la1_2;
@@ -1240,13 +1310,13 @@ public class ComPHP implements ComPHPConstants {
       jj_la1_init_2();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x23d240,0x23d240,0x0,0x0,0x3d240,0x0,0x0,0x30000,0xd240,0x3d240,0x23d240,0x23d240,0x100,0x23d240,0x23d240,0x23d240,0x23d240,0x80,0x400,0x3d240,0x3d240,0x800,0x240,0x3d240,0x3d240,0x3d240,0xd000,0x80000000,0x0,0x0,0x0,0xfc000000,0x0,0x0,0x0,0x0,0xfc000000,0x0,0x0,0x0,0x0,0xfc000000,0x0,0x0,0x0,0x80000000,0x7c000000,0x0,0x0,};
+      jj_la1_0 = new int[] {0x23d240,0x23d240,0x0,0x0,0x3d240,0x0,0x0,0x30000,0xd240,0x3d240,0x23d240,0x23d240,0x100,0x23d240,0x23d240,0x23d240,0x23d240,0x80,0x400,0x3d240,0x3d240,0x800,0x240,0x3d240,0x3d240,0x3d240,0xd000,0x400000,0x0,0x0,0x0,0x0,0xf8000000,0x0,0x0,0x0,0x0,0xf8000000,0x0,0x0,0x0,0x0,0x0,0x0,0xf8000000,0x0,0x0,0x0,0x0,0xf8000000,0x0,0x0,};
    }
    private static void jj_la1_init_1() {
-      jj_la1_1 = new int[] {0xc0,0xc0,0x20000000,0x0,0xc0,0x20000000,0x0,0xc0,0x0,0xc0,0xc0,0xc0,0x0,0xc0,0xc0,0xc0,0xc0,0x0,0x0,0xc0,0xc0,0x0,0x0,0xc0,0xc0,0xc0,0x0,0x7f,0xc0,0xc0,0x4000000,0xffb3f,0x4000000,0x100000,0xc0,0xc0,0xffb3f,0x4000000,0x100000,0xc0,0x40000c0,0xffb3f,0x0,0x0,0x0,0x3f,0x0,0xff000,0xb00,};
+      jj_la1_1 = new int[] {0x180,0x180,0x40000000,0x0,0x180,0x40000000,0x0,0x180,0x0,0x180,0x180,0x180,0x0,0x180,0x180,0x180,0x180,0x0,0x0,0x180,0x180,0x0,0x0,0x180,0x180,0x180,0x0,0x8000180,0xff,0x180,0x180,0x8000000,0x1ff67f,0x8000000,0x200000,0x180,0x180,0x1ff67f,0x8000000,0x200000,0x180,0x8000180,0x40000001,0x0,0x1ff67f,0x0,0x0,0x0,0x7f,0x0,0x1fe000,0x1600,};
    }
    private static void jj_la1_init_2() {
-      jj_la1_2 = new int[] {0x70,0x70,0x0,0x20,0x70,0x0,0x20,0x70,0x0,0x70,0x70,0x70,0x0,0x70,0x70,0x70,0x70,0x0,0x0,0x70,0x70,0x0,0x0,0x70,0x70,0x70,0x0,0x0,0x0,0x60,0x1e,0x0,0x7e,0x0,0x0,0x0,0x0,0x7e,0x0,0x0,0x7e,0x0,0x7e,0x60,0x6,0x0,0x0,0x0,0x0,};
+      jj_la1_2 = new int[] {0xe0,0xe0,0x0,0x40,0xe0,0x0,0x40,0xe0,0x0,0xe0,0xe0,0xe0,0x0,0xe0,0xe0,0xe0,0xe0,0x0,0x0,0xe0,0xe0,0x0,0x0,0xe0,0xe0,0xe0,0x0,0xfc,0x0,0x0,0xc0,0x3c,0x0,0xfc,0x0,0x0,0x0,0x0,0xfc,0x0,0x0,0xfc,0x0,0xfc,0x0,0xfc,0xc0,0xc,0x0,0x0,0x0,0x0,};
    }
 
   /** Constructor with InputStream. */
@@ -1267,7 +1337,7 @@ public class ComPHP implements ComPHPConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 49; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 52; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -1281,7 +1351,7 @@ public class ComPHP implements ComPHPConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 49; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 52; i++) jj_la1[i] = -1;
   }
 
   /** Constructor. */
@@ -1298,7 +1368,7 @@ public class ComPHP implements ComPHPConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 49; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 52; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -1308,7 +1378,7 @@ public class ComPHP implements ComPHPConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 49; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 52; i++) jj_la1[i] = -1;
   }
 
   /** Constructor with generated Token Manager. */
@@ -1324,7 +1394,7 @@ public class ComPHP implements ComPHPConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 49; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 52; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -1333,7 +1403,7 @@ public class ComPHP implements ComPHPConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 49; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 52; i++) jj_la1[i] = -1;
   }
 
   static private Token jj_consume_token(int kind) throws ParseException {
@@ -1384,12 +1454,12 @@ public class ComPHP implements ComPHPConstants {
   /** Generate ParseException. */
   static public ParseException generateParseException() {
     jj_expentries.clear();
-    boolean[] la1tokens = new boolean[71];
+    boolean[] la1tokens = new boolean[72];
     if (jj_kind >= 0) {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
     }
-    for (int i = 0; i < 49; i++) {
+    for (int i = 0; i < 52; i++) {
       if (jj_la1[i] == jj_gen) {
         for (int j = 0; j < 32; j++) {
           if ((jj_la1_0[i] & (1<<j)) != 0) {
@@ -1404,7 +1474,7 @@ public class ComPHP implements ComPHPConstants {
         }
       }
     }
-    for (int i = 0; i < 71; i++) {
+    for (int i = 0; i < 72; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;

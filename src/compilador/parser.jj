@@ -89,7 +89,8 @@ TOKEN:
 |   <GOTO: "goto">
 
     //Funciones, clases, etc.
-|   <FUNCTION: "function">    
+|   <FUNCTION: "function">  
+|   <ARREGLO: "array">  
 
 }
 
@@ -438,7 +439,7 @@ void declaracionAsignacion() :
     (
         valorIdentificador()
         (
-            operadorAsignacion() expresion()
+            operadorAsignacion() ( expresion() | array() )
         |   <INCREMENTO> 
         ) 
 
@@ -471,6 +472,30 @@ void expresion() :
 |   ( <INCREMENTO> | <DECREMENTO> ) valorIdentificador()
 
 }
+
+/*
+    Creación de arreglos de formalmente.
+    Esta gramática ayuda a especificar 
+    claves relacionadas con cada valor 
+    del arreglo así como los índices 
+    convencionales pero en este caso permiten
+    especificar otro tipo de claves asociadas 
+    a los valores como strings o enteros.
+*/
+void array() :
+{}
+{
+    <ARREGLO> 
+    <POP>
+        (
+            valor() 
+            ( 
+                <COM> 
+            |   <IGUAL> <MAYOR> valor() <COM>
+            )            
+        )+
+    <PCL>
+}    
 
 /*
     Elgoba todos los tipos de operadores
