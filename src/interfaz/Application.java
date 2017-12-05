@@ -7,6 +7,8 @@ package interfaz;
 
 import java.awt.Font;
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JFileChooser;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
@@ -20,11 +22,13 @@ public class Application extends javax.swing.JFrame {
     private int tabCounter = 0;
     private final JFileChooser fc = new JFileChooser();
     private final Font font = new Font("Consolas", Font.BOLD, 12);
+    private final Map<JScrollPane, File> mapa;
     
     /**
      * Creates new form Application
      */
     public Application() {
+        this.mapa = new HashMap();
         initComponents();
     }
 
@@ -50,7 +54,7 @@ public class Application extends javax.swing.JFrame {
         cutM = new javax.swing.JMenuItem();
         pasteM = new javax.swing.JMenuItem();
         compileM = new javax.swing.JMenu();
-        analize = new javax.swing.JMenuItem();
+        analizeGramar = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().add(tabPane, java.awt.BorderLayout.CENTER);
@@ -108,9 +112,14 @@ public class Application extends javax.swing.JFrame {
 
         compileM.setText("Compile");
 
-        analize.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F5, 0));
-        analize.setText("Analize Gramar");
-        compileM.add(analize);
+        analizeGramar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F5, 0));
+        analizeGramar.setText("Analize Gramar");
+        analizeGramar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fileCompileActionPerformed(evt);
+            }
+        });
+        compileM.add(analizeGramar);
 
         menuBar.add(compileM);
 
@@ -146,8 +155,10 @@ public class Application extends javax.swing.JFrame {
                 JTextPane textPane = new JTextPane();                
                 textPane.setFont(font);
                 JScrollPane scroll = new JScrollPane(textPane);
-
                 File file = fc.getSelectedFile(); 
+                
+                this.mapa.put(scroll, file);
+                
                 tabPane.addTab(file.getName(), null, scroll, null);
                 tabPane.setSelectedIndex(tabCounter);
                 tabCounter++;  
@@ -171,6 +182,17 @@ public class Application extends javax.swing.JFrame {
             this.tabCounter = 0;
         }
     }//GEN-LAST:event_fileMenuActionPerformed
+
+    private void fileCompileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileCompileActionPerformed
+        // TODO add your handling code here:
+        
+        //Se hizo clic en analizaGramar
+        if(evt.getSource() == this.analizeGramar)
+        {
+            JScrollPane scroll = (JScrollPane) this.tabPane.getSelectedComponent();
+            File f = this.mapa.get(scroll);
+        }
+    }//GEN-LAST:event_fileCompileActionPerformed
 
     /**
      * @param args the command line arguments
@@ -208,7 +230,7 @@ public class Application extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem analize;
+    private javax.swing.JMenuItem analizeGramar;
     private javax.swing.JMenuItem closeAllFiles;
     private javax.swing.JMenuItem closeFile;
     private javax.swing.JMenu compileM;

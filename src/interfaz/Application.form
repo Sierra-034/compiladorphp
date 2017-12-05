@@ -87,13 +87,16 @@
             <Property name="text" type="java.lang.String" value="Compile"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="analize">
+            <MenuItem class="javax.swing.JMenuItem" name="analizeGramar">
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="F5"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Analize Gramar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="fileCompileActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
