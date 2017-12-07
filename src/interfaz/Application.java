@@ -219,6 +219,7 @@ public class Application extends javax.swing.JFrame {
                 File file = fc.getSelectedFile();
                 JTextPane tp = this.mapaTextPane.get(scroll);
                 FileManager.write(file, tp.getText());
+                this.mapaFiles.put(scroll, file);
             }
             
             /*  Si el archivo ya tiene una ruta relacionada
