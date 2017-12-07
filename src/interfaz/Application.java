@@ -5,8 +5,10 @@
  */
 package interfaz;
 
+
 import compilador.ComPHP;
 import compilador.ParseException;
+import java.awt.Component;
 import java.awt.Font;
 import java.io.BufferedReader;
 import java.io.File;
@@ -30,13 +32,15 @@ public class Application extends javax.swing.JFrame {
     private int tabCounter = 0;
     private final JFileChooser fc = new JFileChooser();
     private final Font font = new Font("Consolas", Font.BOLD, 12);
-    private final Map<JScrollPane, File> mapa;
+    private final Map<JScrollPane, File> mapaFiles;
+    private final Map<JScrollPane, JTextPane> mapaTextPane;
     
     /**
      * Creates new form Application
      */
     public Application() {
-        this.mapa = new HashMap();
+        this.mapaFiles = new HashMap();
+        this.mapaTextPane = new HashMap();
         initComponents();
     }
 
@@ -55,6 +59,9 @@ public class Application extends javax.swing.JFrame {
         newFile = new javax.swing.JMenuItem();
         openFile = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        saveFile = new javax.swing.JMenuItem();
+        saveAsFile = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
         closeFile = new javax.swing.JMenuItem();
         closeAllFiles = new javax.swing.JMenuItem();
         editM = new javax.swing.JMenu();
@@ -87,6 +94,23 @@ public class Application extends javax.swing.JFrame {
         });
         fileM.add(openFile);
         fileM.add(jSeparator1);
+
+        saveFile.setText("Save");
+        saveFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fileMenuActionPerformed(evt);
+            }
+        });
+        fileM.add(saveFile);
+
+        saveAsFile.setText("Save As");
+        saveAsFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fileMenuActionPerformed(evt);
+            }
+        });
+        fileM.add(saveAsFile);
+        fileM.add(jSeparator2);
 
         closeFile.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_W, java.awt.event.InputEvent.CTRL_MASK));
         closeFile.setText("Close File");
@@ -147,6 +171,8 @@ public class Application extends javax.swing.JFrame {
             JScrollPane scroll = new JScrollPane(textPane);            
             String tabLabel = String.format("new file %d", tabCounter);
             
+            this.mapaTextPane.put(scroll, textPane);
+            
             tabPane.addTab(tabLabel, null, scroll, null);
             tabPane.setSelectedIndex(tabCounter); 
             
@@ -165,7 +191,8 @@ public class Application extends javax.swing.JFrame {
                 JScrollPane scroll = new JScrollPane(textPane);
                 File file = fc.getSelectedFile(); 
                 
-                this.mapa.put(scroll, file);
+                this.mapaFiles.put(scroll, file);
+                this.mapaTextPane.put(scroll, textPane);
                 
                 tabPane.addTab(file.getName(), null, scroll, null);
                 tabPane.setSelectedIndex(tabCounter);
@@ -174,6 +201,37 @@ public class Application extends javax.swing.JFrame {
                 String cadena = FileManager.read(file);
                 textPane.setText(cadena);
             }
+        }
+        
+        //Se hizo clic en saveFile
+        if(evt.getSource() == this.saveFile)
+        {        
+            JScrollPane scroll = (JScrollPane) this.tabPane.getSelectedComponent();
+            
+            /*  Si el archivo aún no existe en el disco
+                entonces abre un JFileChooser para que el 
+                usuario pueda elegir la ruta donde se guardará
+                el archivo
+            */
+            if( (this.mapaFiles.get(scroll) == null) && 
+                (fc.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) )   
+            {
+                File file = fc.getSelectedFile();
+                JTextPane tp = this.mapaTextPane.get(scroll);
+                FileManager.write(file, tp.getText());
+            }
+            
+            /*  Si el archivo ya tiene una ruta relacionada
+                entonces solamente se invoca a dicha ruta 
+                y se sobreescribe el archivo con el nuevo contenido
+            */
+            else if(this.mapaFiles.get(scroll) != null)
+            {
+                File file = this.mapaFiles.get(scroll);
+                JTextPane tp = this.mapaTextPane.get(scroll);
+                FileManager.write(file, tp.getText());
+            }            
+            
         }
         
         //Se hizo clic en Close File
@@ -200,7 +258,7 @@ public class Application extends javax.swing.JFrame {
             BufferedReader br = null;
             try {
                 JScrollPane scroll = (JScrollPane) this.tabPane.getSelectedComponent();
-                File f = this.mapa.get(scroll);
+                File f = this.mapaFiles.get(scroll);
                 br = new BufferedReader(new FileReader(f));
                 
                 ComPHP c = new ComPHP(br);
@@ -266,10 +324,13 @@ public class Application extends javax.swing.JFrame {
     private javax.swing.JMenu editM;
     private javax.swing.JMenu fileM;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem newFile;
     private javax.swing.JMenuItem openFile;
     private javax.swing.JMenuItem pasteM;
+    private javax.swing.JMenuItem saveAsFile;
+    private javax.swing.JMenuItem saveFile;
     private javax.swing.JTabbedPane tabPane;
     // End of variables declaration//GEN-END:variables
 }
