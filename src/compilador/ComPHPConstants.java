@@ -222,6 +222,7 @@ public interface ComPHPConstants {
     "<ID_FUNCION>",
     "<IDENTIFICADOR>",
     "<ARRAY>",
+    "\");\"",
   };
 
 }

@@ -247,10 +247,10 @@ void funcion() :
 {}
 {
     <FUNCTION> <ID_FUNCION> 
-        <POP> (<IDENTIFICADOR> ( <COM> <IDENTIFICADOR> )* )? <PCL>
-    <KOP>
+        "(" (<IDENTIFICADOR> ( <COM> <IDENTIFICADOR> )* )? ")"
+    "{"
         ( instruccion() )*
-    <KCL>
+    "}"
 }  
 
 /*
@@ -262,9 +262,9 @@ void funcion() :
 void callFuncion() :
 {}
 {
-    <ID_FUNCION> <POP> 
+    <ID_FUNCION> "("
         ( <IDENTIFICADOR> ( <COM> <IDENTIFICADOR> )* )? 
-    <PCL>
+    ")"
 }  
 
 /*
@@ -289,7 +289,7 @@ void instruccion() :
     |   <BREAK>
     |   <CONTINUE>
     )
-    <PC>
+    ";"
 |
     (
         /*
@@ -322,30 +322,30 @@ void control() :
             Se garantiza la existencia de un if antes
             de cualquier else o elseif
         */
-        <IF><POP> expresion() <PCL>
-        <KOP>
+        <IF>"(" expresion() ")"
+        "{"
             ( 
                 instruccion() 
             |   funcion()
             )*
-        <KCL>
+        "}"
         (
-            <ELSEIF><POP> expresion() <PCL>
-            <KOP>
+            <ELSEIF>"(" expresion() ")"
+            "{"
                 ( 
                     instruccion() 
                 |   funcion()
                 )*
-            <KCL>
+            "}"
         )*
         (
             <ELSE> 
-            <KOP>
+            "{"
                 ( 
                     instruccion()
                 |   funcion()
                 )*
-            <KCL>
+            "}"
         )?
     )
 |
@@ -355,13 +355,13 @@ void control() :
             coincide con una estructura switch
             convencional
         */
-        <SWITCH><POP> expresion() <PCL>
-        <KOP>
+        <SWITCH>"{" expresion() ")"
+        "{"
             /*
                 La instrucción case puede ir cero o más veces
             */
             (
-                <CASE><VALOR_INT><PP>
+                <CASE><VALOR_INT>":"
                     ( instruccion() )*
             )*
 
@@ -370,10 +370,10 @@ void control() :
                 o puede aparecer solo una vez
             */
             (
-                <DEF><PP>
+                <DEF>":"
                     ( instruccion() )*
             )?
-        <KCL>
+        "}"
     )
 }            
 
@@ -393,10 +393,10 @@ void repeticion() :
             considerar la forma de dos puntos
             'while(): Instrucciones endwhile;'
         */
-        <WHILE><POP> expresion() <PCL>
-        <KOP>
+        <WHILE>"(" expresion() ")"
+        "{"
             ( instruccion() )*
-        <KCL>
+        "}"
     )
 |
     (
@@ -407,9 +407,9 @@ void repeticion() :
             gracias al universo XD 
         */
         <DO>
-        <KOP>
+        "{"
             ( instruccion() )*
-        <KCL><WHILE><POP> expresion() <PCL><PC>
+        "}"<WHILE>"(" expresion() ");"
     )
 |
     (
@@ -420,10 +420,10 @@ void repeticion() :
             y la sintaxis de dos puntos
             'for(): Instrucciones endfor;'
         */
-        <FOR><POP> expresion() <PC> expresion() <PC> expresion() <PCL>
-        <KOP>
+        <FOR>"(" expresion() ";" expresion() ";" expresion() ")"
+        "{"
             ( instruccion() )*
-        <KCL>
+        "}"
     )
 }
 
@@ -460,14 +460,14 @@ void declaracionAsignacion() :
 void expresion() :
 {}
 {
-    ( <VALOR_BOOLEAN> | valorNumerico() | callFuncion() | <POP> expresion() <PCL> )
-    ( operador() ( valor() | <POP> expresion() <PCL> ) )*   
-    ( <QUERY> expresion() <PP> expresion() )?
+    ( <VALOR_BOOLEAN> | valorNumerico() | callFuncion() | "(" expresion() ")" )
+    ( operador() ( valor() | "(" expresion() ")" ) )*   
+    ( <QUERY> expresion() ":" expresion() )?
 
 |   valorIdentificador()
     ( <INCREMENTO> | <DECREMENTO> )?
-    ( operador() ( valor() | <POP> expresion() <PCL> ) )*      
-    ( <QUERY> expresion() <PP> expresion() )?
+    ( operador() ( valor() | "(" expresion() ")" ) )*      
+    ( <QUERY> expresion() ":" expresion() )?
 
 |   ( <INCREMENTO> | <DECREMENTO> ) valorIdentificador()
 
@@ -486,15 +486,15 @@ void array() :
 {}
 {
     <ARREGLO> 
-    <POP>
+    "("
         (
             valor() 
             ( 
-                <COM> 
-            |   <IGUAL> <MAYOR> valor() <COM>
+                "," 
+            |   <IGUAL> <MAYOR> valor() ","
             )            
         )+
-    <PCL>
+    ")"
 }    
 
 /*
