@@ -24,7 +24,7 @@ public class TestCompiler {
             // TODO code application logic here
             
             ComPHP c = new ComPHP(System.in);
-            ComPHP.gramaticaPrincipal();
+            c.gramaticaPrincipal();
         } catch (ParseException ex) {
             Logger.getLogger(TestCompiler.class.getName()).log(Level.SEVERE, null, ex);
         }

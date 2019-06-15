@@ -263,7 +263,7 @@ public class Application extends javax.swing.JFrame {
                 br = new BufferedReader(new FileReader(f));
                 
                 ComPHP c = new ComPHP(br);
-                ComPHP.funcion();
+                c.gramaticaPrincipal();
                 System.out.println("Compiló papu");
                 
             } catch (FileNotFoundException ex) {

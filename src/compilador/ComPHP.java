@@ -12,7 +12,7 @@ public class ComPHP implements ComPHPConstants {
     El uso de la gramática instrucción 
     valida cualquier tipo de instrucción PHP.
 */
-  static final public void gramaticaPrincipal() throws ParseException {
+  final public void gramaticaPrincipal() throws ParseException {
     jj_consume_token(MENOR);
     jj_consume_token(QUERY);
     jj_consume_token(PHP);
@@ -73,7 +73,7 @@ public class ComPHP implements ComPHPConstants {
     Gramática función especifica cómo se deben 
     declarar las funciones
 */
-  static final public void funcion() throws ParseException {
+  final public void funcion() throws ParseException {
     jj_consume_token(FUNCTION);
     jj_consume_token(ID_FUNCION);
     jj_consume_token(POP);
@@ -135,7 +135,7 @@ public class ComPHP implements ComPHPConstants {
     funciones, éstas pueden ser llamadas
     como lo indica esta grammática
 */
-  static final public void callFuncion() throws ParseException {
+  final public void callFuncion() throws ParseException {
     jj_consume_token(ID_FUNCION);
     jj_consume_token(POP);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
@@ -171,7 +171,7 @@ public class ComPHP implements ComPHPConstants {
     las estructuras secuenciales, estructuras de
     control y las estructuras de repetición 
 */
-  static final public void instruccion() throws ParseException {
+  final public void instruccion() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case BREAK:
     case CONTINUE:
@@ -247,7 +247,7 @@ public class ComPHP implements ComPHPConstants {
     Existen dos variantes de estas estructuras,
     La estructura IF y la SWITCH.
 */
-  static final public void control() throws ParseException {
+  final public void control() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case IF:{
       jj_consume_token(IF);
@@ -529,7 +529,7 @@ public class ComPHP implements ComPHPConstants {
     cero o varias veces dependiendo de una
     condición dada. Similar a las estructuras de control
 */
-  static final public void repeticion() throws ParseException {
+  final public void repeticion() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case WHILE:{
       jj_consume_token(WHILE);
@@ -648,7 +648,7 @@ public class ComPHP implements ComPHPConstants {
     no se pueden declarar las variables sin
     ser inicializadas al mismo tiempo.
 */
-  static final public void declaracionAsignacion() throws ParseException {
+  final public void declaracionAsignacion() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case IDENTIFICADOR:
     case ARRAY:{
@@ -733,7 +733,7 @@ public class ComPHP implements ComPHPConstants {
     las expresiones podrán devolver dos tipos 
     de valores a sean booleanos o aritméticos
 */
-  static final public void expresion() throws ParseException {
+  final public void expresion() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case POP:
     case VALOR_INT:
@@ -966,7 +966,7 @@ public class ComPHP implements ComPHPConstants {
     especificar otro tipo de claves asociadas 
     a los valores como strings o enteros.
 */
-  static final public void array() throws ParseException {
+  final public void array() throws ParseException {
     jj_consume_token(ARREGLO);
     jj_consume_token(POP);
     label_17:
@@ -1011,7 +1011,7 @@ public class ComPHP implements ComPHPConstants {
     Elgoba todos los tipos de operadores
     relacionales, asignación, aritméticos y lógicos
 */
-  static final public void operador() throws ParseException {
+  final public void operador() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case IGUAL:
     case MASIGUAL:
@@ -1060,7 +1060,7 @@ public class ComPHP implements ComPHPConstants {
     que se pueden manejar en PHP, desde
     los arreglos, hasta los valores numéricos
 */
-  static final public void valor() throws ParseException {
+  final public void valor() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case IDENTIFICADOR:
     case ARRAY:{
@@ -1092,7 +1092,7 @@ public class ComPHP implements ComPHPConstants {
     a través de un identificador. Estos podrían
     ser numéricos, booleanos o cadenas.
 */
-  static final public void valorIdentificador() throws ParseException {
+  final public void valorIdentificador() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case IDENTIFICADOR:{
       jj_consume_token(IDENTIFICADOR);
@@ -1113,7 +1113,7 @@ public class ComPHP implements ComPHPConstants {
     Cualquier tipo de valor numérico
     de tipo entero o decimal (de coma flotante)
 */
-  static final public void valorNumerico() throws ParseException {
+  final public void valorNumerico() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case VALOR_INT:{
       jj_consume_token(VALOR_INT);
@@ -1139,7 +1139,7 @@ public class ComPHP implements ComPHPConstants {
     Se omiten preincremento, predecremento, posincremento y posdecremento
     por no definir su clase 
 */
-  static final public void operadorAsignacion() throws ParseException {
+  final public void operadorAsignacion() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case IGUAL:{
       jj_consume_token(IGUAL);
@@ -1184,7 +1184,7 @@ public class ComPHP implements ComPHPConstants {
     Se omiten preincremento, predecremento, posincremento y posdecremento
     por no definir su clase     
 */
-  static final public void operadorAritmetico() throws ParseException {
+  final public void operadorAritmetico() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case MAS:{
       jj_consume_token(MAS);
@@ -1218,7 +1218,7 @@ public class ComPHP implements ComPHPConstants {
     Estos operadores deben usarse solo en 
     expresiones booleanas y con operandos aritméticos
 */
-  static final public void operadorRelacional() throws ParseException {
+  final public void operadorRelacional() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case IGUALDAD:{
       jj_consume_token(IGUALDAD);
@@ -1268,7 +1268,7 @@ public class ComPHP implements ComPHPConstants {
     Se omite la negación por cuestión de número de operandos
     en posteriores utilizaciones
 */
-  static final public void operadorLogico() throws ParseException {
+  final public void operadorLogico() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case AND:{
       jj_consume_token(AND);
@@ -1289,17 +1289,16 @@ public class ComPHP implements ComPHPConstants {
     }
   }
 
-  static private boolean jj_initialized_once = false;
   /** Generated Token Manager. */
-  static public ComPHPTokenManager token_source;
-  static SimpleCharStream jj_input_stream;
+  public ComPHPTokenManager token_source;
+  SimpleCharStream jj_input_stream;
   /** Current token. */
-  static public Token token;
+  public Token token;
   /** Next token. */
-  static public Token jj_nt;
-  static private int jj_ntk;
-  static private int jj_gen;
-  static final private int[] jj_la1 = new int[52];
+  public Token jj_nt;
+  private int jj_ntk;
+  private int jj_gen;
+  final private int[] jj_la1 = new int[52];
   static private int[] jj_la1_0;
   static private int[] jj_la1_1;
   static private int[] jj_la1_2;
@@ -1324,13 +1323,6 @@ public class ComPHP implements ComPHPConstants {
   }
   /** Constructor with InputStream and supplied encoding */
   public ComPHP(java.io.InputStream stream, String encoding) {
-    if (jj_initialized_once) {
-      System.out.println("ERROR: Second call to constructor of static parser.  ");
-      System.out.println("       You must either use ReInit() or set the JavaCC option STATIC to false");
-      System.out.println("       during parser generation.");
-      throw new Error();
-    }
-    jj_initialized_once = true;
     try { jj_input_stream = new SimpleCharStream(stream, encoding, 1, 1); } catch(java.io.UnsupportedEncodingException e) { throw new RuntimeException(e); }
     token_source = new ComPHPTokenManager(jj_input_stream);
     token = new Token();
@@ -1340,11 +1332,11 @@ public class ComPHP implements ComPHPConstants {
   }
 
   /** Reinitialise. */
-  static public void ReInit(java.io.InputStream stream) {
+  public void ReInit(java.io.InputStream stream) {
      ReInit(stream, null);
   }
   /** Reinitialise. */
-  static public void ReInit(java.io.InputStream stream, String encoding) {
+  public void ReInit(java.io.InputStream stream, String encoding) {
     try { jj_input_stream.ReInit(stream, encoding, 1, 1); } catch(java.io.UnsupportedEncodingException e) { throw new RuntimeException(e); }
     token_source.ReInit(jj_input_stream);
     token = new Token();
@@ -1355,13 +1347,6 @@ public class ComPHP implements ComPHPConstants {
 
   /** Constructor. */
   public ComPHP(java.io.Reader stream) {
-    if (jj_initialized_once) {
-      System.out.println("ERROR: Second call to constructor of static parser. ");
-      System.out.println("       You must either use ReInit() or set the JavaCC option STATIC to false");
-      System.out.println("       during parser generation.");
-      throw new Error();
-    }
-    jj_initialized_once = true;
     jj_input_stream = new SimpleCharStream(stream, 1, 1);
     token_source = new ComPHPTokenManager(jj_input_stream);
     token = new Token();
@@ -1371,7 +1356,7 @@ public class ComPHP implements ComPHPConstants {
   }
 
   /** Reinitialise. */
-  static public void ReInit(java.io.Reader stream) {
+  public void ReInit(java.io.Reader stream) {
     jj_input_stream.ReInit(stream, 1, 1);
     token_source.ReInit(jj_input_stream);
     token = new Token();
@@ -1382,13 +1367,6 @@ public class ComPHP implements ComPHPConstants {
 
   /** Constructor with generated Token Manager. */
   public ComPHP(ComPHPTokenManager tm) {
-    if (jj_initialized_once) {
-      System.out.println("ERROR: Second call to constructor of static parser. ");
-      System.out.println("       You must either use ReInit() or set the JavaCC option STATIC to false");
-      System.out.println("       during parser generation.");
-      throw new Error();
-    }
-    jj_initialized_once = true;
     token_source = tm;
     token = new Token();
     jj_ntk = -1;
@@ -1405,7 +1383,7 @@ public class ComPHP implements ComPHPConstants {
     for (int i = 0; i < 52; i++) jj_la1[i] = -1;
   }
 
-  static private Token jj_consume_token(int kind) throws ParseException {
+  private Token jj_consume_token(int kind) throws ParseException {
     Token oldToken;
     if ((oldToken = token).next != null) token = token.next;
     else token = token.next = token_source.getNextToken();
@@ -1421,7 +1399,7 @@ public class ComPHP implements ComPHPConstants {
 
 
 /** Get the next Token. */
-  static final public Token getNextToken() {
+  final public Token getNextToken() {
     if (token.next != null) token = token.next;
     else token = token.next = token_source.getNextToken();
     jj_ntk = -1;
@@ -1430,7 +1408,7 @@ public class ComPHP implements ComPHPConstants {
   }
 
 /** Get the specific Token. */
-  static final public Token getToken(int index) {
+  final public Token getToken(int index) {
     Token t = token;
     for (int i = 0; i < index; i++) {
       if (t.next != null) t = t.next;
@@ -1439,19 +1417,19 @@ public class ComPHP implements ComPHPConstants {
     return t;
   }
 
-  static private int jj_ntk_f() {
+  private int jj_ntk_f() {
     if ((jj_nt=token.next) == null)
       return (jj_ntk = (token.next=token_source.getNextToken()).kind);
     else
       return (jj_ntk = jj_nt.kind);
   }
 
-  static private java.util.List<int[]> jj_expentries = new java.util.ArrayList<int[]>();
-  static private int[] jj_expentry;
-  static private int jj_kind = -1;
+  private java.util.List<int[]> jj_expentries = new java.util.ArrayList<int[]>();
+  private int[] jj_expentry;
+  private int jj_kind = -1;
 
   /** Generate ParseException. */
-  static public ParseException generateParseException() {
+  public ParseException generateParseException() {
     jj_expentries.clear();
     boolean[] la1tokens = new boolean[73];
     if (jj_kind >= 0) {
@@ -1488,11 +1466,11 @@ public class ComPHP implements ComPHPConstants {
   }
 
   /** Enable tracing. */
-  static final public void enable_tracing() {
+  final public void enable_tracing() {
   }
 
   /** Disable tracing. */
-  static final public void disable_tracing() {
+  final public void disable_tracing() {
   }
 
 }
