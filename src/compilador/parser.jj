@@ -46,11 +46,11 @@ PARSER_BEGIN(ComPHP)
 
 package compilador;
 
+import java.util.ArrayList;
+
 public class ComPHP {
     //ArrayList para almacenar los tokens
     private static ArrayList<Token> listValues = new ArrayList<Token>();
-
-
 }
 
 PARSER_END(ComPHP)
@@ -436,15 +436,31 @@ void repeticion() :
     ser inicializadas al mismo tiempo.
 */
 void declaracionAsignacion() :
-{}
+{
+    Token token;
+}
 {
     (
-        valorIdentificador()
+        token = <IDENTIFICADOR> { System.out.println(token.image); }
             (
-                    operadorAsignacion() (    
-                                              expresion() 
-                                            | array() 
-                                         )
+                operadorAsignacion() 
+                (    
+                        expresion() { 
+                            try {
+                                
+                                System.out.println(listValues);
+                                int expressionType = SemanticManager.compareTypes(listValues);
+                                SemanticManager.addVariable(token , expressionType);
+                                
+                            } catch(SemanticException ex) {
+                                System.err.println(ex);
+                            } finally {
+                                listValues.clear();
+                                System.out.println(listValues);
+                            }
+                        }
+                    |   array() 
+                )
                 |   <INCREMENTO> 
             ) 
 
@@ -468,10 +484,11 @@ void expresion() :
     String type;
 }
 {
-    (     jToken = <VALOR_BOOLEAN>      { listValues.add(jToken); }
-        | valorNumerico() 
+    (     jToken = <VALOR_BOOLEAN>  { listValues.add(jToken); }
+        | jToken = <VALOR_INT>      { listValues.add(jToken); }
+        | jToken = <VALOR_DOUBLE>   { listValues.add(jToken); }
+        | jToken = <IDENTIFICADOR>  {  }
         | callFuncion() 
-        | jToken = <IDENTIFICADOR>      {  }
         | "(" expresion() ")" 
     )
 

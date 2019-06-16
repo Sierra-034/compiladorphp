@@ -34,8 +34,7 @@ public class ComPHP implements ComPHPConstants {
       case INCREMENTO:
       case DECREMENTO:
       case ID_FUNCION:
-      case IDENTIFICADOR:
-      case ARRAY:{
+      case IDENTIFICADOR:{
         ;
         break;
         }
@@ -54,8 +53,7 @@ public class ComPHP implements ComPHPConstants {
       case INCREMENTO:
       case DECREMENTO:
       case ID_FUNCION:
-      case IDENTIFICADOR:
-      case ARRAY:{
+      case IDENTIFICADOR:{
         instruccion();
         break;
         }
@@ -119,8 +117,7 @@ public class ComPHP implements ComPHPConstants {
       case INCREMENTO:
       case DECREMENTO:
       case ID_FUNCION:
-      case IDENTIFICADOR:
-      case ARRAY:{
+      case IDENTIFICADOR:{
         ;
         break;
         }
@@ -182,13 +179,11 @@ public class ComPHP implements ComPHPConstants {
     case INCREMENTO:
     case DECREMENTO:
     case ID_FUNCION:
-    case IDENTIFICADOR:
-    case ARRAY:{
+    case IDENTIFICADOR:{
       switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
       case INCREMENTO:
       case DECREMENTO:
-      case IDENTIFICADOR:
-      case ARRAY:{
+      case IDENTIFICADOR:{
         declaracionAsignacion();
         break;
         }
@@ -273,8 +268,7 @@ public class ComPHP implements ComPHPConstants {
         case INCREMENTO:
         case DECREMENTO:
         case ID_FUNCION:
-        case IDENTIFICADOR:
-        case ARRAY:{
+        case IDENTIFICADOR:{
           ;
           break;
           }
@@ -293,8 +287,7 @@ public class ComPHP implements ComPHPConstants {
         case INCREMENTO:
         case DECREMENTO:
         case ID_FUNCION:
-        case IDENTIFICADOR:
-        case ARRAY:{
+        case IDENTIFICADOR:{
           instruccion();
           break;
           }
@@ -339,8 +332,7 @@ public class ComPHP implements ComPHPConstants {
           case INCREMENTO:
           case DECREMENTO:
           case ID_FUNCION:
-          case IDENTIFICADOR:
-          case ARRAY:{
+          case IDENTIFICADOR:{
             ;
             break;
             }
@@ -359,8 +351,7 @@ public class ComPHP implements ComPHPConstants {
           case INCREMENTO:
           case DECREMENTO:
           case ID_FUNCION:
-          case IDENTIFICADOR:
-          case ARRAY:{
+          case IDENTIFICADOR:{
             instruccion();
             break;
             }
@@ -394,8 +385,7 @@ public class ComPHP implements ComPHPConstants {
           case INCREMENTO:
           case DECREMENTO:
           case ID_FUNCION:
-          case IDENTIFICADOR:
-          case ARRAY:{
+          case IDENTIFICADOR:{
             ;
             break;
             }
@@ -414,8 +404,7 @@ public class ComPHP implements ComPHPConstants {
           case INCREMENTO:
           case DECREMENTO:
           case ID_FUNCION:
-          case IDENTIFICADOR:
-          case ARRAY:{
+          case IDENTIFICADOR:{
             instruccion();
             break;
             }
@@ -471,8 +460,7 @@ public class ComPHP implements ComPHPConstants {
           case INCREMENTO:
           case DECREMENTO:
           case ID_FUNCION:
-          case IDENTIFICADOR:
-          case ARRAY:{
+          case IDENTIFICADOR:{
             ;
             break;
             }
@@ -500,8 +488,7 @@ public class ComPHP implements ComPHPConstants {
           case INCREMENTO:
           case DECREMENTO:
           case ID_FUNCION:
-          case IDENTIFICADOR:
-          case ARRAY:{
+          case IDENTIFICADOR:{
             ;
             break;
             }
@@ -554,8 +541,7 @@ public class ComPHP implements ComPHPConstants {
         case INCREMENTO:
         case DECREMENTO:
         case ID_FUNCION:
-        case IDENTIFICADOR:
-        case ARRAY:{
+        case IDENTIFICADOR:{
           ;
           break;
           }
@@ -584,8 +570,7 @@ public class ComPHP implements ComPHPConstants {
         case INCREMENTO:
         case DECREMENTO:
         case ID_FUNCION:
-        case IDENTIFICADOR:
-        case ARRAY:{
+        case IDENTIFICADOR:{
           ;
           break;
           }
@@ -625,8 +610,7 @@ public class ComPHP implements ComPHPConstants {
         case INCREMENTO:
         case DECREMENTO:
         case ID_FUNCION:
-        case IDENTIFICADOR:
-        case ARRAY:{
+        case IDENTIFICADOR:{
           ;
           break;
           }
@@ -652,11 +636,11 @@ public class ComPHP implements ComPHPConstants {
     no se pueden declarar las variables sin
     ser inicializadas al mismo tiempo.
 */
-  final public void declaracionAsignacion() throws ParseException {
+  final public void declaracionAsignacion() throws ParseException {Token token;
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case IDENTIFICADOR:
-    case ARRAY:{
-      valorIdentificador();
+    case IDENTIFICADOR:{
+      token = jj_consume_token(IDENTIFICADOR);
+System.out.println(token.image);
       switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
       case IGUAL:
       case MASIGUAL:
@@ -674,6 +658,18 @@ public class ComPHP implements ComPHPConstants {
         case ID_FUNCION:
         case IDENTIFICADOR:{
           expresion();
+try {
+
+                                System.out.println(listValues);
+                                int expressionType = SemanticManager.compareTypes(listValues);
+                                SemanticManager.addVariable(token , expressionType);
+
+                            } catch(SemanticException ex) {
+                                System.err.println(ex);
+                            } finally {
+                                listValues.clear();
+                                System.out.println(listValues);
+                            }
           break;
           }
         case ARREGLO:{
@@ -742,18 +738,23 @@ public class ComPHP implements ComPHPConstants {
 listValues.add(jToken);
       break;
       }
-    case VALOR_INT:
-    case VALOR_DOUBLE:{
-      valorNumerico();
+    case VALOR_INT:{
+      jToken = jj_consume_token(VALOR_INT);
+listValues.add(jToken);
       break;
       }
-    case ID_FUNCION:{
-      callFuncion();
+    case VALOR_DOUBLE:{
+      jToken = jj_consume_token(VALOR_DOUBLE);
+listValues.add(jToken);
       break;
       }
     case IDENTIFICADOR:{
       jToken = jj_consume_token(IDENTIFICADOR);
 
+      break;
+      }
+    case ID_FUNCION:{
+      callFuncion();
       break;
       }
     case POP:{
@@ -1164,7 +1165,7 @@ listValues.add(jToken);
       jj_la1_1 = new int[] {0x180,0x180,0x40000000,0x0,0x180,0x40000000,0x0,0x180,0x0,0x180,0x180,0x180,0x0,0x180,0x180,0x180,0x180,0x0,0x0,0x180,0x180,0x0,0x0,0x180,0x180,0x180,0x0,0x8000000,0xff,0x180,0x180,0x8000000,0x1ff67f,0x40000001,0x0,0x1ff67f,0x0,0x0,0x0,0x7f,0x0,0x1fe000,0x1600,};
    }
    private static void jj_la1_init_2() {
-      jj_la1_2 = new int[] {0xe0,0xe0,0x0,0x40,0xe0,0x0,0x40,0xe0,0x0,0xe0,0xe0,0xe0,0x0,0xe0,0xe0,0xe0,0xe0,0x0,0x0,0xe0,0xe0,0x0,0x0,0xe0,0xe0,0xe0,0x0,0x7c,0x0,0x0,0xc0,0x7c,0x0,0x0,0xfc,0x0,0xfc,0xc0,0xc,0x0,0x0,0x0,0x0,};
+      jj_la1_2 = new int[] {0x60,0x60,0x0,0x40,0x60,0x0,0x40,0x60,0x0,0x60,0x60,0x60,0x0,0x60,0x60,0x60,0x60,0x0,0x0,0x60,0x60,0x0,0x0,0x60,0x60,0x60,0x0,0x7c,0x0,0x0,0x40,0x7c,0x0,0x0,0xfc,0x0,0xfc,0xc0,0xc,0x0,0x0,0x0,0x0,};
    }
 
   /** Constructor with InputStream. */

@@ -1,3 +1,5 @@
+package compilador;
+
 public class SemanticException extends Exception {
 
     public SemanticException(SemanticError error, String lexema, int line) {

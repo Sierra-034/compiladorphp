@@ -1,3 +1,5 @@
+package compilador;
+
 public enum SemanticError {
     DECLARED, 
     NOT_DECLARED, 

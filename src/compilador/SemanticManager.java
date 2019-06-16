@@ -1,78 +1,61 @@
 package compilador;
 
 import java.util.TreeMap;
+import java.util.ArrayList;
 
 public class SemanticManager{
+	
+	//Tabla de variables
+	private static TreeMap<String, Integer> mapaVariables = new TreeMap<String, Integer>();
+	private static final int INT = 102;
+	private static final int STRING = 100;
+	private static final int STRING2 = 101;
+	private static final int FLOAT = 103;
+	private static final int ID = 104;
+	
+	public static int compareTypes(ArrayList<Token> listValues) throws SemanticException {
+		int type = listValues.get(0).kind;
+		for (Token token : listValues) {
 
-  //Tabla de variables
-  private static TreeMap<String, String> mapaVariables = new TreeMap<String, String>();
-  private static final int INT = 102;
-  private static final int STRING = 100;
-  private static final int STRING2 = 101;
-  private static final int FLOAT = 103;
-  private static final int ID = 104;
+			System.out.printf("[token.kind: %d, expected type: %d]\n", token.kind, type);
 
-
-    public static void addVariable( Token token, String value ) throws SemanticException { 
-
-      //Si el Token no está en el mapa de variables, inserto.
-      if ( !(boolean)mapaVariables.containsKey( token.image ) ){
-        mapaVariables.put( token.image, value );
-      }
-      else{ //Si ya existe...
-        //Obtenemos el token existente en el mapa de variables.
-        String t = mapaVariables.get(token.image);
-
-        //Comparamos que el nuevo token y el existente sean del mismo tipo. 
-        if (!value.equals(t)) {
-          throw new SemanticException( SemanticError.DIFFERENT_DECLARATED, token.image, token.beginLine );
-        }
-      }
-      
-    }
-
-    //Metodo para verificar si existe una variable
-    public boolean checkVariable( Token token ) throws SemanticException { 
-      
-      if ( (boolean)!mapaVariables.containsKey( token.image ) )
-        throw new SemanticException( SemanticError.NOT_DECLARED, token.image, token.beginLine );
-      else
-        return true;
-    }
-
-    public static String compareTypes( Token tipo1, Token tipo2 ) throws SemanticException {
-
-      String type = "";
-
-      if ( tipo1.kind == INT && tipo2.kind == INT )
-        type = "int";
-
-      else if ( tipo1.kind == STRING && tipo2.kind == STRING )
-        type = "string";
-
-      else if ( tipo1.kind == STRING && tipo2.kind == STRING2 )
-        type = "string";
-
-      else if ( tipo1.kind == STRING2 && tipo2.kind == STRING2 )
-        type = "string";
-
-      else if ( tipo1.kind == STRING2 && tipo2.kind == STRING )
-        type = "string";
-
-      else if ( tipo1.kind == FLOAT && tipo2.kind == FLOAT )
-        type = "float";
-
-      else if ( tipo1.kind == INT && tipo2.kind == FLOAT )
-        type = "int";
-
-      else if ( tipo1.kind == FLOAT && tipo2.kind == INT )
-        type = "float";
-
-      else
-        throw new SemanticException( SemanticError.DIFFERENT_TYPES, "", tipo2.beginLine );
-
-      return type;
-
-    }
-
+			if(token.kind != type) {
+				System.out.println("holi");
+				throw new SemanticException(SemanticError.DIFFERENT_TYPES, 
+					token.image, token.beginLine);
+			}
+		}
+		
+		return type;
+	}
+	
+	public static void addVariable( Token token, int value ) throws SemanticException { 
+		
+		System.out.println("Holi");
+		
+		//Si el Token no está en el mapa de variables, inserto.
+		if ( !(boolean)mapaVariables.containsKey( token.image ) ){
+			mapaVariables.put( token.image, value );
+		}
+		else{ //Si ya existe...
+			//Obtenemos el token existente en el mapa de variables.
+			int t = mapaVariables.get(token.image);
+			
+			//Comparamos que el nuevo token y el existente sean del mismo tipo. 
+			if (value != t) {
+				throw new SemanticException( SemanticError.DIFFERENT_DECLARATED, token.image, token.beginLine );
+			}
+		}
+		
+	}
+	
+	//Metodo para verificar si existe una variable
+	public boolean checkVariable( Token token ) throws SemanticException { 
+		
+		if ( (boolean)!mapaVariables.containsKey( token.image ) )
+		throw new SemanticException( SemanticError.NOT_DECLARED, token.image, token.beginLine );
+		else
+		return true;
+	}
+	
 }
