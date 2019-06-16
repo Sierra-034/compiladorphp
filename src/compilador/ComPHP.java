@@ -731,7 +731,7 @@ try {
     de valores a sean booleanos o aritméticos
 */
   final public void expresion() throws ParseException {Token jToken;
-    String type;
+    int type;
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case VALOR_BOOLEAN:{
       jToken = jj_consume_token(VALOR_BOOLEAN);
@@ -750,7 +750,14 @@ listValues.add(jToken);
       }
     case IDENTIFICADOR:{
       jToken = jj_consume_token(IDENTIFICADOR);
+try {
+                type = SemanticManager.checkVariable(jToken);
+                jToken.kind = type;
+                listValues.add(jToken);
 
+            } catch (SemanticException e) {
+                //TODO: handle exception
+            }
       break;
       }
     case ID_FUNCION:{

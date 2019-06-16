@@ -50,12 +50,22 @@ public class SemanticManager{
 	}
 	
 	//Metodo para verificar si existe una variable
-	public boolean checkVariable( Token token ) throws SemanticException { 
+	public boolean checkVariable2( Token token ) throws SemanticException { 
 		
 		if ( (boolean)!mapaVariables.containsKey( token.image ) )
 		throw new SemanticException( SemanticError.NOT_DECLARED, token.image, token.beginLine );
 		else
 		return true;
+	}
+
+
+	public static int checkVariable(Token variable) throws SemanticException {
+
+		if ( (boolean)!mapaVariables.containsKey( variable.image ) )
+			throw new SemanticException( SemanticError.NOT_DECLARED, variable.image, variable.beginLine );
+		else
+			return mapaVariables.get( variable.image );// int
+
 	}
 	
 }

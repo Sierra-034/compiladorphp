@@ -481,13 +481,23 @@ void declaracionAsignacion() :
 void expresion() :
 {
     Token jToken;
-    String type;
+    int type;
 }
 {
     (     jToken = <VALOR_BOOLEAN>  { listValues.add(jToken); }
         | jToken = <VALOR_INT>      { listValues.add(jToken); }
         | jToken = <VALOR_DOUBLE>   { listValues.add(jToken); }
-        | jToken = <IDENTIFICADOR>  {  }
+        | jToken = <IDENTIFICADOR>  { 
+            try {
+                type = SemanticManager.checkVariable(jToken); 
+                jToken.kind = type;
+                listValues.add(jToken);
+                
+            } catch (SemanticException e) {
+                //TODO: handle exception
+            }
+            
+                                    }
         | callFuncion() 
         | "(" expresion() ")" 
     )
