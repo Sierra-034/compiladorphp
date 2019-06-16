@@ -47,6 +47,8 @@ PARSER_BEGIN(ComPHP)
 package compilador;
 
 public class ComPHP {
+    //ArrayList para almacenar los tokens
+    private static ArrayList<Token> listValues = new ArrayList<Token>();
 
 
 }
@@ -278,27 +280,27 @@ void instruccion() :
 {}
 {
     ( 
-        /*
-            Instrucciones que requieren 
-            de punto y coma para indicar 
-            que la instrucción termina y 
-            comienza otra
-        */
-        declaracionAsignacion() 
-    |   callFuncion()
-    |   <BREAK>
-    |   <CONTINUE>
+            /*
+                Instrucciones que requieren 
+                de punto y coma para indicar 
+                que la instrucción termina y 
+                comienza otra
+            */
+            declaracionAsignacion() 
+        |   callFuncion()
+        |   <BREAK>
+        |   <CONTINUE>
     )
     ";"
 |
     (
-        /*
-            Instrucciones que no requieren 
-            un punto y coma para indicar el 
-            término de dicha instrucción
-        */
-        control() 
-    |   repeticion()
+            /*
+                Instrucciones que no requieren 
+                un punto y coma para indicar el 
+                término de dicha instrucción
+            */
+            control() 
+        |   repeticion()
     )    
 }
 
@@ -438,12 +440,15 @@ void declaracionAsignacion() :
 {
     (
         valorIdentificador()
-        (
-            operadorAsignacion() ( expresion() | array() )
-        |   <INCREMENTO> 
-        ) 
+            (
+                    operadorAsignacion() (    
+                                              expresion() 
+                                            | array() 
+                                         )
+                |   <INCREMENTO> 
+            ) 
 
-    |   (<INCREMENTO> | <DECREMENTO> ) valorIdentificador()
+            |   (<INCREMENTO> | <DECREMENTO> ) valorIdentificador()
     )
 }
 
@@ -458,19 +463,19 @@ void declaracionAsignacion() :
     de valores a sean booleanos o aritméticos
 */
 void expresion() :
-{}
 {
-    ( <VALOR_BOOLEAN> | valorNumerico() | callFuncion() | "(" expresion() ")" )
-    ( operador() ( valor() | "(" expresion() ")" ) )*   
-    ( <QUERY> expresion() ":" expresion() )?
+    Token jToken;
+    String type;
+}
+{
+    (     jToken = <VALOR_BOOLEAN>      { listValues.add(jToken); }
+        | valorNumerico() 
+        | callFuncion() 
+        | jToken = <IDENTIFICADOR>      {  }
+        | "(" expresion() ")" 
+    )
 
-|   valorIdentificador()
-    ( <INCREMENTO> | <DECREMENTO> )?
-    ( operador() ( valor() | "(" expresion() ")" ) )*      
-    ( <QUERY> expresion() ":" expresion() )?
-
-|   ( <INCREMENTO> | <DECREMENTO> ) valorIdentificador()
-
+    ( operador() expresion() )*
 }
 
 /*
@@ -534,9 +539,13 @@ void valorIdentificador() :
     de tipo entero o decimal (de coma flotante)
 */
 void valorNumerico() :
-{}
 {
-    ( <VALOR_INT> | <VALOR_DOUBLE> )
+    Token jToken;
+}
+{
+    (     jToken = <VALOR_INT>      { listValues.add(jToken); }
+        | jToken = <VALOR_DOUBLE>   { listValues.add(jToken); }
+    )
 }
 
 /*
