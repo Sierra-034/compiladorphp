@@ -198,6 +198,12 @@ TOKEN:
 |   <VALOR_BOOLEAN: ("true" | "false")>
 
     /*
+        VALOR_STRING coincide con una lista de
+        caracteres entre comillas dobles.
+    */
+|   <VALOR_STRING: ("\"")(~["\""])*("\"")>
+
+    /*
         ID_FUNCION coincide con los nombres de
         las funciones ya que éstos al ser declarados
         o llamados no requieren del signo de dollar 
