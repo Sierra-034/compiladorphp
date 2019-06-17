@@ -31,6 +31,7 @@ public class ComPHP implements ComPHPConstants {
       case BREAK:
       case CONTINUE:
       case FUNCTION:
+      case ECHO:
       case INCREMENTO:
       case DECREMENTO:
       case ID_FUNCION:
@@ -50,6 +51,7 @@ public class ComPHP implements ComPHPConstants {
       case DO:
       case BREAK:
       case CONTINUE:
+      case ECHO:
       case INCREMENTO:
       case DECREMENTO:
       case ID_FUNCION:
@@ -114,6 +116,7 @@ public class ComPHP implements ComPHPConstants {
       case DO:
       case BREAK:
       case CONTINUE:
+      case ECHO:
       case INCREMENTO:
       case DECREMENTO:
       case ID_FUNCION:
@@ -176,6 +179,7 @@ public class ComPHP implements ComPHPConstants {
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case BREAK:
     case CONTINUE:
+    case ECHO:
     case INCREMENTO:
     case DECREMENTO:
     case ID_FUNCION:
@@ -189,6 +193,10 @@ public class ComPHP implements ComPHPConstants {
         }
       case ID_FUNCION:{
         callFuncion();
+        break;
+        }
+      case ECHO:{
+        printFuntion();
         break;
         }
       case BREAK:{
@@ -238,6 +246,39 @@ public class ComPHP implements ComPHPConstants {
     }
   }
 
+  final public void printFuntion() throws ParseException {
+    jj_consume_token(ECHO);
+    switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+    case POP:
+    case VALOR_INT:
+    case VALOR_DOUBLE:
+    case VALOR_BOOLEAN:
+    case VALOR_STRING:
+    case ID_FUNCION:
+    case IDENTIFICADOR:{
+      expresion();
+      break;
+      }
+    default:
+      jj_la1[10] = jj_gen;
+      ;
+    }
+    label_5:
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case COM:{
+        ;
+        break;
+        }
+      default:
+        jj_la1[11] = jj_gen;
+        break label_5;
+      }
+      jj_consume_token(COM);
+      expresion();
+    }
+  }
+
 /*
     La estructuras de control sirven 
     para ejecutar o no cierta porción 
@@ -255,7 +296,7 @@ public class ComPHP implements ComPHPConstants {
 listValues.clear();
       jj_consume_token(PCL);
       jj_consume_token(KOP);
-      label_5:
+      label_6:
       while (true) {
         switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
         case IF:
@@ -266,6 +307,7 @@ listValues.clear();
         case BREAK:
         case CONTINUE:
         case FUNCTION:
+        case ECHO:
         case INCREMENTO:
         case DECREMENTO:
         case ID_FUNCION:
@@ -274,8 +316,8 @@ listValues.clear();
           break;
           }
         default:
-          jj_la1[10] = jj_gen;
-          break label_5;
+          jj_la1[12] = jj_gen;
+          break label_6;
         }
         switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
         case IF:
@@ -285,6 +327,7 @@ listValues.clear();
         case DO:
         case BREAK:
         case CONTINUE:
+        case ECHO:
         case INCREMENTO:
         case DECREMENTO:
         case ID_FUNCION:
@@ -297,13 +340,13 @@ listValues.clear();
           break;
           }
         default:
-          jj_la1[11] = jj_gen;
+          jj_la1[13] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
       }
       jj_consume_token(KCL);
-      label_6:
+      label_7:
       while (true) {
         switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
         case ELSEIF:{
@@ -311,67 +354,14 @@ listValues.clear();
           break;
           }
         default:
-          jj_la1[12] = jj_gen;
-          break label_6;
+          jj_la1[14] = jj_gen;
+          break label_7;
         }
         jj_consume_token(ELSEIF);
         jj_consume_token(POP);
         expresion();
 listValues.clear();
         jj_consume_token(PCL);
-        jj_consume_token(KOP);
-        label_7:
-        while (true) {
-          switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-          case IF:
-          case SWITCH:
-          case FOR:
-          case WHILE:
-          case DO:
-          case BREAK:
-          case CONTINUE:
-          case FUNCTION:
-          case INCREMENTO:
-          case DECREMENTO:
-          case ID_FUNCION:
-          case IDENTIFICADOR:{
-            ;
-            break;
-            }
-          default:
-            jj_la1[13] = jj_gen;
-            break label_7;
-          }
-          switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-          case IF:
-          case SWITCH:
-          case FOR:
-          case WHILE:
-          case DO:
-          case BREAK:
-          case CONTINUE:
-          case INCREMENTO:
-          case DECREMENTO:
-          case ID_FUNCION:
-          case IDENTIFICADOR:{
-            instruccion();
-            break;
-            }
-          case FUNCTION:{
-            funcion();
-            break;
-            }
-          default:
-            jj_la1[14] = jj_gen;
-            jj_consume_token(-1);
-            throw new ParseException();
-          }
-        }
-        jj_consume_token(KCL);
-      }
-      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-      case ELSE:{
-        jj_consume_token(ELSE);
         jj_consume_token(KOP);
         label_8:
         while (true) {
@@ -384,6 +374,7 @@ listValues.clear();
           case BREAK:
           case CONTINUE:
           case FUNCTION:
+          case ECHO:
           case INCREMENTO:
           case DECREMENTO:
           case ID_FUNCION:
@@ -403,6 +394,7 @@ listValues.clear();
           case DO:
           case BREAK:
           case CONTINUE:
+          case ECHO:
           case INCREMENTO:
           case DECREMENTO:
           case ID_FUNCION:
@@ -421,10 +413,65 @@ listValues.clear();
           }
         }
         jj_consume_token(KCL);
+      }
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case ELSE:{
+        jj_consume_token(ELSE);
+        jj_consume_token(KOP);
+        label_9:
+        while (true) {
+          switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+          case IF:
+          case SWITCH:
+          case FOR:
+          case WHILE:
+          case DO:
+          case BREAK:
+          case CONTINUE:
+          case FUNCTION:
+          case ECHO:
+          case INCREMENTO:
+          case DECREMENTO:
+          case ID_FUNCION:
+          case IDENTIFICADOR:{
+            ;
+            break;
+            }
+          default:
+            jj_la1[17] = jj_gen;
+            break label_9;
+          }
+          switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+          case IF:
+          case SWITCH:
+          case FOR:
+          case WHILE:
+          case DO:
+          case BREAK:
+          case CONTINUE:
+          case ECHO:
+          case INCREMENTO:
+          case DECREMENTO:
+          case ID_FUNCION:
+          case IDENTIFICADOR:{
+            instruccion();
+            break;
+            }
+          case FUNCTION:{
+            funcion();
+            break;
+            }
+          default:
+            jj_la1[18] = jj_gen;
+            jj_consume_token(-1);
+            throw new ParseException();
+          }
+        }
+        jj_consume_token(KCL);
         break;
         }
       default:
-        jj_la1[17] = jj_gen;
+        jj_la1[19] = jj_gen;
         ;
       }
       break;
@@ -436,7 +483,7 @@ listValues.clear();
 listValues.clear();
       jj_consume_token(PCL);
       jj_consume_token(KOP);
-      label_9:
+      label_10:
       while (true) {
         switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
         case CASE:{
@@ -444,39 +491,11 @@ listValues.clear();
           break;
           }
         default:
-          jj_la1[18] = jj_gen;
-          break label_9;
+          jj_la1[20] = jj_gen;
+          break label_10;
         }
         jj_consume_token(CASE);
         jj_consume_token(VALOR_INT);
-        jj_consume_token(PP);
-        label_10:
-        while (true) {
-          switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-          case IF:
-          case SWITCH:
-          case FOR:
-          case WHILE:
-          case DO:
-          case BREAK:
-          case CONTINUE:
-          case INCREMENTO:
-          case DECREMENTO:
-          case ID_FUNCION:
-          case IDENTIFICADOR:{
-            ;
-            break;
-            }
-          default:
-            jj_la1[19] = jj_gen;
-            break label_10;
-          }
-          instruccion();
-        }
-      }
-      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-      case DEF:{
-        jj_consume_token(DEF);
         jj_consume_token(PP);
         label_11:
         while (true) {
@@ -488,6 +507,7 @@ listValues.clear();
           case DO:
           case BREAK:
           case CONTINUE:
+          case ECHO:
           case INCREMENTO:
           case DECREMENTO:
           case ID_FUNCION:
@@ -496,22 +516,51 @@ listValues.clear();
             break;
             }
           default:
-            jj_la1[20] = jj_gen;
+            jj_la1[21] = jj_gen;
             break label_11;
+          }
+          instruccion();
+        }
+      }
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case DEF:{
+        jj_consume_token(DEF);
+        jj_consume_token(PP);
+        label_12:
+        while (true) {
+          switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+          case IF:
+          case SWITCH:
+          case FOR:
+          case WHILE:
+          case DO:
+          case BREAK:
+          case CONTINUE:
+          case ECHO:
+          case INCREMENTO:
+          case DECREMENTO:
+          case ID_FUNCION:
+          case IDENTIFICADOR:{
+            ;
+            break;
+            }
+          default:
+            jj_la1[22] = jj_gen;
+            break label_12;
           }
           instruccion();
         }
         break;
         }
       default:
-        jj_la1[21] = jj_gen;
+        jj_la1[23] = jj_gen;
         ;
       }
       jj_consume_token(KCL);
       break;
       }
     default:
-      jj_la1[22] = jj_gen;
+      jj_la1[24] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -532,35 +581,6 @@ listValues.clear();
 listValues.clear();
       jj_consume_token(PCL);
       jj_consume_token(KOP);
-      label_12:
-      while (true) {
-        switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-        case IF:
-        case SWITCH:
-        case FOR:
-        case WHILE:
-        case DO:
-        case BREAK:
-        case CONTINUE:
-        case INCREMENTO:
-        case DECREMENTO:
-        case ID_FUNCION:
-        case IDENTIFICADOR:{
-          ;
-          break;
-          }
-        default:
-          jj_la1[23] = jj_gen;
-          break label_12;
-        }
-        instruccion();
-      }
-      jj_consume_token(KCL);
-      break;
-      }
-    case DO:{
-      jj_consume_token(DO);
-      jj_consume_token(KOP);
       label_13:
       while (true) {
         switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
@@ -571,6 +591,7 @@ listValues.clear();
         case DO:
         case BREAK:
         case CONTINUE:
+        case ECHO:
         case INCREMENTO:
         case DECREMENTO:
         case ID_FUNCION:
@@ -579,8 +600,38 @@ listValues.clear();
           break;
           }
         default:
-          jj_la1[24] = jj_gen;
+          jj_la1[25] = jj_gen;
           break label_13;
+        }
+        instruccion();
+      }
+      jj_consume_token(KCL);
+      break;
+      }
+    case DO:{
+      jj_consume_token(DO);
+      jj_consume_token(KOP);
+      label_14:
+      while (true) {
+        switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+        case IF:
+        case SWITCH:
+        case FOR:
+        case WHILE:
+        case DO:
+        case BREAK:
+        case CONTINUE:
+        case ECHO:
+        case INCREMENTO:
+        case DECREMENTO:
+        case ID_FUNCION:
+        case IDENTIFICADOR:{
+          ;
+          break;
+          }
+        default:
+          jj_la1[26] = jj_gen;
+          break label_14;
         }
         instruccion();
       }
@@ -606,7 +657,7 @@ listValues.clear();
 listValues.clear();
       jj_consume_token(PCL);
       jj_consume_token(KOP);
-      label_14:
+      label_15:
       while (true) {
         switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
         case IF:
@@ -616,6 +667,7 @@ listValues.clear();
         case DO:
         case BREAK:
         case CONTINUE:
+        case ECHO:
         case INCREMENTO:
         case DECREMENTO:
         case ID_FUNCION:
@@ -624,8 +676,8 @@ listValues.clear();
           break;
           }
         default:
-          jj_la1[25] = jj_gen;
-          break label_14;
+          jj_la1[27] = jj_gen;
+          break label_15;
         }
         instruccion();
       }
@@ -633,7 +685,7 @@ listValues.clear();
       break;
       }
     default:
-      jj_la1[26] = jj_gen;
+      jj_la1[28] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -664,6 +716,7 @@ System.out.println(token.image);
         case VALOR_INT:
         case VALOR_DOUBLE:
         case VALOR_BOOLEAN:
+        case VALOR_STRING:
         case ID_FUNCION:
         case IDENTIFICADOR:{
           expresion();
@@ -686,7 +739,7 @@ try {
           break;
           }
         default:
-          jj_la1[27] = jj_gen;
+          jj_la1[29] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -697,7 +750,7 @@ try {
         break;
         }
       default:
-        jj_la1[28] = jj_gen;
+        jj_la1[30] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -715,7 +768,7 @@ try {
         break;
         }
       default:
-        jj_la1[29] = jj_gen;
+        jj_la1[31] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -723,7 +776,7 @@ try {
       break;
       }
     default:
-      jj_la1[30] = jj_gen;
+      jj_la1[32] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -754,6 +807,10 @@ try {
       jToken = jj_consume_token(VALOR_DOUBLE);
       break;
       }
+    case VALOR_STRING:{
+      jToken = jj_consume_token(VALOR_STRING);
+      break;
+      }
     case IDENTIFICADOR:{
       jToken = jj_consume_token(IDENTIFICADOR);
       break;
@@ -769,12 +826,12 @@ try {
       break;
       }
     default:
-      jj_la1[31] = jj_gen;
+      jj_la1[33] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
 SemanticManager.instructionTreatment(listValues, jToken, type);
-    label_15:
+    label_16:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
       case MAS:
@@ -804,8 +861,8 @@ SemanticManager.instructionTreatment(listValues, jToken, type);
         break;
         }
       default:
-        jj_la1[32] = jj_gen;
-        break label_15;
+        jj_la1[34] = jj_gen;
+        break label_16;
       }
       operador();
       expresion();
@@ -824,7 +881,7 @@ SemanticManager.instructionTreatment(listValues, jToken, type);
   final public void array() throws ParseException {
     jj_consume_token(ARREGLO);
     jj_consume_token(POP);
-    label_16:
+    label_17:
     while (true) {
       valor();
       switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
@@ -840,7 +897,7 @@ SemanticManager.instructionTreatment(listValues, jToken, type);
         break;
         }
       default:
-        jj_la1[33] = jj_gen;
+        jj_la1[35] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -855,8 +912,8 @@ SemanticManager.instructionTreatment(listValues, jToken, type);
         break;
         }
       default:
-        jj_la1[34] = jj_gen;
-        break label_16;
+        jj_la1[36] = jj_gen;
+        break label_17;
       }
     }
     jj_consume_token(PCL);
@@ -904,7 +961,7 @@ SemanticManager.instructionTreatment(listValues, jToken, type);
       break;
       }
     default:
-      jj_la1[35] = jj_gen;
+      jj_la1[37] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -936,7 +993,7 @@ SemanticManager.instructionTreatment(listValues, jToken, type);
       break;
       }
     default:
-      jj_la1[36] = jj_gen;
+      jj_la1[38] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -958,7 +1015,7 @@ SemanticManager.instructionTreatment(listValues, jToken, type);
       break;
       }
     default:
-      jj_la1[37] = jj_gen;
+      jj_la1[39] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -981,7 +1038,7 @@ listValues.add(jToken);
       break;
       }
     default:
-      jj_la1[38] = jj_gen;
+      jj_la1[40] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -1027,7 +1084,7 @@ listValues.add(jToken);
       break;
       }
     default:
-      jj_la1[39] = jj_gen;
+      jj_la1[41] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -1064,7 +1121,7 @@ listValues.add(jToken);
       break;
       }
     default:
-      jj_la1[40] = jj_gen;
+      jj_la1[42] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -1110,7 +1167,7 @@ listValues.add(jToken);
       break;
       }
     default:
-      jj_la1[41] = jj_gen;
+      jj_la1[43] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -1140,7 +1197,7 @@ listValues.add(jToken);
       break;
       }
     default:
-      jj_la1[42] = jj_gen;
+      jj_la1[44] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -1155,7 +1212,7 @@ listValues.add(jToken);
   public Token jj_nt;
   private int jj_ntk;
   private int jj_gen;
-  final private int[] jj_la1 = new int[43];
+  final private int[] jj_la1 = new int[45];
   static private int[] jj_la1_0;
   static private int[] jj_la1_1;
   static private int[] jj_la1_2;
@@ -1165,13 +1222,13 @@ listValues.add(jToken);
       jj_la1_init_2();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x23d240,0x23d240,0x0,0x0,0x3d240,0x0,0x0,0x30000,0xd240,0x3d240,0x23d240,0x23d240,0x100,0x23d240,0x23d240,0x23d240,0x23d240,0x80,0x400,0x3d240,0x3d240,0x800,0x240,0x3d240,0x3d240,0x3d240,0xd000,0x400000,0x0,0x0,0x0,0x0,0xf8000000,0x0,0x0,0xf8000000,0x0,0x0,0x0,0x0,0xf8000000,0x0,0x0,};
+      jj_la1_0 = new int[] {0xa3d240,0xa3d240,0x0,0x0,0x83d240,0x0,0x0,0x830000,0xd240,0x83d240,0x0,0x0,0xa3d240,0xa3d240,0x100,0xa3d240,0xa3d240,0xa3d240,0xa3d240,0x80,0x400,0x83d240,0x83d240,0x800,0x240,0x83d240,0x83d240,0x83d240,0xd000,0x400000,0x0,0x0,0x0,0x0,0xf0000000,0x0,0x0,0xf0000000,0x0,0x0,0x0,0x0,0xf0000000,0x0,0x0,};
    }
    private static void jj_la1_init_1() {
-      jj_la1_1 = new int[] {0x180,0x180,0x40000000,0x0,0x180,0x40000000,0x0,0x180,0x0,0x180,0x180,0x180,0x0,0x180,0x180,0x180,0x180,0x0,0x0,0x180,0x180,0x0,0x0,0x180,0x180,0x180,0x0,0x8000000,0xff,0x180,0x180,0x8000000,0x1ff67f,0x40000001,0x0,0x1ff67f,0x0,0x0,0x0,0x7f,0x0,0x1fe000,0x1600,};
+      jj_la1_1 = new int[] {0x300,0x300,0x80000000,0x0,0x300,0x80000000,0x0,0x300,0x0,0x300,0x10000000,0x80000000,0x300,0x300,0x0,0x300,0x300,0x300,0x300,0x0,0x0,0x300,0x300,0x0,0x0,0x300,0x300,0x300,0x0,0x10000000,0x1fe,0x300,0x300,0x10000000,0x3fecff,0x80000002,0x0,0x3fecff,0x0,0x0,0x0,0xfe,0x1,0x3fc000,0x2c00,};
    }
    private static void jj_la1_init_2() {
-      jj_la1_2 = new int[] {0x60,0x60,0x0,0x40,0x60,0x0,0x40,0x60,0x0,0x60,0x60,0x60,0x0,0x60,0x60,0x60,0x60,0x0,0x0,0x60,0x60,0x0,0x0,0x60,0x60,0x60,0x0,0x7c,0x0,0x0,0x40,0x7c,0x0,0x0,0xfc,0x0,0xfc,0xc0,0xc,0x0,0x0,0x0,0x0,};
+      jj_la1_2 = new int[] {0x180,0x180,0x0,0x100,0x180,0x0,0x100,0x180,0x0,0x180,0x1f8,0x0,0x180,0x180,0x0,0x180,0x180,0x180,0x180,0x0,0x0,0x180,0x180,0x0,0x0,0x180,0x180,0x180,0x0,0x1f8,0x0,0x0,0x100,0x1f8,0x0,0x0,0x3b8,0x0,0x3b8,0x300,0x18,0x0,0x0,0x0,0x0,};
    }
 
   /** Constructor with InputStream. */
@@ -1185,7 +1242,7 @@ listValues.add(jToken);
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 43; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 45; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -1199,7 +1256,7 @@ listValues.add(jToken);
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 43; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 45; i++) jj_la1[i] = -1;
   }
 
   /** Constructor. */
@@ -1209,7 +1266,7 @@ listValues.add(jToken);
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 43; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 45; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -1219,7 +1276,7 @@ listValues.add(jToken);
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 43; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 45; i++) jj_la1[i] = -1;
   }
 
   /** Constructor with generated Token Manager. */
@@ -1228,7 +1285,7 @@ listValues.add(jToken);
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 43; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 45; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -1237,7 +1294,7 @@ listValues.add(jToken);
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 43; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 45; i++) jj_la1[i] = -1;
   }
 
   private Token jj_consume_token(int kind) throws ParseException {
@@ -1288,12 +1345,12 @@ listValues.add(jToken);
   /** Generate ParseException. */
   public ParseException generateParseException() {
     jj_expentries.clear();
-    boolean[] la1tokens = new boolean[72];
+    boolean[] la1tokens = new boolean[74];
     if (jj_kind >= 0) {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
     }
-    for (int i = 0; i < 43; i++) {
+    for (int i = 0; i < 45; i++) {
       if (jj_la1[i] == jj_gen) {
         for (int j = 0; j < 32; j++) {
           if ((jj_la1_0[i] & (1<<j)) != 0) {
@@ -1308,7 +1365,7 @@ listValues.add(jToken);
         }
       }
     }
-    for (int i = 0; i < 72; i++) {
+    for (int i = 0; i < 74; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;

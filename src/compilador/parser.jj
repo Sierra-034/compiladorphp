@@ -93,6 +93,7 @@ TOKEN:
     //Funciones, clases, etc.
 |   <FUNCTION: "function">  
 |   <ARREGLO: "array">  
+|   <ECHO: "echo">
 
 }
 
@@ -254,8 +255,7 @@ void gramaticaPrincipal() :
 void funcion() :
 {}
 {
-    <FUNCTION> <ID_FUNCION> 
-        "(" (<IDENTIFICADOR> ( <COM> <IDENTIFICADOR> )* )? ")"
+    <FUNCTION> <ID_FUNCION> "(" (<IDENTIFICADOR> ( "," <IDENTIFICADOR> )* )? ")"
     "{"
         ( instruccion() )*
     "}"
@@ -270,9 +270,7 @@ void funcion() :
 void callFuncion() :
 {}
 {
-    <ID_FUNCION> "("
-        ( <IDENTIFICADOR> ( <COM> <IDENTIFICADOR> )* )? 
-    ")"
+    <ID_FUNCION> "(" ( <IDENTIFICADOR> ( "," <IDENTIFICADOR> )* )? <PCL>
 }  
 
 /*
@@ -294,10 +292,10 @@ void instruccion() :
             */
             declaracionAsignacion() 
         |   callFuncion()
+        |   printFuntion()
         |   <BREAK>
         |   <CONTINUE>
-    )
-    ";"
+    ) ";"
 |
     (
             /*
@@ -308,6 +306,12 @@ void instruccion() :
             control() 
         |   repeticion()
     )    
+}
+
+void printFuntion() :
+{}
+{
+    <ECHO> [expresion()] ( "," expresion() )*
 }
 
 /*
@@ -495,6 +499,7 @@ void expresion() :
     (     jToken = <VALOR_BOOLEAN>
         | jToken = <VALOR_INT>
         | jToken = <VALOR_DOUBLE>
+        | jToken = <VALOR_STRING>
         | jToken = <IDENTIFICADOR>
         | callFuncion() 
         | "(" expresion() ")" 
