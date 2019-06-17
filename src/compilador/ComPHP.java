@@ -252,6 +252,7 @@ public class ComPHP implements ComPHPConstants {
       jj_consume_token(IF);
       jj_consume_token(POP);
       expresion();
+listValues.clear();
       jj_consume_token(PCL);
       jj_consume_token(KOP);
       label_5:
@@ -316,6 +317,7 @@ public class ComPHP implements ComPHPConstants {
         jj_consume_token(ELSEIF);
         jj_consume_token(POP);
         expresion();
+listValues.clear();
         jj_consume_token(PCL);
         jj_consume_token(KOP);
         label_7:
@@ -431,6 +433,7 @@ public class ComPHP implements ComPHPConstants {
       jj_consume_token(SWITCH);
       jj_consume_token(KOP);
       expresion();
+listValues.clear();
       jj_consume_token(PCL);
       jj_consume_token(KOP);
       label_9:
@@ -526,6 +529,7 @@ public class ComPHP implements ComPHPConstants {
       jj_consume_token(WHILE);
       jj_consume_token(POP);
       expresion();
+listValues.clear();
       jj_consume_token(PCL);
       jj_consume_token(KOP);
       label_12:
@@ -584,17 +588,22 @@ public class ComPHP implements ComPHPConstants {
       jj_consume_token(WHILE);
       jj_consume_token(POP);
       expresion();
-      jj_consume_token(72);
+listValues.clear();
+      jj_consume_token(PCL);
+      jj_consume_token(PC);
       break;
       }
     case FOR:{
       jj_consume_token(FOR);
       jj_consume_token(POP);
       expresion();
+listValues.clear();
       jj_consume_token(PC);
       expresion();
+listValues.clear();
       jj_consume_token(PC);
       expresion();
+listValues.clear();
       jj_consume_token(PCL);
       jj_consume_token(KOP);
       label_14:
@@ -730,34 +739,23 @@ try {
     las expresiones podrán devolver dos tipos 
     de valores a sean booleanos o aritméticos
 */
-  final public void expresion() throws ParseException {Token jToken;
-    int type;
+  final public void expresion() throws ParseException {Token jToken = new Token();
+    int type = 0;
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case VALOR_BOOLEAN:{
       jToken = jj_consume_token(VALOR_BOOLEAN);
-listValues.add(jToken);
       break;
       }
     case VALOR_INT:{
       jToken = jj_consume_token(VALOR_INT);
-listValues.add(jToken);
       break;
       }
     case VALOR_DOUBLE:{
       jToken = jj_consume_token(VALOR_DOUBLE);
-listValues.add(jToken);
       break;
       }
     case IDENTIFICADOR:{
       jToken = jj_consume_token(IDENTIFICADOR);
-try {
-                type = SemanticManager.checkVariable(jToken);
-                jToken.kind = type;
-                listValues.add(jToken);
-
-            } catch (SemanticException e) {
-                //TODO: handle exception
-            }
       break;
       }
     case ID_FUNCION:{
@@ -775,6 +773,7 @@ try {
       jj_consume_token(-1);
       throw new ParseException();
     }
+SemanticManager.instructionTreatment(listValues, jToken, type);
     label_15:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
@@ -1289,7 +1288,7 @@ listValues.add(jToken);
   /** Generate ParseException. */
   public ParseException generateParseException() {
     jj_expentries.clear();
-    boolean[] la1tokens = new boolean[73];
+    boolean[] la1tokens = new boolean[72];
     if (jj_kind >= 0) {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
@@ -1309,7 +1308,7 @@ listValues.add(jToken);
         }
       }
     }
-    for (int i = 0; i < 73; i++) {
+    for (int i = 0; i < 72; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;
