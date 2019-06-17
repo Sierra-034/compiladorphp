@@ -8,6 +8,7 @@ package interfaz;
 
 import compilador.ComPHP;
 import compilador.ParseException;
+import compilador.SemanticManager;
 import java.awt.Component;
 import java.awt.Font;
 import java.io.BufferedReader;
@@ -273,6 +274,7 @@ public class Application extends javax.swing.JFrame {
             } finally {
                 try {
                     br.close();
+                    SemanticManager.getMapaVariables().clear();
                 } catch (IOException ex) {
                     Logger.getLogger(Application.class.getName()).log(Level.SEVERE, null, ex);
                 }

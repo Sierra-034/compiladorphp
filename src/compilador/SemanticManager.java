@@ -1,5 +1,6 @@
 package compilador;
 
+import java.lang.reflect.Field;
 import java.util.TreeMap;
 import java.util.ArrayList;
 
@@ -11,7 +12,23 @@ public class SemanticManager{
 	private static final int STRING = 100;
 	private static final int STRING2 = 101;
 	private static final int FLOAT = 103;
-	private static final int ID = 104;
+    private static final int ID = 104;
+    
+    public static void instructionTreatment(ArrayList<Token> tokens, Token currentToken, int type) {
+        System.out.printf("token desde instruccion: %s\n", currentToken);
+        try {
+            if(currentToken.kind == ComPHPConstants.IDENTIFICADOR) {
+                type = SemanticManager.checkVariable(currentToken); 
+                currentToken.kind = type;                
+            }
+
+            tokens.add(currentToken);
+            compareTypes(tokens);
+            
+        } catch (SemanticException e) {
+            System.err.println(e);
+        }
+    }
 	
 	public static int compareTypes(ArrayList<Token> listValues) throws SemanticException {
 		int type = listValues.get(0).kind;
@@ -35,11 +52,11 @@ public class SemanticManager{
 		
 		//Si el Token no está en el mapa de variables, inserto.
 		if ( !(boolean)mapaVariables.containsKey( token.image ) ){
-			mapaVariables.put( token.image, value );
+			getMapaVariables().put( token.image, value );
 		}
 		else{ //Si ya existe...
 			//Obtenemos el token existente en el mapa de variables.
-			int t = mapaVariables.get(token.image);
+			int t = getMapaVariables().get(token.image);
 			
 			//Comparamos que el nuevo token y el existente sean del mismo tipo. 
 			if (value != t) {
@@ -64,8 +81,15 @@ public class SemanticManager{
 		if ( (boolean)!mapaVariables.containsKey( variable.image ) )
 			throw new SemanticException( SemanticError.NOT_DECLARED, variable.image, variable.beginLine );
 		else
-			return mapaVariables.get( variable.image );// int
+			return getMapaVariables().get( variable.image );// int
 
 	}
+
+    /**
+     * @return the mapaVariables
+     */
+    public static TreeMap<String, Integer> getMapaVariables() {
+        return mapaVariables;
+    }
 	
 }

@@ -324,7 +324,7 @@ void control() :
             Se garantiza la existencia de un if antes
             de cualquier else o elseif
         */
-        <IF>"(" expresion() ")"
+        <IF>"(" expresion() { listValues.clear(); } ")"
         "{"
             ( 
                 instruccion() 
@@ -332,7 +332,7 @@ void control() :
             )*
         "}"
         (
-            <ELSEIF>"(" expresion() ")"
+            <ELSEIF>"(" expresion() { listValues.clear(); } ")"
             "{"
                 ( 
                     instruccion() 
@@ -357,7 +357,7 @@ void control() :
             coincide con una estructura switch
             convencional
         */
-        <SWITCH>"{" expresion() ")"
+        <SWITCH>"{" expresion() { listValues.clear(); } ")"
         "{"
             /*
                 La instrucción case puede ir cero o más veces
@@ -395,7 +395,7 @@ void repeticion() :
             considerar la forma de dos puntos
             'while(): Instrucciones endwhile;'
         */
-        <WHILE>"(" expresion() ")"
+        <WHILE>"(" expresion() { listValues.clear(); } ")"
         "{"
             ( instruccion() )*
         "}"
@@ -411,7 +411,7 @@ void repeticion() :
         <DO>
         "{"
             ( instruccion() )*
-        "}"<WHILE>"(" expresion() ");"
+        "}"<WHILE>"(" expresion() { listValues.clear(); } ")" ";"
     )
 |
     (
@@ -422,7 +422,9 @@ void repeticion() :
             y la sintaxis de dos puntos
             'for(): Instrucciones endfor;'
         */
-        <FOR>"(" expresion() ";" expresion() ";" expresion() ")"
+        <FOR>"(" expresion() { listValues.clear(); } ";" 
+                expresion() { listValues.clear(); } ";"
+                expresion() { listValues.clear(); } ")"
         "{"
             ( instruccion() )*
         "}"
@@ -480,27 +482,18 @@ void declaracionAsignacion() :
 */
 void expresion() :
 {
-    Token jToken;
-    int type;
+    Token jToken = new Token();
+    int type = 0;
 }
 {
-    (     jToken = <VALOR_BOOLEAN>  { listValues.add(jToken); }
-        | jToken = <VALOR_INT>      { listValues.add(jToken); }
-        | jToken = <VALOR_DOUBLE>   { listValues.add(jToken); }
-        | jToken = <IDENTIFICADOR>  { 
-            try {
-                type = SemanticManager.checkVariable(jToken); 
-                jToken.kind = type;
-                listValues.add(jToken);
-                
-            } catch (SemanticException e) {
-                //TODO: handle exception
-            }
-            
-                                    }
+    (     jToken = <VALOR_BOOLEAN>
+        | jToken = <VALOR_INT>
+        | jToken = <VALOR_DOUBLE>
+        | jToken = <IDENTIFICADOR>
         | callFuncion() 
         | "(" expresion() ")" 
     )
+    { SemanticManager.instructionTreatment(listValues, jToken, type); }
 
     ( operador() expresion() )*
 }
